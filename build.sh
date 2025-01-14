@@ -10,6 +10,5 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 
 # Start Gunicorn server
-gunicorn --workers 3 --bind 0.0.0.0:8000 ultimate_creative.ultimate_creative.wsgi:application
-
+gunicorn --workers 3 --bind 0.0.0.0:8000 ultimate_creative.wsgi.application
 
