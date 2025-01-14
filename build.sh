@@ -5,9 +5,6 @@ set -e
 
 echo "Starting deployment..."
 
-# Activate virtual environment (adjust path as necessary)
-source venv/bin/activate
-
 # Install dependencies
 echo "Installing dependencies..."
 pip install -r requirements.txt
