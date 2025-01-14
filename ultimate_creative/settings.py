@@ -132,9 +132,9 @@ USE_TZ = True
 
 
 CORS_ORIGIN_WHITELIST = [
-    'https://c3ee-2c0f-f8f0-696a-0-d03e-daf3-c753-94a9',
+    'https://ultimate-creative-website.onrender.com',
 ]
 
 #origina
-CSRF_TRUSTED_ORIGINS = ['https://c3ee-2c0f-f8f0-696a-0-d03e-daf3-c753-94a9']
+CSRF_TRUSTED_ORIGINS = ['https://ultimate-creative-website.onrender.com']
 
