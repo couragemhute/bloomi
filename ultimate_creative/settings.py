@@ -25,7 +25,7 @@ SECRET_KEY = '_$^5usrl&@1+cg-avl$a%0bu5kt8hoo(+)*2ix^mr4enstkt_6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1", "c3ee-2c0f-f8f0-696a-0-d03e-daf3-c753-94a9.ngrok-free.app"]
+ALLOWED_HOSTS = ["localhost","127.0.0.1", "ultimate-creative-website.onrender.com"]
 
 
 # Application definition
