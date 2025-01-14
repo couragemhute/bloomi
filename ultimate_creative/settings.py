@@ -104,9 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+# Keep the STATIC_URL the same
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
+
+# Set STATIC_ROOT to a writable directory within your project
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Keep STATICFILES_DIRS to include the 'static' directory within your project
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Internationalization
@@ -125,8 +129,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 
 CORS_ORIGIN_WHITELIST = [
