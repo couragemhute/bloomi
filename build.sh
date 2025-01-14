@@ -9,10 +9,6 @@ python manage.py migrate
 # Collect static files
 python manage.py collectstatic --noinput
 
-# Run the Django development server in the background
-python manage.py runserver &
+# Start Gunicorn server
+gunicorn --workers 3 --bind 0.0.0.0:8000 ultimate_creative.wsgi.application
 
-# Wait for the server to start
-sleep 5
-
-echo "Build completed successfully and server is running!"
