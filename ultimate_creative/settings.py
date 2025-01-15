@@ -25,7 +25,7 @@ SECRET_KEY = '_$^5usrl&@1+cg-avl$a%0bu5kt8hoo(+)*2ix^mr4enstkt_6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1", "ultimate-creative-website.onrender.com", '0.0.0.0']
+ALLOWED_HOSTS = ["localhost","127.0.0.1", "mist.pythonanywhere.com", '0.0.0.0']
 
 
 # Application definition
@@ -132,9 +132,9 @@ USE_TZ = True
 
 
 CORS_ORIGIN_WHITELIST = [
-    'https://ultimate-creative-website.onrender.com',
+    'https://mist.pythonanywhere.com',
 ]
 
 #origina
-CSRF_TRUSTED_ORIGINS = ['https://ultimate-creative-website.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://mist.pythonanywhere.com']
 
