@@ -10,12 +10,8 @@ services:
     name: ultimate_creative
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn main.asgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "python -m gunicorn ultimate_creative.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
-      # - key: DATABASE_URL
-      #   fromDatabase:
-      #     name: mysitedb
-      #     property: connectionString
       - key: SECRET_KEY
         generateValue: true
       - key: WEB_CONCURRENCY
