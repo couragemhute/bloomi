@@ -1,8 +1,3 @@
-# databases:
-#   - name: mysitedb
-#     plan: free
-#     databaseName: mysite
-#     user: mysite
 
 services:
   - type: web
@@ -10,7 +5,7 @@ services:
     name: ultimate_creative
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn ultimate_creative.asgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "python -m gunicorn ultimate_creative.wsgi.application -k uvicorn.workers.UvicornWorker"
     envVars:
       - key: SECRET_KEY
         generateValue: true
