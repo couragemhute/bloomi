@@ -21,65 +21,52 @@
     <div class="container">
         <div class="row">
             <!-- Software Engineer -->
-            <section class="ftco-section ftco-no-pb ftco-no-pt">
-                <div class="container">
-                    <div class="row">
-                        <!-- Software Engineer -->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="our-team">
-                                <img src="{% static 'assets/images/courage_mhute.jpeg' %}" 
-                                     alt="Software Engineer" 
-                                     class="mb-3" 
-                                     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
-                                <div class="over-layer">
-                                    <div class="team-content">
-                                        <h3 class="title">Courage Mhute (Mist Coat)</h3>
-                                        <span class="post">Software Engineer (Web Developer)</span>
-                                        <p class="description">Passionate about Web Development, Backend Development, and API Integrations.</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 d-flex">
-                                    <div class="social-media">
-                                    <p class="mb-0 d-flex">
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-                                    </p>
-                            </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Graphic Designer -->
-                        <div class="col-md-4 col-sm-6">
-                            <div class="our-team">
-                                <img src="{% static 'assets/images/team/graphic_designer.jpeg' %}" 
-                                     alt="Graphic Designer" 
-                                     class="mb-3" 
-                                     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
-                                <div class="over-layer">
-                                    <div class="team-content">
-                                        <h3 class="title">Enyfonce Nyamvura (Cee Karter)</h3>
-                                        <span class="post">Graphic Designer</span>
-                                        <p class="description">Specialized in creating visually appealing designs for branding and marketing.</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 d-flex">
-                                    <div class="social-media">
-                                    <p class="mb-0 d-flex">
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <img src="{% static 'assets/images/courage_mhute.jpeg' %}" 
+                         alt="Software Engineer" 
+                         class="card-img-top" 
+                         style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Courage Mhute (Mist Coat)</h3>
+                        <span class="card-subtitle mb-2 text-muted">Software Engineer (Web Developer)</span>
+                        <p class="card-text">Passionate about Web Development, Backend Development, and API Integrations.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="mb-0 d-flex justify-content-center">
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                        </p>
                     </div>
                 </div>
-            </section>
-            
+            </div>
+
+            <!-- Graphic Designer -->
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <img src="{% static 'assets/images/team/graphic_designer.jpeg' %}" 
+                         alt="Graphic Designer" 
+                         class="card-img-top" 
+                         style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Enyfonce Nyamvura (Cee Karter)</h3>
+                        <span class="card-subtitle mb-2 text-muted">Graphic Designer</span>
+                        <p class="card-text">Specialized in creating visually appealing designs for branding and marketing.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="mb-0 d-flex justify-content-center">
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
 
 </br>
 {% endblock %}
