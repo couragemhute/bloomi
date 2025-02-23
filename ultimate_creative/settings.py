@@ -25,7 +25,7 @@ SECRET_KEY = '_$^5usrl&@1+cg-avl$a%0bu5kt8hoo(+)*2ix^mr4enstkt_6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1", "mist.pythonanywhere.com", '0.0.0.0']
+ALLOWED_HOSTS = ["localhost","127.0.0.1", "mist.pythonanywhere.com", "ultimatecreative.zw", '0.0.0.0']
 
 
 # Application definition
@@ -133,8 +133,12 @@ USE_TZ = True
 
 CORS_ORIGIN_WHITELIST = [
     'https://mist.pythonanywhere.com',
+    'http://ultimatecreative.zw',
+    'https://ultimatecreative.zw',
 ]
 
-#origina
-CSRF_TRUSTED_ORIGINS = ['https://mist.pythonanywhere.com']
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://mist.pythonanywhere.com',
+    'http://ultimatecreative.zw',
+    'https://ultimatecreative.zw',
+]
