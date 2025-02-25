@@ -46,26 +46,27 @@ def contact_form_submission(request):
 
         try:
             user = "Website Visitor"
-            recipient_email = "couragemhute21@gmail.com"
+            recipient_emails = ["info@ultimatecreative.co.zw", "courage@ultimatecreative.co.zw", "enyfonce@ultimatecreative.co.zw"]
 
-            email_subject = f"New Message from {name} - Priority: {priority}"
-            email_content = (
-                f"Message: {message}\n\n"
-                f"Priority: {priority}\n\n"
-                f"Visitor Email: {email}\n"
-            )
+            for recipient_email in recipient_emails:
+                email_subject = f"New Message from {name} - Priority: {priority}"
+                email_content = (
+                    f"Message: {message}\n\n"
+                    f"Priority: {priority}\n\n"
+                    f"Visitor Email: {email}\n"
+                )
 
-            logger.debug("Email subject: %s", email_subject)
-            logger.debug("Email content: %s", email_content)
+                logger.debug("Email subject: %s", email_subject)
+                logger.debug("Email content: %s", email_content)
 
-            email_sent = send_email_from_global_config(email_subject, user, email_content, recipient_email)
+                email_sent = send_email_from_global_config(email_subject, user, email_content, recipient_email)
 
-            if email_sent:
-                messages.success(request, "Your message has been sent successfully!")
-                logger.info("Email sent successfully to %s", recipient_email)
-            else:
-                messages.error(request, "Failed to send the email. Please try again.")
-                logger.error("Failed to send email to %s", recipient_email)
+                if email_sent:
+                    messages.success(request, "Your message has been sent successfully!")
+                    logger.info("Email sent successfully to %s", recipient_email)
+                else:
+                    messages.error(request, "Failed to send the email. Please try again.")
+                    logger.error("Failed to send email to %s", recipient_email)
 
         except Exception as e:
             messages.error(request, f"An error occurred: {str(e)}")
