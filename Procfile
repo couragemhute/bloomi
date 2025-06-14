@@ -1,1 +1,1 @@
-web: gunicorn ultimate_creative.wsgi:application -k uvicorn.workers.UvicornWorker
+web: gunicorn core.wsgi:application -k uvicorn.workers.UvicornWorker
