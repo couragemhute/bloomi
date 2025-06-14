@@ -1,70 +1,61 @@
 {% load static %}
 
-<footer class="ftco-footer">
-    <div class="container">
-        <div class="row mb-5">
-            <!-- Footer Widget 1 -->
-            <div class="col-sm-12 col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2 logo"><a href="#">Ultimate Creative</a></h2>
-                    <p class="motto">"Innovating the future, one step at a time."</p>
-                    <ul class="ftco-footer-social list-unstyled mt-2">
-                        <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Footer Widget 2: Explore -->
-            <div class="col-sm-12 col-md">
-                <div class="ftco-footer-widget mb-4 ml-md-4">
-                    <h2 class="ftco-heading-2">Explore</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'about' %}"><span class="fa fa-chevron-right mr-2"></span>About</a></li>
-                        <li><a href="{% url 'contact' %}"><span class="fa fa-chevron-right mr-2"></span>Contact</a></li>
-                        <li><a href="{% url 'services' %}"><span class="fa fa-chevron-right mr-2"></span>What We Do</a></li>
-                        <li><a href="{% url 'products' %}"><span class="fa fa-chevron-right mr-2"></span>Products</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Footer Widget 3: Legal -->
-            <div class="col-sm-12 col-md">
-                <div class="ftco-footer-widget mb-4 ml-md-4">
-                    <h2 class="ftco-heading-2">Legal</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'blog' %}"><span class="fa fa-chevron-right mr-2"></span>Blog</a></li>
-                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Privacy &amp; Policy</a></li>
-                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Term &amp; Conditions</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Footer Widget 4: Company -->
-            <div class="col-sm-12 col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Company</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'about' %}"><span class="fa fa-chevron-right mr-2"></span>About Us</a></li>
-                        <li><a href="{% url 'blog' %}"><span class="fa fa-chevron-right mr-2"></span>Blog</a></li>
-                        <li><a href="{% url 'contact' %}"><span class="fa fa-chevron-right mr-2"></span>Contact</a></li>
-                        <li><a href="{% url 'team' %}"><span class="fa fa-chevron-right mr-2"></span>Team</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Footer Widget 5: Contact Information -->
-            <div class="col-sm-12 col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Have a Question?</h2>
-                    <div class="block-23 mb-3">
+<footer>
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <!-- About MistNex -->
+                <div class="col-md-3 col-sm-6 col-xs-12 col">
+                    <div class="footer-widget footer-logo">
+                        <h1>MistNex</h1>
+                        <p>At MistNex Dynamics, we engineer next-generation digital solutions, creative tech experiences, and impactful innovations tailored for forward-thinking businesses.</p>
                         <ul>
-                            <li><span class="icon fa fa-map marker"></span><span class="text">08 Dan Judson Drive, Milton Park, Harare, Zimbabwe</span></li>
-                            <li><a href="tel:+263774798743"><span class="icon fa fa-phone"></span><span class="text">+263 77 479 8743</span></a></li>
-                            <li><a href="tel:+263774798743"><span class="icon fa fa-phone"></span><span class="text">+263 78 135 9910</span></a></li>
-                            <li><a href="mailto:info@ultimatecreative.co.zw"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">[email&#160;protected]</span></a></li>
+                            <li><i class="fa fa-phone"></i> +263 77 123 4567</li>
+                            <li><i class="fa fa-envelope"></i> <a href="mailto:hello@mistnex.com">hello@mistnex.com</a></li>
                         </ul>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="col-md-3 col-sm-6 col-xs-12 col">
+                    <div class="footer-widget footer-menu">
+                        <h2>Our Services</h2>
+                        <ul>
+                            <li><a href="software.html">Software Development</a></li>
+                            <li><a href="branding.html">Creative Branding</a></li>
+                            <li><a href="web.html">Web & App Development</a></li>
+                            <li><a href="ai.html">AI & Automation</a></li>
+                            <li><a href="design.html">Graphic Design</a></li>
+                            <li><a href="printing.html">Smart Print Solutions</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Instagram -->
+                <div class="col-md-3 col-sm-6 col-xs-12 col">
+                    <div class="footer-widget instagram-wrap">
+                        <h2>Follow Us</h2>
+                        <ul>
+                            <li><a href="#"><img src="assets/images/instagram/1.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="assets/images/instagram/2.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="assets/images/instagram/3.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="assets/images/instagram/4.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="assets/images/instagram/5.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="assets/images/instagram/6.jpg" alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-md-3 col-sm-6 col-xs-12 col">
+                    <div class="footer-widget quick-contact">
+                        <h2>Quick Contact</h2>
+                        <form action="#">
+                            <input type="text" placeholder="Full Name">
+                            <input type="email" placeholder="Email">
+                            <textarea name="message" placeholder="Message" rows="4"></textarea>
+                            <button type="submit" class="btn-style">Send</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -72,14 +63,11 @@
     </div>
 
     <!-- Footer Bottom -->
-    <div class="container-fluid px-0 py-5 bg-black">
+    <div class="footer-bottom text-center">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <p class="mb-0" style="color: rgba(255,255,255,.5);">
-                        Copyright &copy;<script data-cfasync="false" src="https://github.com/couragemhute"></script>
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This website was developed by <i class="fa fa-heart color-danger" aria-hidden="true"></i> by <a href="https://github.com/couragemhute" target="_blank">Courage Mhute</a>
-                    </p>
+                <div class="col-xs-12">
+                    &copy; <script>document.write(new Date().getFullYear());</script> MistNex Dynamics. All rights reserved. Designed with <i class="fa fa-heart-o" aria-hidden="true"></i> by Courage Mhute.
                 </div>
             </div>
         </div>
