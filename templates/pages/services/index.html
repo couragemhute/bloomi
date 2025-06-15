@@ -16,292 +16,197 @@
 {% endblock%}
 
 {% block content %}
-<section class="ftco-section">
-  <div class="container">
-      <div class="row tabulation mt-4 ftco-animate">
-          <div class="col-md-4">
-              <ul class="nav nav-pills nav-fill d-md-flex d-block flex-column">
-                  <!-- IT Services -->
-                  <li class="nav-item text-left">
-                      <a class="nav-link active py-4" data-toggle="tab" href="#services-it1">Software Development</a>
-                  </li>
-                  <li class="nav-item text-left">
-                      <a class="nav-link py-4" data-toggle="tab" href="#services-it3">Website Design</a>
-                  </li>
-                  <!-- Design Services -->
-                  <li class="nav-item text-left">
-                      <a class="nav-link py-4" data-toggle="tab" href="#services-1">Logo Design</a>
-                  </li>
-                  <li class="nav-item text-left">
-                      <a class="nav-link py-4" data-toggle="tab" href="#services-2">Business Flyer Design</a>
-                  </li>
-                  <li class="nav-item text-left">
-                      <a class="nav-link py-4" data-toggle="tab" href="#services-3">Banner Design</a>
-                  </li>
-                  <li class="nav-item text-left">
-                      <a class="nav-link py-4" data-toggle="tab" href="#services-4">Show Poster Design</a>
-                  </li>
-                  <li class="nav-item text-left">
-                    <a class="nav-link py-4" data-toggle="tab" href="#services-it2">Mobile App Development</a>
-                </li>
-                  <li class="nav-item text-left">
-                      <a class="nav-link py-4" data-toggle="tab" href="#services-it4">Mail Hosting</a>
-                  </li>
-                  <li class="nav-item text-left">
-                      <a class="nav-link py-4" data-toggle="tab" href="#services-it5">Domain Selling & Hosting</a>
-                  </li>
-                  <li class="nav-item text-left">
-                      <a class="nav-link py-4" data-toggle="tab" href="#services-5">Professional CV Design</a>
-                  </li>
-              </ul>
-          </div>
-          <div class="col-md-8">
-            <div class="tab-content">
-                <!-- IT Services -->
-                <div class="tab-pane container p-0 active" id="services-it1">
-                  <div class="img" style="background-image: url({% static 'assets/images/services_software_dev.gif' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-              </div>
-                    <h3><a href="#">Software Development</a></h3>
-                    <p>Transform your business with innovative software solutions.  
-                        We specialize in crafting custom software tailored to your unique business needs, ensuring enhanced efficiency and scalability. From enterprise applications to SaaS platforms, we use cutting-edge technology and agile methodologies to deliver solutions that adapt to your evolving demands. Partner with us to turn your ideas into robust, scalable, and secure applications designed for success.</p>
-                </div>
-                <div class="tab-pane container p-0 fade" id="services-it3">
-                  <div class="img" style="background-image: url({% static 'assets/images/services_web_design.png' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-              </div>
-                    <h3><a href="#">Website Design</a></h3>
-                    <p>Make your digital presence unforgettable.  
-                        We design visually stunning and fully responsive websites that leave a lasting impression. Whether for e-commerce, corporate, or personal use, our designs blend aesthetic appeal with user-centric functionality. Trust us to create a platform that effectively represents your brand, attracts customers, and drives business growth.</p>
-                </div>
-                <!-- Design Services -->
-                <div class="tab-pane container p-0 fade" id="services-1">
-                  <div class="img" style="background-image: url({% static 'assets/images/logo_design.jpeg' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-              </div>
-                    <h3><a href="#">Logo Design</a></h3>
-                    <p>Build a strong brand identity with a memorable logo.  
-                        Our professional logo design services create unique designs that resonate with your target audience. We focus on delivering logos that capture your brand’s essence, helping you stand out in the competitive market. Let us design a logo that leaves a lasting impression and sets your brand apart.</p>
-                </div>
-                <div class="tab-pane container p-0 fade" id="services-2">
-                  <div class="img" style="background-image: url({% static 'assets/images/business_cards.jpeg' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-              </div>
-                    <h3><a href="#">Business Flyer Design</a></h3>
-                    <p>Spread your message with impactful flyer designs.  
-                        Our business flyer design services combine creativity with strategic marketing to produce materials that capture attention and drive engagement. Whether it’s promoting a product, service, or event, we craft custom designs that ensure your message is heard loud and clear. Trust us to help you make a statement.</p>
-                </div>
-                <div class="tab-pane container p-0 fade" id="services-3">
-                  <div class="img" style="background-image: url({% static 'assets/images/billboard.jpeg' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-              </div>
-                    <h3><a href="#">Banner Design</a></h3>
-                    <p>Make a bold statement with custom banners.  
-                        Our banner designs are crafted to grab attention and effectively communicate your message. Perfect for events, promotions, or online advertising, our designs are visually striking and aligned with your brand. Let us create banners that help you stand out and leave a lasting impression.</p>
-                </div>
-                <div class="tab-pane container p-0 fade" id="services-4">
-                  <div class="img" style="background-image: url({% static 'assets/images/poster_design.jpeg' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-                </div>
-              
-                    <h3><a href="#">Show Poster Design</a></h3>
-                    <p>Promote your events with stunning posters.  
-                        We design eye-catching show posters that capture the essence of your event and draw in your target audience. Whether for concerts, performances, or festivals, our posters are crafted to engage, inform, and excite. Choose us to bring your vision to life with creative poster designs.</p>
-                </div>
-                <div class="tab-pane container p-0 fade" id="services-it2">
-                  <div class="img" style="background-image: url({% static 'assets/images/mobile_app.gif' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-                </div>
-                  <h3><a href="#">Mobile App Development</a></h3>
-                  <p>Bring your vision to life with dynamic mobile applications.  
-                      Our team creates engaging, user-friendly mobile apps for iOS and Android platforms that align perfectly with your business objectives. Whether it’s enhancing customer engagement or streamlining your operations, our apps are designed for exceptional functionality and reliability. Choose us to craft mobile experiences that captivate users and elevate your brand.</p>
-              </div>
-                <div class="tab-pane container p-0 fade" id="services-it4">
-                  <div class="img" style="background-image: url({% static 'assets/images/mail_hosting.gif' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-              </div>
-  
-                    <h3><a href="#">Mail Hosting</a></h3>
-                    <p>Experience seamless communication with reliable mail hosting.  
-                        Our personalized email hosting solutions offer secure and professional communication channels for your business. With features like spam protection, robust storage, and seamless integration, we ensure your business operates smoothly. Choose us for a mail hosting service that boosts efficiency and strengthens your brand image.</p>
-                </div>
-                <div class="tab-pane container p-0 fade" id="services-it5">
-                  <div class="img" style="background-image: url({% static 'assets/images/domain_selling.jpeg' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-              </div>
-                    <h3><a href="#">Domain Selling & Hosting</a></h3>
-                    <p>Launch your online presence with confidence.  
-                        We provide affordable and secure domain registration and hosting services tailored to your needs. With our fast servers, robust security, and exceptional support, your website will always be accessible to your audience. Trust us to handle your domain and hosting requirements with care and professionalism.</p>
-                </div>
-                <div class="tab-pane container p-0 fade" id="services-5">
-                  <div class="img" style="background-image: url({% static 'assets/images/cv_sample_image.png' %}); 
-                  background-size: contain; 
-                  background-repeat: no-repeat; 
-                  background-position: center; 
-                  width: 100%; 
-                  height: auto; 
-                  aspect-ratio: 16/9;">
-              </div>
-                    <h3><a href="#">Professional CV Design</a></h3>
-                    <p>Showcase your achievements with a standout CV.  
-                        Our professional CV design services highlight your skills and experience in an attractive, easy-to-read format. Tailored to your industry, our CVs help you make a strong first impression and stand out in a competitive job market. Let us design a CV that opens doors to new opportunities.</p>
-                </div>
-            </div>
-          </div>
-        
-      </div>
-  </div>
-</section>
 
 
-<section class="ftco-section testimony-section">
-  <div class="img img-bg border" style="background-image: url(images/bg_4.jpg);"></div>
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-        <span class="subheading">Testimonial</span>
-        <h2 class="mb-3">Happy Clients</h2>
-      </div>
-    </div>
-    <div class="row ftco-animate">
-      <div class="col-md-12">
-        <div class="carousel-testimony owl-carousel ftco-owl">
-          <div class="item">
-            <div class="testimony-wrap py-4">
-              <div class="icon d-flex align-items-center justify-content-center">
-                <span class="fa fa-quote-left"></span>
-              </div>
-              <div class="text">
-                <p class="mb-4">"The custom software they built for our business has streamlined operations and increased efficiency. Their team was attentive, professional, and delivered exactly what we needed. Highly recommended!"</p>
-                <div class="d-flex align-items-center">
-                  <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-                  <div class="pl-3">
-                    <p class="name">Sophia Johnson</p>
-                    <span class="position">CEO, Tech Innovators</span>
-                  </div>
+<!-- .service-area start -->
+<section class="service-area ptb-100">
+    <div class="container">
+        <div class="row g-4"> <!-- g-4 adds consistent spacing between cards -->
+
+            <!-- Service 1 -->
+            <div class="col-md-4">
+                <div class="service-wrap text-center h-100">
+                    <div class="service-img mb-3">
+                        <img src="{% static 'assets/images/service/1.jpg' %}" class="img-fluid" alt="Custom Web Development">
+                    </div>
+                    <div class="service-content">
+                        <h4>Custom Web Development</h4>
+                        <p>We build fast, secure, and scalable web apps tailored to your unique business goals using Django, Laravel, and modern frontend frameworks.</p>
+                    </div>
                 </div>
-              </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="col-md-4">
+                <div class="service-wrap text-center h-100">
+                    <div class="service-img mb-3">
+                        <img src="{% static 'assets/images/service/2.jpg' %}" class="img-fluid" alt="Mobile App Solutions">
+                    </div>
+                    <div class="service-content">
+                        <h4>Mobile App Solutions</h4>
+                        <p>From Android to cross-platform Flutter apps, MistNex delivers mobile experiences that are sleek, fast, and user-centric.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="col-md-4">
+                <div class="service-wrap text-center h-100">
+                    <div class="service-img mb-3">
+                        <img src="{% static 'assets/images/service/3.jpg' %}" class="img-fluid" alt="UI/UX Design">
+                    </div>
+                    <div class="service-content">
+                        <h4>UI/UX & Product Design</h4>
+                        <p>Crafting intuitive, beautiful interfaces and workflows that enhance user satisfaction and conversion rates.</p>
+                    </div>
+                </div>
             </div>
           </div>
-          <div class="item">
-            <div class="testimony-wrap py-4">
-              <div class="icon d-flex align-items-center justify-content-center">
-                <span class="fa fa-quote-left"></span>
-              </div>
-              <div class="text">
-                <p class="mb-4">"Our mobile app has transformed how we engage with customers. The team created a user-friendly and visually appealing app that exceeded our expectations."</p>
-                <div class="d-flex align-items-center">
-                  <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                  <div class="pl-3">
-                    <p class="name">Michael Brown</p>
-                    <span class="position">Product Manager, EngageNow</span>
-                  </div>
+        <div class="row g-4 mt-4"> <!-- g-4 adds consistent spacing between cards -->
+
+            <!-- Service 4 -->
+            <div class="col-md-4">
+                <div class="service-wrap text-center h-100">
+                    <div class="service-img mb-3">
+                        <img src="{% static 'assets/images/service/4.jpg' %}" class="img-fluid" alt="Backend Architecture">
+                    </div>
+                    <div class="service-content">
+                        <h4>Backend Architecture</h4>
+                        <p>Powerful backend systems with APIs, security, scalability, and seamless database integrations. We speak Python, PHP, MySQL & more.</p>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="item">
-            <div class="testimony-wrap py-4">
-              <div class="icon d-flex align-items-center justify-content-center">
-                <span class="fa fa-quote-left"></span>
-              </div>
-              <div class="text">
-                <p class="mb-4">"The website design services were outstanding. Our new site is not only visually stunning but also optimized for performance, attracting more visitors than ever."</p>
-                <div class="d-flex align-items-center">
-                  <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-                  <div class="pl-3">
-                    <p class="name">Emily Davis</p>
-                    <span class="position">Marketing Director, BrandPulse</span>
-                  </div>
+
+            <!-- Service 5 -->
+            <div class="col-md-4">
+                <div class="service-wrap text-center h-100">
+                    <div class="service-img mb-3">
+                        <img src="{% static 'assets/images/service/5.jpg' %}" class="img-fluid" alt="Cloud & DevOps">
+                    </div>
+                    <div class="service-content">
+                        <h4>Cloud & DevOps</h4>
+                        <p>Deploy smarter. We optimize your infrastructure, automate deployments, and scale apps on AWS, GCP, and Azure.</p>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="item">
-            <div class="testimony-wrap py-4">
-              <div class="icon d-flex align-items-center justify-content-center">
-                <span class="fa fa-quote-left"></span>
-              </div>
-              <div class="text">
-                <p class="mb-4">"Switching to their mail hosting service was a game-changer. The reliability and security they provide are unmatched, and their support team is always ready to help."</p>
-                <div class="d-flex align-items-center">
-                  <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-                  <div class="pl-3">
-                    <p class="name">James Wilson</p>
-                    <span class="position">IT Manager, SecureComm</span>
-                  </div>
+
+            <!-- Service 6 -->
+            <div class="col-md-4">
+                <div class="service-wrap text-center h-100">
+                    <div class="service-img mb-3">
+                        <img src="{% static 'assets/images/service/6.jpg' %}" class="img-fluid" alt="AI & Automation">
+                    </div>
+                    <div class="service-content">
+                        <h4>AI & Business Automation</h4>
+                        <p>We integrate machine learning and automation tools to help streamline operations and deliver intelligent insights.</p>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="item">
-            <div class="testimony-wrap py-4">
-              <div class="icon d-flex align-items-center justify-content-center">
-                <span class="fa fa-quote-left"></span>
-              </div>
-              <div class="text">
-                <p class="mb-4">"Their logo and branding services were exactly what we needed to stand out in a crowded market. The designs were creative, professional, and perfectly captured our vision."</p>
-                <div class="d-flex align-items-center">
-                  <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                  <div class="pl-3">
-                    <p class="name">Olivia Martin</p>
-                    <span class="position">Founder, VisualSpark</span>
-                  </div>
+
+            <!-- Service 7 -->
+            <div class="col-md-4">
+                <div class="service-wrap text-center h-100">
+                    <div class="service-img mb-3">
+                        <img src="{% static 'assets/images/service/6.jpg' %}" class="img-fluid" alt="Domain & Hosting">
+                    </div>
+                    <div class="service-content">
+                        <h4>Domain & Cloud Hosting</h4>
+                        <p>Secure your online presence with domain registration and blazing-fast cloud hosting – all bundled at just <strong>$50/year</strong>.</p>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
+            </div> 
+
         </div>
-      </div>
     </div>
-  </div>
 </section>
+<!-- .service-area end -->
+
+
+
+<!-- .pricing-table-area start -->
+<div class="pricing-table-area ptb-100 bg-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                <div class="section-title text-center">
+                    <h2>Flexible Pricing Plans</h2>
+                    <p>Choose a package that suits your project size and business growth stage. We also offer custom quotes for enterprises.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pricing-table">
+                <div class="pricing-grids active-price">
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="pricing-wrap">
+                            <h3>Starter</h3>
+                            <h4>$149.99<span>One-time</span></h4>
+                            <ul>
+                                <li>Landing Page Website</li>
+                                <li>Basic SEO Setup</li>
+                                <li>1-Month Support</li>
+                                <li>Contact Form Integration</li>
+                            </ul>
+                            <button>Choose Plan</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="pricing-wrap">
+                            <h3>Professional</h3>
+                            <h4>$199.99<span>Per Project</span></h4>
+                            <ul>
+                                <li>Dynamic Website or App</li>
+                                <li>Admin Dashboard</li>
+                                <li>SEO & Analytics</li>
+                                <li>3-Month Support</li>
+                            </ul>
+                            <button>Choose Plan</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="pricing-wrap">
+                            <h3>Enterprise</h3>
+                            <h4>Custom Quote<span>Tailored</span></h4>
+                            <ul>
+                                <li>Enterprise-Grade Systems</li>
+                                <li>Cloud Integration & DevOps</li>
+                                <li>AI & Automation</li>
+                                <li>Ongoing Maintenance</li>
+                            </ul>
+                            <button>Request Quote</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- .pricing-table-area end -->
+
+
+<!-- quote-area start -->
+<div class="quote-area bg-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-xs-12">
+                <div class="quote-wrap">
+                    <h2>Let MistNex help you build the future — faster, smarter, better.</h2>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+                <div class="quote-wrap text-right">
+                    <a href="">Request a Free Quote</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- quote-area end -->
+
 
 
 {% endblock%}

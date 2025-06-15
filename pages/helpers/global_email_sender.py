@@ -37,41 +37,43 @@ logger = logging.getLogger(__name__)
 
 def contact_form_submission(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        priority = request.POST.get("priority")
-        message = request.POST.get("message")
+        name = request.POST.get("fname", "").strip()
+        email = request.POST.get("email", "").strip()
+        subject = request.POST.get("subject", "No Subject").strip()
+        message = request.POST.get("msg", "").strip()
 
-        logger.info("Received contact form submission from %s", email)
+        logger.info(f"Contact form submitted by {email}")
 
         try:
             user = "Website Visitor"
-            recipient_emails = ["info@ultimatecreative.co.zw", "courage@ultimatecreative.co.zw", "enyfonce@ultimatecreative.co.zw"]
+            recipient_emails = [
+                "courage@ultimatecreative.co.zw",
+            ]
 
-            for recipient_email in recipient_emails:
-                email_subject = f"New Message from {name} - Priority: {priority}"
+            email_sent_all = True
+            for recipient in recipient_emails:
+                email_subject = f"New Message from {name} - Subject: {subject}"
                 email_content = (
-                    f"Message: {message}\n\n"
-                    f"Priority: {priority}\n\n"
-                    f"Visitor Email: {email}\n"
+                    f"Message:\n{message}\n\n"
+                    f"From:\nName: {name}\nEmail: {email}\n"
                 )
-
-                logger.debug("Email subject: %s", email_subject)
-                logger.debug("Email content: %s", email_content)
-
-                email_sent = send_email_from_global_config(email_subject, user, email_content, recipient_email)
-
-                if email_sent:
-                    messages.success(request, "Your message has been sent successfully!")
-                    logger.info("Email sent successfully to %s", recipient_email)
+                logger.debug(f"Sending email to {recipient} with subject: {email_subject}")
+                sent = send_email_from_global_config(email_subject, user, email_content, recipient)
+                if sent:
+                    logger.info(f"Email sent to {recipient}")
                 else:
-                    messages.error(request, "Failed to send the email. Please try again.")
-                    logger.error("Failed to send email to %s", recipient_email)
+                    email_sent_all = False
+                    logger.error(f"Failed to send email to {recipient}")
+
+            if email_sent_all:
+                messages.success(request, "Your message has been sent successfully!")
+            else:
+                messages.error(request, "Some emails failed to send. Please try again later.")
 
         except Exception as e:
             messages.error(request, f"An error occurred: {str(e)}")
-            logger.exception("An error occurred while processing the contact form submission")
+            logger.exception("Exception during contact form email sending")
 
-        return redirect("contact") 
+        return redirect("contact")
 
-    return render(request, "contact_form.html")
+    return render(request, "pages/contact/index.html")

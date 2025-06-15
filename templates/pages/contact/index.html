@@ -16,55 +16,101 @@
 {% endblock%}
 
 {% block content %}
-<section class="ftco-appointment ftco-section img" style="background-image: url(images/bg_2.jpg);">
-    <div class="overlay"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 half ftco-animate">
-            <h2 class="mb-4">Send a Message &amp; Get in touch!</h2>
-            <form action="{% url 'contact_form_submission' %}" method="POST" class="appointment">
-              {% csrf_token %}
-              <div class="row">
-                  <div class="col-md-6">
-                      <div class="form-group">
-                          <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group">
-                          <input type="email" name="email" class="form-control" placeholder="Email" required>
-                      </div>
-                  </div>
-                  <div class="col-md-12">
-                      <div class="form-group">
-                          <div class="form-field">
-                              <div class="select-wrap">
-                                  <div class="icon"><span class="fa fa-chevron-down"></span></div>
-                                  <select name="priority" id="priority" class="form-control" required>
-                                      <option value="">Select Priority</option>
-                                      <option value="Very High">Very High</option>
-                                      <option value="Medium">Medium</option>
-                                      <option value="Low">Low</option>
-                                  </select>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-12">
-                      <div class="form-group">
-                          <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
-                      </div>
-                  </div>
-                  <div class="col-md-12">
-                      <div class="form-group">
-                          <input type="submit" value="Send message" class="btn btn-primary py-3 px-4">
-                      </div>
-                  </div>
-              </div>
-          </form>          
+<div class="contact-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="contact-wrap form-style">
+                    <h3>Contact Me</h3>
+                    <div class="cf-msg"></div>
+                    <form action="{% url 'contact_form_submission' %}" method="post" id="contactForm">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <input type="text" placeholder="Name" id="fname" name="fname" required>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <input type="email" placeholder="Email" id="email" name="email" required>
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="text" placeholder="Subject" id="subject" name="subject" required>
+                            </div>
+                            <div class="col-xs-12">
+                                <textarea class="contact-textarea" placeholder="Message" id="msg" name="msg" required></textarea>
+                            </div>
+                            <div class="col-xs-12">
+                                <button id="submit" class="cont-submit btn-contact" name="submit" type="submit">SEND MESSAGE</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="col-md-4">
+                <div class="contact-wrap">
+                    <ul>
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <p>+263 71 330 4655</p>
+                            <p>+263 77 479 8743</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            <p><a href="mailto:info@mistnex.com">info@mistnex.com</a></p>
+                        </li>
+                        <li>
+                            <i class="fa fa-fax"></i>
+                            <p>+263 77 479 8743</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-location-arrow"></i>
+                            <p>08 Dan Judson Road, Milton Park, Harare, Zimbabwe</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="col-xs-12">
+                <div id="leafletMap" style="height: 400px;"></div>
+            </div>
         </div>
     </div>
 </div>
-</section>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-oCqXFZ7phquK+6VKEh5h1yG0xGL8Lv6A/wwl7t0o7r4=" crossorigin=""/>
+
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-o9N1j6fYq+i2YgD7uFn/mOtPENI0LTs4ZW+N/e7cR4=" crossorigin=""></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const lat = -17.8103;
+    const lng = 31.0456;
+
+    // Initialize Leaflet map
+    const map = L.map('leafletMap').setView([lat, lng], 15); // Harare coords
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add marker at the address with full address and coordinates in popup
+    L.marker([lat, lng]).addTo(map)
+      .bindPopup(
+        `<b>MistNex Location</b><br>
+        08 Dan Judson Road, Milton Park, Harare, Zimbabwe<br>
+        Coordinates: ${lat}, ${lng}`
+      )
+      .openPopup();
+  });
+</script>
 
 {% endblock%}
