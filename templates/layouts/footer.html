@@ -50,11 +50,25 @@
                 <div class="col-md-3 col-sm-6 col-xs-12 col">
                     <div class="footer-widget quick-contact">
                         <h2>Quick Contact</h2>
-                        <form action="#">
-                            <input type="text" placeholder="Full Name">
-                            <input type="email" placeholder="Email">
-                            <textarea name="message" placeholder="Message" rows="4"></textarea>
-                            <button type="submit" class="btn-style">Send</button>
+                        <form action="{% url 'contact_form_submission' %}" method="post" id="contactFormFooter">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                            <input type="text" placeholder="Name" id="fname" name="fname" required>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                            <input type="email" placeholder="Email" id="email" name="email" required>
+                            </div>
+                            <div class="col-xs-12">
+                            <input type="text" placeholder="Subject" id="subject" name="subject" required>
+                            </div>
+                            <div class="col-xs-12">
+                            <textarea class="contact-textarea" placeholder="Message" id="msg" name="msg" required></textarea>
+                            </div>
+                            <div class="col-xs-12">
+                            <button id="submit" class="cont-submit btn-contact" name="submit" type="submit">SEND MESSAGE</button>
+                            </div>
+                        </div>
                         </form>
                     </div>
                 </div>
