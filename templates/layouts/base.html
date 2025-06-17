@@ -3,79 +3,133 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
+    {% comment %} Organization Schema JSON-LD {% endcomment %}
     <script type="application/ld+json">
-        {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "MistNex Dynamics",
-        "url": "https://www.mistnex.co.zw",
-        "logo": "https://www.mistnex.co.zw{% static 'assets/images/nexlogo.png' %}",
-        "description": "MistNex Dynamics delivers next-generation technology and creative solutions that transform businesses with real impact. We specialize in AI integration, custom software development, and dynamic web solutions tailored for Zimbabwe and beyond.",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+263774798743",
-            "contactType": "Customer Service",
-            "email": "info@mistnex.co.zw",
-            "hoursAvailable": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday"
-            ],
-            "opens": "08:00",
-            "closes": "17:00"
-            }
-        },
-        "sameAs": [
-            "https://www.facebook.com/supertechglobal",
-            "https://www.linkedin.com/in/courage-mhute-8a2b71220/",
-            "https://twitter.com/mist_coat_zw",
-            "https://www.instagram.com/mist_coat_zw/"
-        ],
-        "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "ZW"
-        },
-        "founder": {
-            "@type": "Person",
-            "name": "Courage Mhute"
-        },
-        "keywords": "AI Integration, Custom Software Development, Web Development, Creative Digital Solutions, Zimbabwe Tech Company"
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MistNex Dynamics",
+      "url": "https://mistnex.co.zw",
+      "logo": "https://mistnex.co.zw{% static 'assets/images/nexlogo.png' %}",
+      "description": "MistNex Dynamics delivers next-generation technology and creative solutions that transform businesses with real impact. We specialize in AI integration, custom software development, and dynamic web solutions tailored for Zimbabwe and beyond.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+263774798743",
+        "contactType": "Customer Service",
+        "email": "info@mistnex.co.zw",
+        "hoursAvailable": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
         }
-        </script>
+      },
+      "sameAs": [
+        "https://www.facebook.com/supertechglobal",
+        "https://www.linkedin.com/in/courage-mhute-8a2b71220/",
+        "https://twitter.com/mist_coat_zw",
+        "https://www.instagram.com/mist_coat_zw/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ZW"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Courage Mhute"
+      },
+      "keywords": "AI Integration, Custom Software Development, Web Development, Creative Digital Solutions, Zimbabwe Tech Company"
+    }
+    </script>
 
+    {% comment %} Services Schema JSON-LD {% endcomment %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "serviceType": "Custom Software Development",
+          "provider": {
+            "@type": "Organization",
+            "name": "MistNex Dynamics",
+            "url": "https://mistnex.co.zw"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Zimbabwe"
+          },
+          "description": "Tailored software solutions to empower businesses with AI, web development, and creative digital innovation."
+        },
+        {
+          "@type": "Service",
+          "serviceType": "Creative Branding",
+          "provider": {
+            "@type": "Organization",
+            "name": "MistNex Dynamics",
+            "url": "https://mistnex.co.zw"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Zimbabwe"
+          },
+          "description": "Innovative branding solutions that help your business stand out."
+        },
+        {
+          "@type": "Service",
+          "serviceType": "Web & App Development",
+          "provider": {
+            "@type": "Organization",
+            "name": "MistNex Dynamics",
+            "url": "https://mistnex.co.zw"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Zimbabwe"
+          },
+          "description": "Developing responsive and engaging web and mobile applications to meet your unique business needs."
+        }
+      ]
+    }
+    </script>
+
+    {% comment %} Basic Meta Tags {% endcomment %}
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>MistNex Dynamics – Next-Gen Software & Impactful Innovation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- SEO Meta Tags -->
+    {% comment %} SEO Meta Tags {% endcomment %}
     <meta name="description" content="MistNex Dynamics delivers next-generation software solutions, impactful technologies, and dynamic innovation for businesses and individuals seeking future-proof digital transformation.">
     <meta name="keywords" content="MistNex Dynamics, Software Development, Tech Innovation, Dynamic Solutions, Next-Gen Software, AI Integration, Branding Solutions, Web Development, Custom Software, Zimbabwe Tech Company">
     <meta name="author" content="MistNex Dynamics">
     <meta name="robots" content="index, follow">
 
-    <!-- Open Graph / Facebook -->
+    {% comment %} Open Graph / Facebook Meta {% endcomment %}
     <meta property="og:title" content="MistNex Dynamics – Next-Gen Software & Impactful Innovation">
     <meta property="og:description" content="Explore creative, custom software and digital solutions powered by MistNex Dynamics. We transform ideas into tech reality.">
     <meta property="og:image" content="{% static 'assets/images/nexlogo.png' %}">
-    <meta property="og:url" content="https://www.mistnex.co.zw">
+    <meta property="og:url" content="https://mistnex.co.zw">
     <meta property="og:type" content="website">
 
-    <!-- Twitter Card -->
+    {% comment %} Twitter Card Meta {% endcomment %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MistNex Dynamics – Next-Gen Software & Impactful Innovation">
     <meta name="twitter:description" content="Next-gen software and digital transformation by MistNex Dynamics. Build smarter. Impact greater.">
     <meta name="twitter:image" content="{% static 'assets/images/mistnex-og-image.jpg' %}">
 
-    <!-- Favicon -->
+    {% comment %} Favicon {% endcomment %}
     <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/nexlogo.png' %}">
     <link rel="icon" href="{% static 'assets/images/nexlogo.png' %}" type="image/png">
-    <!-- CSS Files -->
+
+    {% comment %} CSS Files {% endcomment %}
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css' %}">
@@ -85,9 +139,10 @@
     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
 
-    <!-- Modernizr -->
+    {% comment %} Modernizr JS {% endcomment %}
     <script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
 </head>
+
 
 <body>
     <!-- Preloader -->
