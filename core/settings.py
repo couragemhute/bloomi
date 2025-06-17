@@ -8,10 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY", default='unsafe-secret-key')
 DEBUG = config("DEBUG", cast=bool, default=True)
 
-ALLOWED_HOSTS = [
-    "localhost", "127.0.0.1", "mist.pythonanywhere.com", 
-    "ultimatecreative.co.zw", "0.0.0.0"
-]
+ALLOWED_HOSTS = config("ALLOWED_HOSTS")
 
 # Installed apps
 INSTALLED_APPS = [
