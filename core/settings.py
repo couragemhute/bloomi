@@ -1,5 +1,6 @@
 import os
 from decouple import config
+from decouple import Csv
 
 # Base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -8,7 +9,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY", default='unsafe-secret-key')
 DEBUG = config("DEBUG", cast=bool, default=True)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS")
+
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
+
 
 # Installed apps
 INSTALLED_APPS = [
