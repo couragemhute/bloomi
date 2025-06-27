@@ -1,0 +1,177 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<div class="breadcumb-area black-opacity bg-img-4">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="breadcumb-wrap" data-aos="fade-down">
+                    <h2 class="text-white">Privacy Policy</h2>
+                    <p class="text-light">How we collect, use, and protect data within MistNex services.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<style>
+    .policy-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 20px;
+        line-height: 1.8;
+        font-size: 1.1em;
+    }
+
+    .policy-container h2, 
+    .policy-container h3 {
+        margin-top: 50px;
+        font-weight: 700;
+        color: #1a1a1a;
+    }
+
+    .policy-container ul {
+        margin-left: 20px;
+        padding-left: 15px;
+        list-style-type: disc;
+    }
+
+    .policy-container p {
+        color: #444;
+    }
+
+    .divider {
+        height: 1px;
+        background: #e0e0e0;
+        margin: 40px 0;
+    }
+
+    .cta-section {
+        background-color: #f7f9fc;
+        padding: 40px 20px;
+        margin-top: 60px;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .cta-section h4 {
+        margin-bottom: 15px;
+    }
+
+    .cta-section a {
+        color: #007bff;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="policy-container" data-aos="fade-up">
+    <h2 class="text-center">Our Commitment to Your Privacy</h2>
+    <p class="text-center">Effective Date: {{ today|default:"January 1, 2024" }}</p>
+
+    <div class="divider"></div>
+
+    <p><strong>MistNex Dynamics</strong> (“we”, “our”, or “us”) is a tech company offering digital communication tools such as WhatsApp messaging platforms, chatbots, and automation services. We are committed to safeguarding your personal data.</p>
+
+    <h3>1. Information We Collect</h3>
+    <ul>
+        <li>Contact data (name, email address, phone number)</li>
+        <li>Message content (WhatsApp or contact forms)</li>
+        <li>Technical data (IP address, device type, browser info)</li>
+        <li>Business profile data (company name, industry, preferences)</li>
+    </ul>
+
+    <h3>2. How We Use Your Information</h3>
+    <ul>
+        <li>To provide and manage our WhatsApp messaging solutions</li>
+        <li>To communicate with you about services, billing, or issues</li>
+        <li>To analyze user behavior and improve our platform</li>
+        <li>To comply with Meta's and regulatory requirements</li>
+    </ul>
+
+    <h3>3. WhatsApp Messaging Policy</h3>
+    <ul>
+        <li>We process messages and metadata strictly for service delivery</li>
+        <li>We do not read or store personal conversations without explicit permission</li>
+        <li>We use secure channels and APIs approved by WhatsApp/Meta</li>
+    </ul>
+
+    <h3>4. Data Sharing with Trusted Providers</h3>
+    <ul>
+        <li>We do not sell or lease your data to third parties</li>
+        <li>We may share limited data with:
+            <ul>
+                <li>Meta (Facebook/WhatsApp)</li>
+                <li>Twilio or other communication platforms</li>
+                <li>Hosting providers and analytics tools</li>
+            </ul>
+        </li>
+        <li>All partners follow strict data privacy terms</li>
+    </ul>
+
+    <h3>5. Data Retention</h3>
+    <ul>
+        <li>Your data is retained only as long as needed for service purposes</li>
+        <li>Chat logs and metadata are auto-purged where possible</li>
+        <li>You may request deletion at any time</li>
+    </ul>
+
+    <h3>6. Cookies & Analytics</h3>
+    <ul>
+        <li>We use cookies to improve site functionality and security</li>
+        <li>Analytics cookies help us understand visitor behavior</li>
+        <li>You can disable cookies in your browser settings</li>
+    </ul>
+
+    <h3>7. Your Rights</h3>
+    <ul>
+        <li>Access the personal data we store about you</li>
+        <li>Request correction or deletion of your data</li>
+        <li>Withdraw consent at any time</li>
+        <li>Contact your local data authority if your rights are violated</li>
+    </ul>
+
+    <h3>8. Data Security</h3>
+    <ul>
+        <li>We use HTTPS encryption and secure databases</li>
+        <li>Only authorized staff can access your data</li>
+        <li>We regularly update and audit our systems</li>
+    </ul>
+
+    <h3>9. Children's Privacy</h3>
+    <ul>
+        <li>Our services are not meant for children under 13</li>
+        <li>We do not knowingly collect data from minors</li>
+    </ul>
+
+    <h3>10. Policy Updates</h3>
+    <ul>
+        <li>This policy may change from time to time</li>
+        <li>All updates will appear on this page</li>
+    </ul>
+
+    <h3>11. Contact Us</h3>
+    <ul>
+        <li>Email: <a href="mailto:info@mistnex.com">info@mistnex.com</a></li>
+        <li>Phone: +263 71 330 4655 / +263 77 479 8743</li>
+        {% comment %} <li>Address: 08 Dan Judson Road, Milton Park, Harare, Zimbabwe</li> {% endcomment %}
+    </ul>
+
+    <div class="cta-section" data-aos="fade-up" data-aos-delay="200">
+        <h4>Want to integrate WhatsApp for your business?</h4>
+        <p>Please <a href="{% url 'contact' %}">Contact Us</a> for a free consultation.</p>
+    </div>
+</div>
+
+<!-- AOS Animations -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+</script>
+{% endblock %}
