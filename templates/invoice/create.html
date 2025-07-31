@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice A00001</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+    .flex {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #f9f9fb;
+      padding: 1.5rem;
+      border-radius: 12px;
+      flex: 1;
+      min-width: 320px;
+    }
+    .section-title {
+      font-weight: 600;
+      margin-bottom: .5rem;
+      border-bottom: 2px dashed #ccc;
+      display: inline-block;
+    }
+    .input-row {
+      margin: .5rem 0;
+    }
+    input, select {
+      width: 100%;
+      padding: .5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: .75rem;
+      border-bottom: 1px solid #e0e0e0;
+      text-align: left;
+    }
+    th {
+      background: #7f3de3;
+      color: #fff;
+    }
+    .actions, .footer-controls {
+      margin-top: 1rem;
+    }
+    .actions button, .footer-controls button {
+      padding: .5rem 1rem;
+      margin: .25rem;
+      border: none;
+      border-radius: 8px;
+      background: #e6e6f5;
+      cursor: pointer;
+    }
+    .summary {
+      margin-top: 2rem;
+      text-align: right;
+    }
+    .summary h2 {
+      font-size: 1.25rem;
+    }
+    .signature {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .signature-box {
+      width: 300px;
+      height: 120px;
+      border: 2px dashed #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+    }
+    .add-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 2rem;
+    }
+    .add-buttons button {
+      background: #f2f2f2;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="flex">
+      <div>
+        <div class="input-row">
+          <label>Invoice No*</label>
+          <input type="text" value="A00001">
+        </div>
+        <div class="input-row">
+          <label>Invoice Date*</label>
+          <input type="date" value="2025-07-26">
+        </div>
+        <button>+ Add due date</button>
+        <button>+ Add More Fields</button>
+      </div>
+      <div class="card" style="flex: 0 0 300px; text-align: center;">
+        <p><strong>Add Business Logo</strong><br><small>Resolution up to 1080x1080px. PNG or JPEG file.</small></p>
+      </div>
+    </div>
+
+    <div class="flex">
+      <div class="card">
+        <p class="section-title">Billed By</p>
+        <div class="input-row"><select><option>Zimbabwe</option></select></div>
+        <div class="input-row"><input type="text" placeholder="Your Business Name (required)"></div>
+        <div class="input-row"><input type="text" placeholder="+263"></div>
+        <div class="input-row"><input type="text" placeholder="Address (optional)"></div>
+        <div class="input-row"><input type="text" placeholder="City (optional)"></div>
+        <div class="input-row"><input type="text" placeholder="Postal Code / ZIP Code"></div>
+        <div class="input-row"><input type="text" placeholder="State (optional)"></div>
+        <button>📧 Add Email</button>
+        <button>+ Add Custom Fields</button>
+      </div>
+      <div class="card">
+        <p class="section-title">Billed To</p>
+        <div class="input-row"><select><option>Zimbabwe</option></select></div>
+        <div class="input-row"><input type="text" placeholder="Client's Business Name (required)"></div>
+        <div class="input-row"><input type="text" placeholder="+263"></div>
+        <div class="input-row"><input type="text" placeholder="Address (optional)"></div>
+        <div class="input-row"><input type="text" placeholder="City (optional)"></div>
+        <div class="input-row"><input type="text" placeholder="Postal Code / ZIP Code"></div>
+        <div class="input-row"><input type="text" placeholder="State (optional)"></div>
+        <button>📧 Add Email</button>
+        <button>+ Add Custom Fields</button>
+      </div>
+    </div>
+
+    <div style="margin-top: 1rem;">
+      <input type="checkbox"> Add Shipping Details
+      <select style="float: right;">
+        <option>US Dollar (USD, $)</option>
+      </select>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th><th>Quantity</th><th>Rate</th><th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <input type="text" placeholder="Item Name">
+            <button>+ Add Description</button>
+            <button>🖼️ Add Thumbnail</button>
+            <select><option>Product</option></select>
+          </td>
+          <td><input type="number" value="1"></td>
+          <td><input type="text" value="$ 1"></td>
+          <td><strong>US$1.00</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="actions">
+      <button>+ Add New Line</button>
+      <button>Add Discounts/Additional Charges</button>
+      <button>Hide Totals</button>
+      <input type="checkbox"> Summarise Total Quantity
+    </div>
+
+    <div class="summary">
+      <h2>Total (USD): US$1.00</h2>
+      <button>+ Add More Fields</button>
+      <button>Show Total In Words</button>
+    </div>
+
+    <div class="signature">
+      <div class="signature-box">Add Signature</div>
+    </div>
+
+    <div class="add-buttons">
+      <button>📄 Add Terms & Conditions</button>
+      <button>📝 Add Notes</button>
+      <button>📎 Add Attachments</button>
+      <button>📘 Add Additional Info</button>
+      <button>📞 Add Contact Details</button>
+    </div>
+  </div>
+</body>
+</html>

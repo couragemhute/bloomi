@@ -84,8 +84,13 @@
 							<li class="{% if request.resolver_match.url_name == 'policy' %}active{% endif %}">
 						<a href="{% url 'policy' %}">Privacy Policy</a>
 						</li>
+						{% comment %} <li class="{% if request.resolver_match.url_name == 'invoice' %}active{% endif %}">
+						<a href="{% url 'invoice' %}">Invoice</a>
+						</li> {% endcomment %}
 
-						
+							<li class="{% if request.resolver_match.url_name == 'terms' %}active{% endif %}">
+						<a href="{% url 'terms' %}">Terms & Conditions</a>
+						</li>
 					</ul>
 				</div>
 			</div>

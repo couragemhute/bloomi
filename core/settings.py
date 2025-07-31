@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
     'home.apps.HomeConfig',
     'pages.apps.PagesConfig',
+    'invoice.apps.InvoiceConfig',
 ]
 
 # Middleware

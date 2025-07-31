@@ -1,7 +1,7 @@
 from django.urls import path
 
 from pages.helpers.global_email_sender import contact_form_submission
-from .views import AboutTemplateView, ServicesTemplateView, BlogTemplateView, ContactTemplateView, ProductsTemplateView, TeamTemplateView, PolicyTemplateView
+from .views import AboutTemplateView, ServicesTemplateView, BlogTemplateView, ContactTemplateView, ProductsTemplateView, TeamTemplateView, PolicyTemplateView, TermsAndConditionsTemplateView
 
 urlpatterns = [
     path('about/', AboutTemplateView.as_view(), name='about'),
@@ -11,6 +11,7 @@ urlpatterns = [
     path('products/', ProductsTemplateView.as_view(), name='products'),
     path('team/', TeamTemplateView.as_view(), name='team'),
     path('policy/', PolicyTemplateView.as_view(), name='policy'),
+    path('terms/', TermsAndConditionsTemplateView.as_view(), name='terms'),
     
     
     path('contact/submit/', contact_form_submission, name='contact_form_submission')
