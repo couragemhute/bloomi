@@ -1,48 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice A00001</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quotation - MistNex Dynamics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     body {
       font-family: 'Inter', sans-serif;
       background: #fff;
       color: #333;
       margin: 0;
-      padding: 2rem;
+      padding: 3rem 4rem; /* more comfortable padding */
+      box-sizing: border-box;
+      min-height: 100vh;
     }
     .container {
-      max-width: 1100px;
+      max-width: 960px;
+      width: 95%;
       margin: auto;
+      padding: 3rem 3rem; /* generous padding */
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      background: #fff;
     }
-    .flex {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
+    .header, .flex, .summary, .terms, .footer {
+      margin-bottom: 1.5rem;
     }
-    .card {
-      background: #f9f9fb;
-      padding: 1.5rem;
-      border-radius: 12px;
-      flex: 1;
-      min-width: 320px;
+    .company-info, .quote-meta {
+      display: inline-block;
+      vertical-align: top;
+      width: 48%;
+    }
+    .quote-meta {
+      text-align: right;
+    }
+    .logo-upload {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 2px dashed #ccc;
+      text-align: center;
+      cursor: pointer;
+    }
+    .logo-upload.hover {
+      border-color: #00adee;
+    }
+    .logo-upload img {
+      max-height: 150px; /* bigger logo */
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
     }
     .section-title {
-      font-weight: 600;
-      margin-bottom: .5rem;
-      border-bottom: 2px dashed #ccc;
-      display: inline-block;
-    }
-    .input-row {
-      margin: .5rem 0;
-    }
-    input, select {
-      width: 100%;
-      padding: .5rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      background: #00adee;
+      color: white;
+      padding: .5rem 1rem;
+      font-weight: bold;
     }
     table {
       width: 100%;
@@ -50,156 +63,307 @@
       margin-top: 1rem;
     }
     th, td {
+      border: 1px solid #ddd;
       padding: .75rem;
-      border-bottom: 1px solid #e0e0e0;
       text-align: left;
     }
     th {
-      background: #7f3de3;
-      color: #fff;
+      background: #00adee;
+      color: white;
     }
-    .actions, .footer-controls {
-      margin-top: 1rem;
-    }
-    .actions button, .footer-controls button {
-      padding: .5rem 1rem;
-      margin: .25rem;
+    .summary td {
       border: none;
-      border-radius: 8px;
-      background: #e6e6f5;
+    }
+    .terms {
+      font-size: 0.9rem;
+    }
+    .footer {
+      text-align: center;
+      font-weight: bold;
+    }
+    .bank-details td {
+      padding: 0.5rem;
+    }
+    .highlight {
+      font-weight: bold;
+    }
+    .quotation-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .quotation-box, .bank-box {
+      flex: 1;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    td[contenteditable], th[contenteditable], .editable {
+      border: 1px dashed #999;
+      padding: 0.5rem;
+    }
+    .btn-line {
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .btn-line button {
+      margin: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background-color: #00adee;
+      color: white;
+      border: none;
       cursor: pointer;
     }
-    .summary {
-      margin-top: 2rem;
-      text-align: right;
+    .btn-line button:hover {
+      background-color: #007aa3;
     }
-    .summary h2 {
-      font-size: 1.25rem;
+    td:focus {
+      outline: 2px solid #00adee;
     }
-    .signature {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: flex-end;
-    }
-    .signature-box {
-      width: 300px;
-      height: 120px;
-      border: 2px dashed #aaa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #aaa;
-    }
-    .add-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-      margin-top: 2rem;
-    }
-    .add-buttons button {
-      background: #f2f2f2;
-      border: 1px solid #ccc;
+    @media print {
+      .btn-line, .logo-upload {
+        display: none !important;
+      }
+      body {
+        padding: 0;
+      }
+      .container {
+        border: none;
+        box-shadow: none;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0 1rem 1rem 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="flex">
-      <div>
-        <div class="input-row">
-          <label>Invoice No*</label>
-          <input type="text" value="A00001">
-        </div>
-        <div class="input-row">
-          <label>Invoice Date*</label>
-          <input type="date" value="2025-07-26">
-        </div>
-        <button>+ Add due date</button>
-        <button>+ Add More Fields</button>
+    <div class="logo-upload" id="logoDropArea">
+      <p><strong>Drag and drop your company logo here</strong> or click to upload</p>
+      <input type="file" id="logoInput" accept="image/*" style="display: none;">
+    </div>
+
+    <div class="header">
+      <div class="company-info" contenteditable="true">
+        <h2>MistNex Dynamics (PVT) LIMITED</h2>
+        <p>08 Dan Judson Road, Milton Park,<br>Harare, Zimbabwe</p>
+        <p>Phone No: 077 479 8743<br>Email: courage@mistnex.co.zw</p>
       </div>
-      <div class="card" style="flex: 0 0 300px; text-align: center;">
-        <p><strong>Add Business Logo</strong><br><small>Resolution up to 1080x1080px. PNG or JPEG file.</small></p>
+      <div class="quote-meta" contenteditable="true">
+        <h2>QUOTATION</h2>
+        <p><strong>Quotation No:</strong> MND0034</p>
+        <p><strong>Date:</strong> 2025-07-31</p>
+        <p><strong>Due Date:</strong> 2025-08-07</p>
       </div>
     </div>
 
-    <div class="flex">
-      <div class="card">
-        <p class="section-title">Billed By</p>
-        <div class="input-row"><select><option>Zimbabwe</option></select></div>
-        <div class="input-row"><input type="text" placeholder="Your Business Name (required)"></div>
-        <div class="input-row"><input type="text" placeholder="+263"></div>
-        <div class="input-row"><input type="text" placeholder="Address (optional)"></div>
-        <div class="input-row"><input type="text" placeholder="City (optional)"></div>
-        <div class="input-row"><input type="text" placeholder="Postal Code / ZIP Code"></div>
-        <div class="input-row"><input type="text" placeholder="State (optional)"></div>
-        <button>📧 Add Email</button>
-        <button>+ Add Custom Fields</button>
+    <div class="quotation-row">
+      <div class="quotation-box" contenteditable="true">
+        <div class="section-title">Quotation to:</div>
+        <p><strong>Zimbabwe National Water Authority (ZINWA)</strong><br>
+        8th Floor, Old Mutual Centre, 3rd Street /<br>
+        Jason Moyo Avenue,<br>
+        Harare,<br>
+        Country: Zimbabwe</p>
       </div>
-      <div class="card">
-        <p class="section-title">Billed To</p>
-        <div class="input-row"><select><option>Zimbabwe</option></select></div>
-        <div class="input-row"><input type="text" placeholder="Client's Business Name (required)"></div>
-        <div class="input-row"><input type="text" placeholder="+263"></div>
-        <div class="input-row"><input type="text" placeholder="Address (optional)"></div>
-        <div class="input-row"><input type="text" placeholder="City (optional)"></div>
-        <div class="input-row"><input type="text" placeholder="Postal Code / ZIP Code"></div>
-        <div class="input-row"><input type="text" placeholder="State (optional)"></div>
-        <button>📧 Add Email</button>
-        <button>+ Add Custom Fields</button>
+      <div class="bank-box" contenteditable="true">
+        <div class="section-title">Bank Details</div>
+        <table class="bank-details">
+          <tr><td class="highlight">FBC Bank:</td></tr>
+          <tr><td>ZWL Account No: <strong>1370426870288</strong></td></tr>
+          <tr><td>USD Account No: 0206870426870187</td></tr>
+          <tr><td>Account Name: Mistnex Dynamics PVT LTD</td></tr>
+        </table>
       </div>
     </div>
 
-    <div style="margin-top: 1rem;">
-      <input type="checkbox"> Add Shipping Details
-      <select style="float: right;">
-        <option>US Dollar (USD, $)</option>
-      </select>
-    </div>
-
-    <table>
+    <table id="quoteTable">
       <thead>
         <tr>
-          <th>Item</th><th>Quantity</th><th>Rate</th><th>Amount</th>
+          <th>Description</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>
-            <input type="text" placeholder="Item Name">
-            <button>+ Add Description</button>
-            <button>🖼️ Add Thumbnail</button>
-            <select><option>Product</option></select>
-          </td>
-          <td><input type="number" value="1"></td>
-          <td><input type="text" value="$ 1"></td>
-          <td><strong>US$1.00</strong></td>
+          <td contenteditable="true">Design and development of the ZINWA Permit Management System, including multi-level approval workflows, digital certificate generation with QR code verification, and comprehensive user audit logging.</td>
+          <td contenteditable="true">1</td>
+          <td contenteditable="true">$0.00</td>
+          <td contenteditable="false">$0.00</td>
         </tr>
       </tbody>
     </table>
-    <div class="actions">
-      <button>+ Add New Line</button>
-      <button>Add Discounts/Additional Charges</button>
-      <button>Hide Totals</button>
-      <input type="checkbox"> Summarise Total Quantity
+
+    <div class="btn-line">
+      <button onclick="addRow()">Add Line</button>
+      <button onclick="deleteRow()">Delete Last Line</button>
+      <button onclick="exportPDF()">Export to PDF</button>
+      <button onclick="window.print()">Print</button>
+      <button onclick="saveAsDoc()">Save as .docx</button>
+      <button onclick="saveAsXLSX()">Save as .xlsx</button>
     </div>
 
-    <div class="summary">
-      <h2>Total (USD): US$1.00</h2>
-      <button>+ Add More Fields</button>
-      <button>Show Total In Words</button>
+    <table class="summary">
+      <tr><td style="text-align:right;">Subtotal:</td><td id="subtotal" contenteditable="false">$0.00</td></tr>
+      <tr><td style="text-align:right;">Discount (%):</td><td contenteditable="true" id="discount">0</td></tr>
+      <tr><td style="text-align:right;">Tax (%):</td><td contenteditable="true" id="tax">0</td></tr>
+      <tr><td style="text-align:right;"><strong>Total Amount:</strong></td><td id="totalAmount"><strong>$0.00</strong></td></tr>
+    </table>
+
+    <div class="terms" contenteditable="true">
+      <p><strong>Terms & Conditions:</strong></p>
+      <p>By proceeding with this quotation and engaging in services with MistNex Dynamics, you agree to our standard terms and conditions available at:<br>
+      <a href="https://mistnex.co.zw/pages/terms/">https://mistnex.co.zw/pages/terms/</a></p>
     </div>
 
-    <div class="signature">
-      <div class="signature-box">Add Signature</div>
-    </div>
-
-    <div class="add-buttons">
-      <button>📄 Add Terms & Conditions</button>
-      <button>📝 Add Notes</button>
-      <button>📎 Add Attachments</button>
-      <button>📘 Add Additional Info</button>
-      <button>📞 Add Contact Details</button>
+    <div class="footer">
+      Thank you for your business!
     </div>
   </div>
+
+  <!-- Required Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.1/docx.min.js"></script>
+
+  <script>
+    const dropArea = document.getElementById('logoDropArea');
+    const logoInput = document.getElementById('logoInput');
+
+    dropArea.addEventListener('click', () => logoInput.click());
+    dropArea.addEventListener('dragover', e => { e.preventDefault(); dropArea.classList.add('hover'); });
+    dropArea.addEventListener('dragleave', () => dropArea.classList.remove('hover'));
+    dropArea.addEventListener('drop', e => {
+      e.preventDefault(); dropArea.classList.remove('hover');
+      const file = e.dataTransfer.files[0]; previewLogo(file);
+    });
+    logoInput.addEventListener('change', e => previewLogo(e.target.files[0]));
+
+    function previewLogo(file) {
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          dropArea.innerHTML = `<img src="${reader.result}" alt="Company Logo">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function parseCurrency(value) {
+      return parseFloat(value.replace(/[^0-9.-]+/g, "")) || 0;
+    }
+
+    function updateTotals() {
+      let subtotal = 0;
+      const rows = document.getElementById('quoteTable').querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const qty = parseFloat(row.cells[1].innerText.trim()) || 0;
+        const price = parseCurrency(row.cells[2].innerText);
+        const total = qty * price;
+        row.cells[3].innerText = `$${total.toFixed(2)}`;
+        subtotal += total;
+      });
+
+      document.getElementById('subtotal').innerText = `$${subtotal.toFixed(2)}`;
+      const discountPercent = parseFloat(document.getElementById('discount').innerText) || 0;
+      const taxPercent = parseFloat(document.getElementById('tax').innerText) || 0;
+
+      const afterDiscount = subtotal - (discountPercent / 100 * subtotal);
+      const taxAmount = taxPercent / 100 * afterDiscount;
+      const total = afterDiscount + taxAmount;
+
+      document.getElementById('totalAmount').innerHTML = `<strong>$${total.toFixed(2)}</strong>`;
+    }
+
+    function addRow() {
+      const tbody = document.getElementById('quoteTable').querySelector('tbody');
+      const row = tbody.insertRow();
+      for (let i = 0; i < 4; i++) {
+        const cell = row.insertCell();
+        cell.contentEditable = i < 3;
+        cell.innerHTML = i === 0 ? 'New item description' : i === 1 ? '1' : '$0.00';
+      }
+      updateTotals();
+    }
+
+    function deleteRow() {
+      const tbody = document.getElementById('quoteTable').querySelector('tbody');
+      if (tbody.rows.length > 1) tbody.deleteRow(tbody.rows.length - 1);
+      updateTotals();
+    }
+
+    document.addEventListener('input', function(e) {
+      if (e.target.closest('table')) updateTotals();
+    });
+
+    window.addEventListener('load', updateTotals);
+
+    async function exportPDF() {
+      const { jsPDF } = window.jspdf;
+      const container = document.querySelector('.container');
+
+      // Clone container and remove buttons for clean PDF
+      const clone = container.cloneNode(true);
+      clone.querySelector('.btn-line')?.remove();
+
+      // Append clone to hidden div offscreen for rendering
+      const hiddenDiv = document.createElement("div");
+      hiddenDiv.style.position = "fixed";
+      hiddenDiv.style.left = "-9999px";
+      hiddenDiv.style.top = "0";
+      hiddenDiv.style.width = "960px"; // match container max-width for crisp render
+      hiddenDiv.appendChild(clone);
+      document.body.appendChild(hiddenDiv);
+
+      // Render clone to canvas with high scale for quality
+      const canvas = await html2canvas(clone, { scale: 3, useCORS: true });
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF('p', 'pt', 'a4');
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight(); // ~842pt
+
+      // Calculate image height keeping aspect ratio and fill page height
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      // If image height is less than page height, center vertically, else start at 0
+      const yOffset = imgHeight < pageHeight ? (pageHeight - imgHeight) / 2 : 0;
+
+      pdf.addImage(imgData, 'PNG', 0, yOffset, imgWidth, imgHeight);
+      pdf.save("quotation.pdf");
+
+      hiddenDiv.remove();
+    }
+
+    async function saveAsDoc() {
+      const content = document.querySelector('.container');
+      const text = content.innerText;
+
+      const doc = new docx.Document({
+        sections: [{
+          children: [new docx.Paragraph({
+            children: [new docx.TextRun({ text, font: "Calibri", size: 22 })]
+          })]
+        }]
+      });
+
+      const blob = await docx.Packer.toBlob(doc);
+      saveAs(blob, "quotation.docx");
+    }
+
+    function saveAsXLSX() {
+      const table = document.getElementById("quoteTable");
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Quote" });
+      XLSX.writeFile(wb, "quotation.xlsx");
+    }
+  </script>
 </body>
 </html>
