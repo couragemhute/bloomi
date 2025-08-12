@@ -23,6 +23,8 @@ urlpatterns = [
     path('', include('home.urls')),
     path('pages/', include('pages.urls')),  # Removed extra slash at start
     path('invoice/', include('invoice.urls')),  # Include invoice URLs
+    path('videos/', include('videos.urls')),
+
 ]
 
 # Serve static and media files during development

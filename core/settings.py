@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'pages.apps.PagesConfig',
     'invoice.apps.InvoiceConfig',
+    'videos.apps.VideosConfig'
 ]
 
 # Middleware
@@ -120,3 +121,5 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Default auto field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REPLICATE_API_TOKEN = config("REPLICATE_API_TOKEN")
