@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'pages.apps.PagesConfig',
     'invoice.apps.InvoiceConfig',
-    'videos.apps.VideosConfig'
+
 ]
 
 # Middleware
@@ -123,3 +123,8 @@ CSRF_TRUSTED_ORIGINS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REPLICATE_API_TOKEN = config("REPLICATE_API_TOKEN")
+
+FB_APP_ID = config("FB_APP_ID")
+FB_GRAPH_API_VERSION = config("FB_GRAPH_API_VERSION")
+FB_CONFIG_ID = config("FB_CONFIG_ID")
+FB_FEATURE_TYPE = config("FB_FEATURE_TYPE")

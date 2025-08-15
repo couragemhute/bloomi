@@ -69,6 +69,9 @@
 						<li class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}">
 						<a href="{% url 'services' %}">Service</a>
 						</li>
+						<li class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">
+						<a href="{% url 'products' %}">Products</a>
+						</li>
 						{% comment %} <li class="{% if request.resolver_match.url_name == 'team' %}active{% endif %}">
 						<a href="{% url 'team' %}">Team</a>
 						</li>
