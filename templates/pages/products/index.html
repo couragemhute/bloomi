@@ -61,13 +61,14 @@
                             </ul>
                         </div>
                         <div class="mt-3">
-                            <button id="onboard-btn" class="btn btn-primary">Get Started</button>
+                            <button id="wa-onboard-btn" class="btn btn-primary">Get Started</button>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <!-- products-area end -->
@@ -83,7 +84,7 @@
             </div>
             <div class="col-sm-3 col-xs-12">
                 <div class="quote-wrap text-right">
-                    <button id="onboard-btn-quote" class="btn btn-primary">Request Onboarding</button>
+                    <button id="wa-onboard-btn-2" class="btn btn-primary">Request Onboarding</button>
                 </div>
             </div>
         </div>
@@ -94,70 +95,63 @@
 <!-- Facebook SDK for WhatsApp Embedded Signup -->
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script>
-  window.fbAsyncInit = function() {
+window.fbAsyncInit = function() {
     FB.init({
-      appId: "{{ FB_APP_ID }}",
-      autoLogAppEvents: true,
-      xfbml: true,
-      version: "{{ FB_GRAPH_API_VERSION }}"
+        appId: "{{ FB_APP_ID }}",
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: "{{ FB_GRAPH_API_VERSION }}"
     });
-  };
+};
 
-  // Listen for the embedded signup completion
-  window.addEventListener('message', (event) => {
+// Listen for postMessage from Facebook
+window.addEventListener('message', (event) => {
     if (!event.origin.endsWith('facebook.com')) return;
+
     try {
-      const data = JSON.parse(event.data);
-      if (data.type === 'WA_EMBEDDED_SIGNUP') {
-        console.log('Embedded signup completed:', data);
-        // Send the code to the backend to exchange for token
-        fetch("{% url 'exchange_fb_code' %}", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": "{{ csrf_token }}"
-          },
-          body: JSON.stringify({
-            code: data.code,
-            business_id: data.business_id,
-            business_name: data.business_name
-          })
-        })
-        .then(res => res.json())
-        .then(res => {
-          if(res.access_token) {
-              alert("Onboarding complete! Token generated.");
-          } else if(res.error) {
-              alert("Error: " + JSON.stringify(res.error));
-          }
-        })
-        .catch(err => console.error("Error posting code:", err));
-      }
-    } catch(err) {
-      console.log('Error parsing postMessage data:', event.data);
+        const data = JSON.parse(event.data);
+        if (data.type === 'WA_EMBEDDED_SIGNUP') {
+            console.log('Embedded Signup data:', data);
+
+            // Send code to backend via POST
+            fetch("{% url 'exchange_fb_code' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({
+                    code: data.code,
+                    business_id: data.business_id,
+                    business_name: data.business_name
+                })
+            })
+            .then(res => res.json())
+            .then(resp => console.log('Server response:', resp))
+            .catch(err => console.error('Backend error:', err));
+        }
+    } catch(e) {
+        console.error('Failed to parse postMessage', e);
     }
-  });
+});
 
-  // Launch WhatsApp Embedded Signup
-  function launchWhatsAppSignup() {
-    FB.login(function(response) {
-      console.log("FB login response:", response);
-    }, {
-      config_id: "{{ FB_CONFIG_ID }}",
-      response_type: 'code',
-      override_default_response_type: true,
-      extras: {
-        setup: {},
-        featureType: "{{ FB_FEATURE_TYPE }}",
-        sessionInfoVersion: '3',
-      }
+// Launch embedded signup
+function launchWhatsAppSignup() {
+    FB.login(null, {
+        config_id: "{{ FB_CONFIG_ID }}",
+        response_type: 'code',
+        override_default_response_type: true,
+        extras: {
+            setup: {},
+            featureType: "{{ FB_FEATURE_TYPE }}",
+            sessionInfoVersion: '3',
+        }
     });
-  }
+}
 
-  // Bind buttons
-  document.getElementById("onboard-btn").onclick = launchWhatsAppSignup;
-  document.getElementById("onboard-btn-quote").onclick = launchWhatsAppSignup;
-
+// Attach click events
+document.getElementById('wa-onboard-btn').addEventListener('click', launchWhatsAppSignup);
+document.getElementById('wa-onboard-btn-2').addEventListener('click', launchWhatsAppSignup);
 </script>
 
 {% endblock %}
