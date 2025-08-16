@@ -4,7 +4,6 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
 from .models import OnboardedClient
 
 @csrf_exempt
@@ -62,3 +61,6 @@ def exchange_fb_code(request):
             "access_token": short_lived_token,
             "long_lived_token": long_lived_token
         })
+
+    # Handle non-POST requests
+    return JsonResponse({"error": "Only POST requests are allowed"}, status=405)

@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block navigation %}
+<!-- breadcumb-area start -->
 <div class="breadcumb-area black-opacity bg-img-3">
     <div class="container">
         <div class="row">
@@ -26,10 +27,12 @@
         </div>
     </div>
 </div>
+<!-- breadcumb-area end -->
 {% endblock %}
 
 {% block content %}
 
+<!-- products-area start -->
 <div class="pricing-table-area ptb-100 bg-1">
     <div class="container">
         <div class="row">
@@ -45,6 +48,7 @@
             <div class="pricing-table">
                 <div class="pricing-grids active-price text-center">
 
+                    <!-- WhatsApp Chatbot Product -->
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="pricing-wrap">
                             <h3>WhatsApp Chatbot</h3>
@@ -57,7 +61,7 @@
                             </ul>
                         </div>
                         <div class="mt-3">
-                            <button onclick="launchWhatsAppSignup()" class="btn btn-primary">Get Started</button>
+                            <button id="onboard-btn" class="btn btn-primary">Get Started</button>
                         </div>
                     </div>
 
@@ -66,7 +70,9 @@
         </div>
     </div>
 </div>
+<!-- products-area end -->
 
+<!-- quote-area start -->
 <div class="quote-area bg-1">
     <div class="container">
         <div class="row">
@@ -75,79 +81,83 @@
                     <h2>Let Mistnex Dynamics help you automate, engage, and grow — starting with WhatsApp.</h2>
                 </div>
             </div>
-            <div class="col-sm-3 col-xs-12 text-right">
-                <button onclick="launchWhatsAppSignup()" class="btn btn-primary">Request Onboarding</button>
+            <div class="col-sm-3 col-xs-12">
+                <div class="quote-wrap text-right">
+                    <button id="onboard-btn-quote" class="btn btn-primary">Request Onboarding</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!-- quote-area end -->
 
+<!-- Facebook SDK for WhatsApp Embedded Signup -->
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script>
-window.fbAsyncInit = function() {
+  window.fbAsyncInit = function() {
     FB.init({
-        appId: "{{ FB_APP_ID }}",
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: "{{ FB_GRAPH_API_VERSION }}"
+      appId: "{{ FB_APP_ID }}",
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: "{{ FB_GRAPH_API_VERSION }}"
     });
-};
+  };
 
-// Listen to embedded signup message events
-window.addEventListener('message', (event) => {
+  // Listen for the embedded signup completion
+  window.addEventListener('message', (event) => {
     if (!event.origin.endsWith('facebook.com')) return;
     try {
-        const data = JSON.parse(event.data);
-        if (data.type === 'WA_EMBEDDED_SIGNUP') {
-            console.log('Embedded Signup Event:', data);
-        }
-    } catch(e) {
-        console.log('Event data:', event.data);
-    }
-});
-
-// Handle login callback and send code to backend
-const fbLoginCallback = (response) => {
-    if (response.authResponse) {
-        const code = response.authResponse.code;
-        const businessId = response.authResponse.business_id || 'unknown';
-
+      const data = JSON.parse(event.data);
+      if (data.type === 'WA_EMBEDDED_SIGNUP') {
+        console.log('Embedded signup completed:', data);
+        // Send the code to the backend to exchange for token
         fetch("{% url 'exchange_fb_code' %}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": "{{ csrf_token }}"
-            },
-            body: JSON.stringify({
-                code: code,
-                business_name: prompt("Enter your Business Name"),
-                business_id: businessId
-            })
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+          },
+          body: JSON.stringify({
+            code: data.code,
+            business_id: data.business_id,
+            business_name: data.business_name
+          })
         })
         .then(res => res.json())
-        .then(data => {
-            console.log("Onboarding Response:", data);
-            alert("Successfully onboarded! Token saved.");
+        .then(res => {
+          if(res.access_token) {
+              alert("Onboarding complete! Token generated.");
+          } else if(res.error) {
+              alert("Error: " + JSON.stringify(res.error));
+          }
         })
-        .catch(err => console.error("Error onboarding:", err));
-    } else {
-        console.log("Login failed or cancelled", response);
+        .catch(err => console.error("Error posting code:", err));
+      }
+    } catch(err) {
+      console.log('Error parsing postMessage data:', event.data);
     }
-};
+  });
 
-// Launch embedded signup
-const launchWhatsAppSignup = () => {
-    FB.login(fbLoginCallback, {
-        config_id: "{{ FB_CONFIG_ID }}",
-        response_type: 'code',
-        override_default_response_type: true,
-        extras: {
-            setup: {},
-            featureType: "{{ FB_FEATURE_TYPE }}",
-            sessionInfoVersion: '3',
-        }
+  // Launch WhatsApp Embedded Signup
+  function launchWhatsAppSignup() {
+    FB.login(function(response) {
+      console.log("FB login response:", response);
+    }, {
+      config_id: "{{ FB_CONFIG_ID }}",
+      response_type: 'code',
+      override_default_response_type: true,
+      extras: {
+        setup: {},
+        featureType: "{{ FB_FEATURE_TYPE }}",
+        sessionInfoVersion: '3',
+      }
     });
-};
+  }
+
+  // Bind buttons
+  document.getElementById("onboard-btn").onclick = launchWhatsAppSignup;
+  document.getElementById("onboard-btn-quote").onclick = launchWhatsAppSignup;
+
 </script>
 
 {% endblock %}
