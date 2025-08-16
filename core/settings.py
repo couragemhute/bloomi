@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'pages.apps.PagesConfig',
     'invoice.apps.InvoiceConfig',
+    'facebook_onboarding.apps.FacebookOnboardingConfig',
 
 ]
 

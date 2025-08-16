@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('pages/', include('pages.urls')),  # Removed extra slash at start
     path('invoice/', include('invoice.urls')),  # Include invoice URLs
+    path('facebook-onboarding/', include('facebook_onboarding.urls')),  # Include Facebook onboarding URLs
 
 ]
 
