@@ -4,27 +4,17 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
 from .models import OnboardedClient
-
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-import requests
-from django.conf import settings
-from .models import OnboardedClient
-import json
 
 @csrf_exempt
 def exchange_fb_code(request):
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON"}, status=400)
-    elif request.method == "GET":
-        data = request.GET
-    else:
-        return JsonResponse({"error": "Only GET or POST requests are allowed"}, status=400)
+    if request.method != "POST":
+        return JsonResponse({"error": "Only POST requests are allowed"}, status=405)
+
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON"}, status=400)
 
     code = data.get("code")
     business_name = data.get("business_name", "Unknown")
@@ -60,7 +50,7 @@ def exchange_fb_code(request):
     long_token_data = r_long.json()
     long_lived_token = long_token_data.get("access_token", short_lived_token)
 
-    # Step 3: Save to database
+    # Step 3: Save securely in DB
     client, _ = OnboardedClient.objects.update_or_create(
         whatsapp_business_id=business_id,
         defaults={
@@ -72,6 +62,6 @@ def exchange_fb_code(request):
 
     return JsonResponse({
         "message": "Client onboarded successfully",
-        "access_token": short_lived_token,
-        "long_lived_token": long_lived_token
+        "business_id": business_id,
+        "business_name": business_name
     })
