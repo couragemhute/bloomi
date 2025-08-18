@@ -92,7 +92,6 @@
 </div>
 <!-- quote-area end -->
 
-<!-- Facebook SDK for WhatsApp Embedded Signup -->
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script>
 window.fbAsyncInit = function() {
@@ -104,55 +103,54 @@ window.fbAsyncInit = function() {
     });
 };
 
-// Listen for postMessage from Facebook
-window.addEventListener('message', (event) => {
-    if (!event.origin.endsWith('facebook.com')) return;
+// Callback when FB.login returns
+function fbLoginCallback(response) {
+    console.log("🔑 FB.login callback:", response);
+    if (response.authResponse && response.authResponse.code) {
+        const code = response.authResponse.code;
+        console.log("✅ Got auth code:", code);
 
-    try {
-        const data = JSON.parse(event.data);
-        console.log('Embedded Signup>>>>>>>>>>>>>>>>. data:', data);
-        if (data.type === 'WA_EMBEDDED_SIGNUP') {
-            console.log('Embedded Signup data:', data);
-
-            // Send code to backend via POST
-            fetch("{% url 'exchange_fb_code' %}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                body: JSON.stringify({
-                    code: data.code,
-                    business_id: data.business_id,
-                    business_name: data.business_name
-                })
+        // Send code to Django backend
+        fetch("{% url 'exchange_fb_code' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({
+                code: code
             })
-            .then(res => res.json())
-            .then(resp => console.log('Server response:', resp))
-            .catch(err => console.error('Backend error:', err));
-        }
-    } catch(e) {
-        console.error('Failed to parse postMessage', e);
+        })
+        .then(res => res.json())
+        .then(data => console.log("📩 Server response:", data))
+        .catch(err => console.error("❌ Backend error:", err));
+    } else {
+        console.warn("⚠️ No authResponse in FB.login response", response);
     }
-});
+}
 
 // Launch embedded signup
 function launchWhatsAppSignup() {
-    FB.login(null, {
+    FB.login(fbLoginCallback, {
         config_id: "{{ FB_CONFIG_ID }}",
         response_type: 'code',
         override_default_response_type: true,
         extras: {
+            version: 'v3',
             setup: {},
+            features: [
+                { name: "{{ FB_FEATURE_NAME }}" }
+            ],
             featureType: "{{ FB_FEATURE_TYPE }}",
             sessionInfoVersion: '3',
         }
     });
 }
 
-// Attach click events
+// Attach click handlers
 document.getElementById('wa-onboard-btn').addEventListener('click', launchWhatsAppSignup);
 document.getElementById('wa-onboard-btn-2').addEventListener('click', launchWhatsAppSignup);
 </script>
+
 
 {% endblock %}
