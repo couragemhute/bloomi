@@ -110,6 +110,7 @@ window.addEventListener('message', (event) => {
 
     try {
         const data = JSON.parse(event.data);
+        console.log('Embedded Signup>>>>>>>>>>>>>>>>. data:', data);
         if (data.type === 'WA_EMBEDDED_SIGNUP') {
             console.log('Embedded Signup data:', data);
 
