@@ -1,6 +1,6 @@
 # bot/views.py
-import requests
 import json
+import requests
 import logging
 from django.conf import settings
 from django.http import JsonResponse
@@ -9,80 +9,110 @@ from .models import OnboardedClient
 
 logger = logging.getLogger(__name__)
 
+GRAPH = getattr(settings, "FB_GRAPH_API_VERSION", "v23.0")
+
+
 @csrf_exempt
 def exchange_fb_code(request):
-    logger.info("📩 Received request at /facebook-onboarding/exchange-code/")
+    logger.info("🔵 Received request at /facebook-onboarding/exchange-code/")
 
     if request.method != "POST":
-        logger.warning("❌ Invalid request method: %s", request.method)
-        return JsonResponse({"error": "Only POST requests are allowed"}, status=405)
+        logger.warning("❌ Invalid method: %s", request.method)
+        return JsonResponse({"error": "POST required"}, status=405)
 
     try:
         data = json.loads(request.body)
-        logger.debug("✅ Parsed JSON body: %s", data)
-    except json.JSONDecodeError as e:
-        logger.error("❌ Failed to decode JSON: %s", e)
+        logger.debug("📥 Raw request JSON: %s", data)
+    except json.JSONDecodeError:
+        logger.error("❌ Invalid JSON in request body: %s", request.body)
         return JsonResponse({"error": "Invalid JSON"}, status=400)
 
     code = data.get("code")
+    waba_id = data.get("waba_id") or data.get("whatsapp_business_id") or data.get("wabaId")
+    phone_number_id = data.get("phone_number_id")
+    business_id = data.get("business_id")
     business_name = data.get("business_name", "Unknown")
-    business_id = data.get("business_id", "unknown_id")
+    note = data.get("note")
 
-    logger.info("➡️ Extracted values: code=%s..., business_name=%s, business_id=%s",
-                code[:6] if code else None, business_name, business_id)
+    logger.info("➡️ Extracted params: code=%s, waba_id=%s, phone_number_id=%s, business_id=%s, business_name=%s",
+                bool(code), waba_id, phone_number_id, business_id, business_name)
 
     if not code:
-        logger.error("❌ No code provided in request body")
-        return JsonResponse({"error": "Code not provided"}, status=400)
+        logger.warning("⚠️ No 'code' provided, saving only asset IDs...")
+        client, created = OnboardedClient.objects.update_or_create(
+            whatsapp_business_id=waba_id,
+            defaults={
+                "business_name": business_name,
+                "phone_number_id": phone_number_id,
+                "business_id": business_id,
+                "meta": data
+            }
+        )
+        logger.info("💾 Saved asset-only client: id=%s created=%s", client.pk, created)
+        return JsonResponse({"message": "Saved WABA/phone ids (no code)", "waba_id": waba_id})
 
-    # Step 1: Exchange code for short-lived token
-    token_url = "https://graph.facebook.com/v22.0/oauth/access_token"
+    # ---- Step 1: Exchange code -> short-lived token
+    token_url = f"https://graph.facebook.com/{GRAPH}/oauth/access_token"
     params = {
         "client_id": settings.FB_APP_ID,
         "client_secret": settings.FB_APP_SECRET,
         "redirect_uri": settings.FB_REDIRECT_URI,
         "code": code
     }
-    logger.info("🌐 Requesting short-lived token from Facebook: %s", token_url)
-    r = requests.get(token_url, params=params)
+    logger.debug("🌍 Requesting short-lived token: %s", token_url)
+    r = requests.get(token_url, params=params, timeout=10)
     token_data = r.json()
-    logger.debug("📩 FB short-lived token response: %s", token_data)
+    logger.debug("📡 Short token response: %s", token_data)
 
     short_lived_token = token_data.get("access_token")
     if not short_lived_token:
-        logger.error("❌ Failed to retrieve short-lived token")
-        return JsonResponse({"error": token_data}, status=400)
+        logger.error("❌ Short-lived token exchange failed: %s", token_data)
+        return JsonResponse({"error": "token_exchange_failed", "details": token_data}, status=400)
 
-    # Step 2: Exchange for long-lived token
-    long_token_url = "https://graph.facebook.com/v22.0/oauth/access_token"
+    logger.info("✅ Short-lived token acquired")
+
+    # ---- Step 2: Exchange short-lived -> long-lived
+    long_token_url = f"https://graph.facebook.com/{GRAPH}/oauth/access_token"
     long_params = {
         "grant_type": "fb_exchange_token",
         "client_id": settings.FB_APP_ID,
         "client_secret": settings.FB_APP_SECRET,
         "fb_exchange_token": short_lived_token
     }
-    logger.info("🌐 Requesting long-lived token from Facebook")
-    r_long = requests.get(long_token_url, params=long_params)
-    long_token_data = r_long.json()
-    logger.debug("📩 FB long-lived token response: %s", long_token_data)
+    logger.debug("🌍 Requesting long-lived token...")
+    r2 = requests.get(long_token_url, params=long_params, timeout=10)
+    long_data = r2.json()
+    logger.debug("📡 Long token response: %s", long_data)
 
-    long_lived_token = long_token_data.get("access_token", short_lived_token)
+    long_lived_token = long_data.get("access_token") or short_lived_token
+    logger.info("✅ Long-lived token acquired")
 
-    # Step 3: Save securely in DB
-    logger.info("💾 Saving OnboardedClient to DB (business_id=%s)", business_id)
+    # ---- Step 3: Save client in DB
     client, created = OnboardedClient.objects.update_or_create(
-        whatsapp_business_id=business_id,
+        whatsapp_business_id=waba_id or business_id or "unknown",
         defaults={
             "business_name": business_name,
+            "phone_number_id": phone_number_id,
             "access_token": short_lived_token,
-            "long_lived_token": long_lived_token
+            "long_lived_token": long_lived_token,
+            "meta": {
+                "short_token_response": token_data,
+                "long_token_response": long_data,
+                "raw_post": data
+            }
         }
     )
-    logger.info("✅ OnboardedClient saved: %s (created=%s)", client, created)
+
+    logger.info("💾 Onboarded client saved: id=%s created=%s", client.pk, created)
+    logger.debug("🗂 Final client record: %s", {
+        "business_name": client.business_name,
+        "waba_id": client.whatsapp_business_id,
+        "phone_number_id": client.phone_number_id,
+    })
 
     return JsonResponse({
-        "message": "Client onboarded successfully",
-        "business_id": business_id,
-        "business_name": business_name,
+        "message": "Client onboarded",
+        "waba_id": client.whatsapp_business_id,
+        "phone_number_id": client.phone_number_id,
         "created": created
     })
