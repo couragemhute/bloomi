@@ -114,7 +114,6 @@ window.fbAsyncInit = function() {
 // Listen for Embedded Signup postMessage
 window.addEventListener("message", (event) => {
     try {
-        if (!event.origin.includes("facebook.com") && !event.origin.includes("fbcdn.net")) return;
 
         const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
         addLog(`Received postMessage: ${JSON.stringify(data)}`);
@@ -129,6 +128,7 @@ window.addEventListener("message", (event) => {
                 business_id: data.business_id || (data.data && data.data.business_id) || null,
                 business_name: data.business_name || (data.data && data.data.business_name) || null
             };
+            addLog(`FB.login Details: ${JSON.stringify(payload)}`);
 
             fetch("{% url 'exchange_fb_code' %}", {
                 method: "POST",
