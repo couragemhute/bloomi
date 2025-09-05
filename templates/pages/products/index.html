@@ -170,7 +170,7 @@
   // FB.login fallback handler
   function fbLoginCallback(response) {
     addLog(`FB.login callback: ${JSON.stringify(response)}`);
-    if (response && response.authResponse && response.authResponse.code) {
+    if (response && response.authResponse) {
       const code = response.authResponse.accessToken;
       addLog(`FB.login returned code: ${code}, sending to backend...`);
       fetch("{% url 'exchange_fb_code' %}", {
