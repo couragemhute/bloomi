@@ -95,23 +95,22 @@
 <!-- SDK (async) -->
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
+<!-- Debug Logs -->
 <div id="log-box" style="border:1px solid #ccc; padding:10px; max-height:250px; overflow:auto;">
   <strong>Logs:</strong><br>
 </div>
 
 <script>
   function addLog(message) {
-    // log in console
-    console.log(message);
-
-    // log in visible div
-    const logBox = document.getElementById("log-box");
+    console.log(message); // console
+    const logBox = document.getElementById("log-box"); // visible
     const p = document.createElement("p");
     p.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
     logBox.appendChild(p);
-    logBox.scrollTop = logBox.scrollHeight; // auto scroll
+    logBox.scrollTop = logBox.scrollHeight;
   }
 
+  // FB SDK Init
   window.fbAsyncInit = function() {
     addLog("Initializing Facebook SDK...");
     FB.init({
@@ -120,10 +119,10 @@
       xfbml: true,
       version: "{{ FB_GRAPH_API_VERSION }}" // e.g. v23.0
     });
-    addLog("Facebook SDK initialized");
+    addLog("Facebook SDK initialized ✅");
   };
 
-  // Listen for Embedded Signup messages
+  // Handle Embedded Signup postMessage
   window.addEventListener("message", (event) => {
     try {
       if (!event.origin || (!event.origin.includes("facebook.com") && !event.origin.includes("fbcdn.net"))) {
@@ -132,77 +131,48 @@
       }
 
       const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
-      addLog(`Received WA_EMBEDDED_SIGNUP message: ${JSON.stringify(data)}`);
+      addLog(`Received message: ${JSON.stringify(data)}`);
 
       if (data && data.type === "WA_EMBEDDED_SIGNUP") {
         if (data.event && data.event.startsWith("FINISH")) {
-          addLog("Signup finished, preparing data...");
+          addLog("Onboarding finished, preparing payload...");
 
-          const code = data.code || (data.data && data.data.code) || null;
-          const waba_id = data.waba_id || (data.data && data.data.waba_id) || null;
-          const phone_number_id = data.phone_number_id || (data.data && data.data.phone_number_id) || null;
-          const business_id = data.business_id || (data.data && data.data.business_id) || null;
-          const business_name = data.business_name || (data.data && data.data.business_name) || null;
+          const payload = {
+            code: data.code || (data.data && data.data.code) || null,
+            waba_id: data.waba_id || (data.data && data.data.waba_id) || null,
+            phone_number_id: data.phone_number_id || (data.data && data.data.phone_number_id) || null,
+            business_id: data.business_id || (data.data && data.data.business_id) || null,
+            business_name: data.business_name || (data.data && data.data.business_name) || null
+          };
 
-          if (code) {
-            addLog(`Code present, sending to backend: ${code}`);
-            fetch("{% url 'exchange_fb_code' %}", {
-              method: "POST",
-              credentials: "include",
-              headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": "{{ csrf_token }}"
-              },
-              body: JSON.stringify({
-                code: code,
-                waba_id: waba_id,
-                phone_number_id: phone_number_id,
-                business_id: business_id,
-                business_name: business_name
-              })
-            })
-            .then(r => r.json())
-            .then(j => addLog(`Backend response: ${JSON.stringify(j)}`))
-            .catch(e => addLog(`Error sending code to backend: ${e}`));
-          } else {
-            addLog("No code, sending asset IDs only");
-            fetch("{% url 'exchange_fb_code' %}", {
-              method: "POST",
-              credentials: "include",
-              headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": "{{ csrf_token }}"
-              },
-              body: JSON.stringify({
-                code: null,
-                waba_id: waba_id,
-                phone_number_id: phone_number_id,
-                business_id: business_id,
-                business_name: business_name,
-                note: "No code in postMessage, asset ids present"
-              })
-            }).then(() => addLog("Asset IDs sent to backend"));
-          }
+          fetch("{% url 'exchange_fb_code' %}", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify(payload)
+          })
+          .then(r => r.json())
+          .then(j => addLog(`Backend response: ${JSON.stringify(j)}`))
+          .catch(e => addLog(`Error sending to backend: ${e}`));
+
         } else if (data.event === "CANCEL") {
-          addLog("User cancelled onboarding");
+          addLog("User cancelled onboarding ❌");
         }
       }
     } catch (err) {
       addLog(`Error parsing postMessage: ${err}`);
-      console.warn("Failed parsing postMessage from FB:", err, event.data);
     }
   });
 
-  // FB.login callback (for rare cases code is here)
+  // FB.login fallback handler
   function fbLoginCallback(response) {
     addLog(`FB.login callback: ${JSON.stringify(response)}`);
-
-    if (response && response.authResponse) {
-      const accessToken = response.authResponse.accessToken;
-      const userID = response.authResponse.userID;
-
-      addLog(`Got accessToken: ${accessToken}, sending to backend`);
-
+    if (response && response.authResponse && response.authResponse.code) {
+      const code = response.authResponse.accessToken;
+      addLog(`FB.login returned code: ${code}, sending to backend...`);
       fetch("{% url 'exchange_fb_code' %}", {
         method: "POST",
         credentials: "include",
@@ -210,17 +180,12 @@
           "Content-Type": "application/json",
           "X-CSRFToken": "{{ csrf_token }}"
         },
-        body: JSON.stringify({
-          access_token: accessToken,
-          user_id: userID
-        })
-      }).then(r => r.json())
-        .then(j => addLog(`Backend response: ${JSON.stringify(j)}`))
-        .catch(e => addLog(`Error sending token: ${e}`));
+        body: JSON.stringify({ code })
+      }).then(() => addLog("Code sent from FB.login callback"));
     }
   }
 
-
+  // Launch WhatsApp Embedded Signup
   function launchWhatsAppSignup() {
     addLog("Launching WhatsApp Embedded Signup...");
     FB.login(fbLoginCallback, {
@@ -237,10 +202,6 @@
 
   document.getElementById('wa-onboard-btn').addEventListener('click', launchWhatsAppSignup);
   document.getElementById('wa-onboard-btn-2').addEventListener('click', launchWhatsAppSignup);
-
 </script>
-
-
-
 
 {% endblock %}
