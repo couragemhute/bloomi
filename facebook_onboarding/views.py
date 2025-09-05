@@ -52,29 +52,11 @@ def exchange_fb_code(request):
         logger.info("💾 Saved asset-only client: id=%s created=%s", client.pk, created)
         return JsonResponse({"message": "Saved WABA/phone ids (no code)", "waba_id": waba_id})
 
-    # Case 2: Code provided, exchange for tokens using facebook SDK
-    try:
-        # Step 1: Exchange code for short-lived token
-        graph = facebook.GraphAPI()
-        token_url = f"https://graph.facebook.com/{GRAPH}/oauth/access_token"
-        params = {
-            "client_id": settings.FB_APP_ID,
-            "client_secret": settings.APP_SECRET,
-            "redirect_uri": settings.FB_REDIRECT_URI,
-            "code": code
-        }
-        logger.debug("🌍 Requesting short-lived token...")
-        r = graph.request(token_url, args=params, post_args=None, method='GET')
-        short_lived_token = r.get("access_token")
-        logger.info("✅ Short-lived token acquired")
-    except facebook.GraphAPIError as e:
-        logger.error("❌ Error getting short-lived token: %s", e)
-        return JsonResponse({"error": "short_token_failed", "details": str(e)}, status=502)
 
     try:
         # Step 2: Exchange short-lived -> long-lived token
-        graph = facebook.GraphAPI(access_token=short_lived_token)
-        long_lived_token_info = graph.extend_access_token(settings.FB_APP_ID, settings.FB_APP_SECRET)
+        graph = facebook.GraphAPI(access_token=code)
+        long_lived_token_info = graph.extend_access_token(settings.FB_APP_ID, settings.APP_SECRET)
         long_lived_token = long_lived_token_info.get("access_token")
         logger.info("✅ Long-lived token acquired")
     except facebook.GraphAPIError as e:
@@ -87,10 +69,10 @@ def exchange_fb_code(request):
         defaults={
             "business_name": business_name,
             "phone_number_id": phone_number_id,
-            "access_token": short_lived_token,
+            "access_token": code,
             "long_lived_token": long_lived_token,
             "meta": {
-                "short_token_response": {"access_token": short_lived_token},
+                "short_token_response": {"access_token": code},
                 "long_token_response": long_lived_token_info,
                 "raw_post": data
             }
