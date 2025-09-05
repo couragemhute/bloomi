@@ -196,9 +196,13 @@
   // FB.login callback (for rare cases code is here)
   function fbLoginCallback(response) {
     addLog(`FB.login callback: ${JSON.stringify(response)}`);
-    if (response && response.authResponse && response.authResponse.code) {
-      const code = response.authResponse.code;
-      addLog(`FB.login returned code: ${code}, sending to backend`);
+
+    if (response && response.authResponse) {
+      const accessToken = response.authResponse.accessToken;
+      const userID = response.authResponse.userID;
+
+      addLog(`Got accessToken: ${accessToken}, sending to backend`);
+
       fetch("{% url 'exchange_fb_code' %}", {
         method: "POST",
         credentials: "include",
@@ -206,10 +210,16 @@
           "Content-Type": "application/json",
           "X-CSRFToken": "{{ csrf_token }}"
         },
-        body: JSON.stringify({ code })
-      }).then(() => addLog("Code sent from FB.login callback"));
+        body: JSON.stringify({
+          access_token: accessToken,
+          user_id: userID
+        })
+      }).then(r => r.json())
+        .then(j => addLog(`Backend response: ${JSON.stringify(j)}`))
+        .catch(e => addLog(`Error sending token: ${e}`));
     }
   }
+
 
   function launchWhatsAppSignup() {
     addLog("Launching WhatsApp Embedded Signup...");
