@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="x-apple-disable-message-reformatting">
-    <title></title>
+    <title>Bloomi Notification</title>
     
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,600" rel="stylesheet" type="text/css">
     <style>
-        /* What it does: Remove spaces around the email design added by some email clients. */
-        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
-        html,
-        body {
+        html, body {
             margin: 0 auto !important;
             padding: 0 !important;
             height: 100% !important;
@@ -22,7 +19,7 @@
             font-size: 14px;
             margin-bottom: 10px;
             line-height: 24px;
-            color:#8094ae;
+            color: #8094ae;
             font-weight: 400;
         }
         * {
@@ -31,8 +28,7 @@
             margin: 0;
             padding: 0;
         }
-        table,
-        td {
+        table, td {
             mso-table-lspace: 0pt !important;
             mso-table-rspace: 0pt !important;
         }
@@ -49,10 +45,9 @@
             text-decoration: none;
         }
         img {
-            -ms-interpolation-mode:bicubic;
+            -ms-interpolation-mode: bicubic;
         }
     </style>
-
 </head>
 
 <body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f5f6fa;">
@@ -65,12 +60,13 @@
                             <tr>
                                 <td style="text-align: center; padding-bottom:25px">
                                     <a href="#" class="logo-link">                                        
-                                        {% comment %} <img class="logo-dark logo-img logo-img-lg" src="{% static 'images/logo_fidelity.png' %}" alt="logo-dark" height="150" width="130"> {% endcomment %}
+                                        {% comment %} <img class="logo-dark logo-img logo-img-lg" src="{% static 'images/logo_bloomi.png' %}" alt="Bloomi" height="150" width="130"> {% endcomment %}
                                     </a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
                     <table style="width:100%;max-width:620px;margin:0 auto;background-color:#ffffff;">
                         <tbody>
                             <tr>
@@ -81,25 +77,27 @@
                             <tr>
                                 <td style="text-align: center; padding: 0 30px 20px;">
                                     <p style="margin-bottom: 25px;">
-                                        {{your_email_content}} <br>
-                                        {% comment %} <span style="font-weight: bold;">Username:</span> <span style="color: #6576ff;">{{ username }}</span> <br>
-                                        <span style="font-weight: bold;">Password:</span> <span style="color: #6576ff;">{{ password }}</span> {% endcomment %}
+                                        {{ your_email_content }}
                                     </p>
                                 </td>
                             </tr>                  
                             <tr>
                                 <td style="text-align:center;padding: 20px 30px 40px">
-                                    <p style="margin: 0; font-size: 13px; line-height: 22px; color:#9ea8bb;">This email was sent from our website by a visitor. Please do not reply to this email. If you have any questions or concerns, contact us at info@mistnex.co.zw</p>
+                                    <p style="margin: 0; font-size: 13px; line-height: 22px; color:#9ea8bb;">
+                                        You are receiving this email because you subscribed to receive notifications from Bloomi.  
+                                        If you no longer wish to receive these updates, you can unsubscribe at any time.
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
                     <table style="width:100%;max-width:620px;margin:0 auto;">
                         <tbody>
-                            <tr class="bg-danger">
+                            <tr>
                                 <td style="text-align: center; padding:25px 20px 0;">
-                                    <p style="font-size: 13px;">&copy; 2025 MistNex Dynamics. All Rights Reserved</p>
-                            </td>
+                                    <p style="font-size: 13px;">&copy; 2025 Bloomi. All Rights Reserved.</p>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
