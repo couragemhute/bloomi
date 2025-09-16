@@ -1,191 +1,81 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en">
 <head>
-  <meta name="facebook-domain-verification" content="qyuucfrweqpu0drgp8urd1sn2sbilv" />
-  <!-- Schema.org Organization -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "MistNex Dynamics",
-    "url": "https://mistnex.co.zw",
-    "logo": "https://mistnex.co.zw{% static 'assets/images/nexlogo.png' %}",
-    "description": "MistNex Dynamics delivers next-generation technology and creative solutions that transform businesses with real impact. We specialize in AI integration, custom software development, and dynamic web solutions tailored for Zimbabwe and beyond.",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+263774798743",
-      "contactType": "Customer Service",
-      "email": "info@mistnex.co.zw",
-      "hoursAvailable": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "08:00",
-        "closes": "17:00"
-      }
-    },
-    "sameAs": [
-      "https://www.facebook.com/supertechglobal",
-      "https://www.linkedin.com/in/courage-mhute-8a2b71220/",
-      "https://twitter.com/mist_coat_zw",
-      "https://www.instagram.com/mist_coat_zw/"
-    ],
-    "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Harare",
-    "addressLocality": "Harare",
-    "addressCountry": "ZW"
-    },  
+    <title>The Bloomi Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
 
-    "founder": {
-      "@type": "Person",
-      "name": "Courage Mhute"
-    },
-    "keywords": "AI Integration, Custom Software Development, Web Development, Branding Solutions, Zimbabwe Tech, MistNex Dynamics"
-  }
-  </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- Schema.org Services -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "serviceType": "Custom Software Development",
-        "provider": { "@type": "Organization", "name": "MistNex Dynamics", "url": "https://mistnex.co.zw" },
-        "areaServed": { "@type": "Country", "name": "Zimbabwe" },
-        "description": "Tailored software solutions to empower Zimbabwean businesses with AI, web apps, and cloud platforms."
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Creative Branding",
-        "provider": { "@type": "Organization", "name": "MistNex Dynamics", "url": "https://mistnex.co.zw" },
-        "areaServed": { "@type": "Country", "name": "Zimbabwe" },
-        "description": "Strategic branding, logos, and visual identities that set your business apart."
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Web & Mobile App Development",
-        "provider": { "@type": "Organization", "name": "MistNex Dynamics", "url": "https://mistnex.co.zw" },
-        "areaServed": { "@type": "Country", "name": "Zimbabwe" },
-        "description": "Full-stack web and mobile solutions built for performance and scale."
-      }
-    ]
-  }
-  </script>
-
-  <!-- Essential Meta Tags -->
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>MistNex Dynamics – Leading Software Development Company in Zimbabwe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- SEO Meta -->
-  <meta name="description" content="MistNex Dynamics delivers next-gen software solutions, AI integration, and creative branding tailored for Zimbabwean businesses. Boost growth with future-ready tech. Contact us today!">
-  <meta name="keywords" content="Software Development Zimbabwe, AI Integration, Web Development, Custom Software Zimbabwe, MistNex Dynamics, Branding Services Zimbabwe, Tech Company Zimbabwe">
-  <meta name="author" content="MistNex Dynamics">
-  <meta name="robots" content="index, follow">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="MistNex Dynamics – Leading Software Development Company in Zimbabwe">
-  <meta property="og:description" content="Explore custom software, AI integration, and branding services in Zimbabwe. Built for your business by MistNex Dynamics.">
-  <meta property="og:image" content="{% static 'assets/images/nexlogo.png' %}">
-  <meta property="og:url" content="https://mistnex.co.zw">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MistNex Dynamics – Leading Software Development Company in Zimbabwe">
-  <meta name="twitter:description" content="Custom AI, Web & Branding Solutions | Trusted Zimbabwe Tech Innovators.">
-  <meta name="twitter:image" content="{% static 'assets/images/mistnex-og-image.jpg' %}">
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/nexlogo.png' %}">
-  <link rel="icon" href="{% static 'assets/images/nexlogo.png' %}" type="image/png">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
-
-  <!-- Modernizr -->
-  <script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <!-- Local CSS from static -->
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 </head>
-
-
 <body>
-    <!-- Preloader -->
-    <div id="cssLoader3" class="preloder-wrap">
-        <div class="loader">
-            <div class="child-common child4"></div>
-            <div class="child-common child3"></div>
-            <div class="child-common child2"></div>
-            <div class="child-common child1"></div>
+
+  	<div class="wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 d-flex align-items-center">
+						<p class="mb-0 phone pl-md-2">
+							<a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +00 1234 567</a> 
+							<a href="#"><span class="fa fa-paper-plane mr-1"></span> <span class="__cf_email__" data-cfemail="ee97819b9c8b838f8782ae8b838f8782c08d8183">[email&#160;protected]</span></a>
+						</p>
+					</div>
+					<div class="col-md-6 d-flex justify-content-md-end">
+						<div class="social-media">
+			    		<p class="mb-0 d-flex">
+			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+			    		</p>
+		        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+    
+    {% include "layouts/header.html" %}
+    <!-- ======= Navbar ======= -->
+    {% block navigation %}
+        <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_5.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate mb-5 text-center">
+          	<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Contact Us <i class="fa fa-chevron-right"></i></span></p>
+            <h1 class="mb-0 bread">Contact Us</h1>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+    {% endblock %}
 
-    <!-- Search Area -->
-    <div class="search-area">
-        <span class="closs-btn">Close</span>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="search-form">
-                        <form action="#">
-                            <input type="text" name="search" placeholder="Search Here">
-                            <button type="button" class="btn-style">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- ======= Main Content ======= -->
 
-    <!-- Header -->
-    <header class="header-area">
-        <div class="header-top bg-2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-8 col-xs-12">
-                        <div class="header-top-left">
-                            <p>MistNex Dynamics delivers next-generation technology and creative solutions that transform businesses with real impact.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-4 col-xs-12">
-                        <div class="header-top-right text-right">
-                            <ul>
-                                <li><a href="https://www.facebook.com/supertechglobal"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% include 'layouts/header.html' %}
-    </header>
+        {% block content %}
+        <!-- Default content -->
 
-    <!-- Navigation -->
-     
-    {% block navigation %}{% endblock %}
+        {% endblock %}
 
-    <!-- Page Content -->
-    {% block content %}{% endblock %}
 
-    <!-- Footer -->
-    {% include 'layouts/footer.html' %}
+    <!-- ======= Footer ======= -->
+{% include 'layouts/footer.html'%}
 
-    <!-- Scripts -->
-    {% include 'layouts/scripts.html' %}
+    <!-- Loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+    <!-- Vendor JS -->
+{% include 'layouts/scripts.html'%}
 </body>
 </html>

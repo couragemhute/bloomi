@@ -1,72 +1,22 @@
-{% extends 'layouts/base.html' %}
-{% load static %}
+{% extends 'layouts/base.html'%}
+{% load static%}
 
 {% block navigation %}
-<section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'assets/images/about.jpeg' %});" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text align-items-end justify-content-center">
-        <div class="col-md-9 ftco-animate mb-5 text-center">
-            <p class="breadcrumbs mb-0"><span class="mr-2"></span> <span>Our Team <i class="fa fa-chevron-right"></i></span></p>
-          <h1 class="mb-0 bread">Meet Our Team</h1>
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_5.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate mb-5 text-center">
+          	<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> </p>
+            <h1 class="mb-0 bread">BLOOMI</h1>
+          </div>
         </div>
       </div>
-    </div>
-</section>
-</br>
-{% endblock %}
+    </section>
+
+{% endblock%}
 
 {% block content %}
-<section class="ftco-section ftco-no-pb ftco-no-pt">
-    <div class="container">
-        <div class="row">
-            <!-- Software Engineer -->
-            <div class="col-md-6 col-sm-6">
-                <div class="card">
-                    <img src="{% static 'assets/images/courage_mhute.jpeg' %}" 
-                         alt="Software Engineer" 
-                         class="card-img-top" 
-                         style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
-                    <div class="card-body text-center">
-                        <h3 class="card-title">Courage Mhute (Mist Coat)</h3>
-                        <span class="card-subtitle mb-2 text-muted">Software Engineer (Web Developer)</span>
-                        <p class="card-text">Passionate about Web Development, Backend Development, and API Integrations.</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="mb-0 d-flex justify-content-center">
-                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Graphic Designer -->
-            <div class="col-md-6 col-sm-6">
-                <div class="card">
-                    <img src="{% static 'assets/images/team/karter.jpeg' %}" 
-                         alt="Graphic Designer" 
-                         class="card-img-top" 
-                         style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
-                    <div class="card-body text-center">
-                        <h3 class="card-title">Enyfonce Nyamvura (Cee Karter)</h3>
-                        <span class="card-subtitle mb-2 text-muted">Graphic Designer</span>
-                        <p class="card-text">Specialized in creating visually appealing designs for branding and marketing.</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="mb-0 d-flex justify-content-center">
-                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-                            <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 
-</br>
-{% endblock %}
+{% endblock%}

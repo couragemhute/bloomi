@@ -1,130 +1,22 @@
 {% extends 'layouts/base.html'%}
 {% load static%}
+
 {% block navigation %}
-        <!-- breadcumb-area start -->
-        <div class="breadcumb-area black-opacity bg-img-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="breadcumb-wrap">
-                            <h2>Contact us</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="breadcumb-menu">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <ul>
-                                <li><a href="{% url 'home' %}">Home</a></li>
-                                <li>/</li>
-                                <li>Contact</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_5.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate mb-5 text-center">
+          	<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> </p>
+            <h1 class="mb-0 bread">BLOOMI</h1>
+          </div>
         </div>
-        <!-- breadcumb-area end -->
+      </div>
+    </section>
+
 {% endblock%}
 
 {% block content %}
-<div class="contact-area ptb-100">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="contact-wrap form-style">
-                    <h3>Contact Me</h3>
-                    <div class="cf-msg"></div>
-                    <form action="{% url 'contact_form_submission' %}" method="post" id="contactForm">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12">
-                                <input type="text" placeholder="Name" id="fname" name="fname" required>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <input type="email" placeholder="Email" id="email" name="email" required>
-                            </div>
-                            <div class="col-xs-12">
-                                <input type="text" placeholder="Subject" id="subject" name="subject" required>
-                            </div>
-                            <div class="col-xs-12">
-                                <textarea class="contact-textarea" placeholder="Message" id="msg" name="msg" required></textarea>
-                            </div>
-                            <div class="col-xs-12">
-                                <button id="submit" class="cont-submit btn-contact" name="submit" type="submit">SEND MESSAGE</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-            <!-- Contact Info -->
-            <div class="col-md-4">
-                <div class="contact-wrap">
-                    <ul>
-                        <li>
-                            <i class="fa fa-phone"></i>
-                            <p>+263 71 330 4655</p>
-                            <p>+263 77 479 8743</p>
-                        </li>
-                        <li>
-                            <i class="fa fa-envelope"></i>
-                            <p><a href="mailto:info@mistnex.com">info@mistnex.com</a></p>
-                        </li>
-                        <li>
-                            <i class="fa fa-fax"></i>
-                            <p>+263 77 479 8743</p>
-                        </li>
-                        <li>
-                            <i class="fa fa-location-arrow"></i>
-                            <p>08 Dan Judson Road, Milton Park, Harare, Zimbabwe</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-{% comment %} 
-            <!-- Map -->
-            <div class="col-xs-12">
-                <div id="leafletMap" style="height: 400px;"></div>
-            </div> {% endcomment %}
-        </div>
-    </div>
-</div>
 
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-oCqXFZ7phquK+6VKEh5h1yG0xGL8Lv6A/wwl7t0o7r4=" crossorigin=""/>
-
-
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-o9N1j6fYq+i2YgD7uFn/mOtPENI0LTs4ZW+N/e7cR4=" crossorigin=""></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const lat = -17.8103;
-    const lng = 31.0456;
-
-    // Initialize Leaflet map
-    const map = L.map('leafletMap').setView([lat, lng], 15); // Harare coords
-
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Add marker at the address with full address and coordinates in popup
-    L.marker([lat, lng]).addTo(map)
-      .bindPopup(
-        `<b>MistNex Location</b><br>
-        08 Dan Judson Road, Milton Park, Harare, Zimbabwe<br>
-        Coordinates: ${lat}, ${lng}`
-      )
-      .openPopup();
-  });
-</script>
 
 {% endblock%}

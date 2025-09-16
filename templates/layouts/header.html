@@ -1,116 +1,42 @@
 {% load static %}
 
-<div class="header-middle bg-2" >
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3 hidden-sm hidden-xs">
-				<div class="logo" style="margin-top: -80px;">  <!-- Adjust value as needed -->
-					<a>
-					<img src="{% static 'assets/images/nexlogo.png' %}" alt="MistNexDynamicsLogo">
-					</a>
-				</div>
-			</div>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">Bloomi</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
 
-			<div class="col-md-9 col-xs-12">
-				<div class="header-middle-right">
-					<ul>
-						<li>
-							<div class="contact-icon">
-								<i class="fa fa-clock-o"></i>
-							</div>
-							<div class="contact-info">
-								<p>MON - SAT (8AM - 5PM)</p>
-								<span>Sunday closed</span>
-							</div>
-						</li>
-						<li>
-							<div class="contact-icon">
-								<i class="fa fa-envelope"></i>
-							</div>
-							<div class="contact-info">
-								<p>MAIL US</p>
-								<span> info@mistnex.co.zw</span>
-							</div>
-						</li>
-						<li>
-							<div class="contact-icon">
-								<i class="fa fa-phone"></i>
-							</div>
-							<div class="contact-info">
-								<p>PHONE US</p>
-								<span> (+263) 77 479 8743</span>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-			<div class="header-bottom"  id="sticky-header">
-	<div class="container">
-		<div class="row">
-			<div class="hidden-md hidden-lg col-sm-8 col-xs-6">
-				<div class="logo" style="margin-top: -80px;">  <!-- Adjust value as needed -->
-					<a>
-					<img src="{% static 'assets/images/nexlogo.png' %}" alt="MistNexLogo">
-					</a>
-				</div>
-			</div>
-			<div class="col-md-11 hidden-sm hidden-xs">
-				<div class="mainmenu">
-					<ul id="navigation">
-						<li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-						<a href="{% url 'home' %}">Home <i class="fa fa-angle-down"></i></a>
-						</li>
-						<li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-						<a href="{% url 'about' %}">About</a>
-						</li>
-						<li class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}">
-						<a href="{% url 'services' %}">Service</a>
-						</li>
-						<li class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">
-						<a href="{% url 'products' %}">Products</a>
-						</li>
-						{% comment %} <li class="{% if request.resolver_match.url_name == 'team' %}active{% endif %}">
-						<a href="{% url 'team' %}">Team</a>
-						</li>
-						<li class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">
-						<a href="{% url 'products' %}">Portfolio</a>
-						</li> {% endcomment %}
-						<li class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">
-						<a href="{% url 'blog' %}">Blog</a>
-						</li>
-						<li class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
-						<a href="{% url 'contact' %}">Contact</a>
-						</li>
-							<li class="{% if request.resolver_match.url_name == 'policy' %}active{% endif %}">
-						<a href="{% url 'policy' %}">Privacy Policy</a>
-						</li>
-						{% comment %} <li class="{% if request.resolver_match.url_name == 'invoice' %}active{% endif %}">
-						<a href="{% url 'invoice' %}">Invoice</a>
-						</li>  {% endcomment %}
-
-							<li class="{% if request.resolver_match.url_name == 'terms' %}active{% endif %}">
-						<a href="{% url 'terms' %}">Terms & Conditions</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-1 col-sm-2 col-xs-3">
-				<div class="search-wrap text-right">
-					<ul>
-						<li>
-							<a href="javascript:void(0);">
-								<i class="fa fa-search"></i>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-sm-2 clear col-xs-3 hidden-md hidden-lg">
-				<div class="responsive-menu-wrap floatright"></div>
-			</div>
-		</div>
-	</div>
-</div>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    <a href="{% url 'home' %}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                    <a href="{% url 'about' %}" class="nav-link">About</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'services' %}active{% endif %}">
+                    <a href="{% url 'services' %}" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'products' %}active{% endif %}">
+                    <a href="{% url 'products' %}" class="nav-link">Products</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'team' %}active{% endif %}">
+                    <a href="{% url 'team' %}" class="nav-link">Team</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'blog' %}active{% endif %}">
+                    <a href="{% url 'blog' %}" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'policy' %}active{% endif %}">
+                    <a href="{% url 'policy' %}" class="nav-link">Policy</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'terms' %}active{% endif %}">
+                    <a href="{% url 'terms' %}" class="nav-link">Terms</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                    <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

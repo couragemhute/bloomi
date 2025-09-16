@@ -1,89 +1,76 @@
 {% load static %}
-
-<footer>
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <!-- About MistNex -->
-                <div class="col-md-3 col-sm-6 col-xs-12 col">
-                    <div class="footer-widget footer-logo">
-                        <h1>MistNex Dynamics</h1>
-                        <p>At MistNex Dynamics, we engineer next-generation digital solutions, creative tech experiences, and impactful innovations tailored for forward-thinking businesses.</p>
-                        <ul>
-                            <li><i class="fa fa-phone"></i> +263 77 123 4567</li>
-                            <li><i class="fa fa-envelope"></i> <a href="mailto:info@mistnex.co.zw">info@mistnex.co.zw</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Services -->
-                <div class="col-md-3 col-sm-6 col-xs-12 col">
-                    <div class="footer-widget footer-menu">
-                        <h2>Our Services</h2>
-                        <ul>
-                            <li><a href="software.html">Software Development</a></li>
-                            <li><a href="branding.html">Creative Branding</a></li>
-                            <li><a href="web.html">Web & App Development</a></li>
-                            <li><a href="ai.html">AI & Automation</a></li>
-                            <li><a href="design.html">Graphic Design</a></li>
-                            <li><a href="printing.html">Smart Print Solutions</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Instagram -->
-                <div class="col-md-3 col-sm-6 col-xs-12 col">
-                    <div class="footer-widget instagram-wrap">
-                        <h2>Follow Us</h2>
-                        <ul>
-                            <li><a href="#"><img src="assets/images/instagram/1.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/instagram/2.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/instagram/3.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/instagram/4.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/instagram/5.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/instagram/6.jpg" alt=""></a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="col-md-3 col-sm-6 col-xs-12 col">
-                    <div class="footer-widget quick-contact">
-                        <h2>Quick Contact</h2>
-                        <form action="{% url 'contact_form_submission' %}" method="post" id="contactFormFooter">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12">
-                            <input type="text" placeholder="Name" id="fname" name="fname" required>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                            <input type="email" placeholder="Email" id="email" name="email" required>
-                            </div>
-                            <div class="col-xs-12">
-                            <input type="text" placeholder="Subject" id="subject" name="subject" required>
-                            </div>
-                            <div class="col-xs-12">
-                            <textarea class="contact-textarea" placeholder="Message" id="msg" name="msg" required></textarea>
-                            </div>
-                            <div class="col-xs-12">
-                            <button id="submit" class="cont-submit btn-contact" name="submit" type="submit">SEND MESSAGE</button>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
-                </div>
+   
+    <footer class="ftco-footer">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-sm-12 col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2 logo"><a href="#">Bloomi</a></h2>
+              <p>Far far away, behind the word mountains, far from the countries.</p>
+              <ul class="ftco-footer-social list-unstyled mt-2">
+                <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+              </ul>
             </div>
-        </div>
-    </div>
-
-    <!-- Footer Bottom -->
-    <div class="footer-bottom text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    &copy; <script>document.write(new Date().getFullYear());</script> MistNex Dynamics. All rights reserved. Designed with <i class="fa fa-heart-o" aria-hidden="true"></i> by Courage Mhute.
-                </div>
+          </div>
+          <div class="col-sm-12 col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-4">
+              <h2 class="ftco-heading-2">Explore</h2>
+              <ul class="list-unstyled">
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>About</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Contact</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>What We Do</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Plans &amp; Pricing</a></li>
+              </ul>
             </div>
+          </div>
+          <div class="col-sm-12 col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-4">
+              <h2 class="ftco-heading-2">Legal</h2>
+              <ul class="list-unstyled">
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Join us</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Blog</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Privacy &amp; Policy</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Term &amp; Conditions</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Company</h2>
+              <ul class="list-unstyled">
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>About Us</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Blog</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Contact</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Careers</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon fa fa-map marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+	                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+	                <li><a href="#"><span class="icon fa fa-paper-plane pr-4"></span><span class="text"><span class="__cf_email__" data-cfemail="e0898e868fa0998f9592848f8d81898ece838f8d">[email&#160;protected]</span></span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
         </div>
-    </div>
-</footer>
+      </div>
+      <div class="container-fluid px-0 py-5 bg-black">
+      	<div class="container">
+      		<div class="row">
+	          <div class="col-md-12">
+		
+	            <p class="mb-0" style="color: rgba(255,255,255,.5);"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	  Copyright &copy;<script data-cfasync="false" src="bloomi.com"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Bloomi</a>
+	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	          </div>
+	        </div>
+      	</div>
+      </div>
+    </footer>

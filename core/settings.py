@@ -26,8 +26,9 @@ INSTALLED_APPS = [
 
     'home.apps.HomeConfig',
     'pages.apps.PagesConfig',
-    'invoice.apps.InvoiceConfig',
-    'facebook_onboarding.apps.FacebookOnboardingConfig',
+    'accounts.apps.AccountsConfig',
+    'blog.apps.BlogConfig',
+    'course.apps.CourseConfig',
 
 ]
 
@@ -65,6 +66,8 @@ TEMPLATES = [
 
 # WSGI
 WSGI_APPLICATION = 'core.wsgi.application'
+
+AUTH_USER_MODEL = "accounts.CustomUser"  #
 
 # Database
 DATABASES = {
@@ -110,25 +113,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # CORS & CSRF
 CORS_ORIGIN_WHITELIST = [
-    'https://mist.pythonanywhere.com',
-    'http://ultimatecreative.co.zw',
-    'https://ultimatecreative.co.zw',
+    'https://test.com',
+    'http://localhost:3000',
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'https://mist.pythonanywhere.com',
-    'https://ultimatecreative.co.zw',
-    'http://ultimatecreative.co.zw',
+    'https://test.com',
 ]
 
 # Default auto field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-REPLICATE_API_TOKEN = config("REPLICATE_API_TOKEN")
-
-FB_APP_ID = config("FB_APP_ID")
-FB_GRAPH_API_VERSION = config("FB_GRAPH_API_VERSION")
-FB_CONFIG_ID = config("FB_CONFIG_ID")
-FB_FEATURE_TYPE = config("FB_FEATURE_TYPE")
-FB_APP_SECRET = config("FB_APP_SECRET")
-FB_REDIRECT_URI = config("FB_REDIRECT_URI")
-APP_SECRET = config("APP_SECRET")

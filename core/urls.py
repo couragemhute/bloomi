@@ -21,10 +21,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('pages/', include('pages.urls')),  # Removed extra slash at start
-    path('invoice/', include('invoice.urls')),  # Include invoice URLs
-    path('facebook-onboarding/', include('facebook_onboarding.urls')),  # Include Facebook onboarding URLs
-
+    path('pages/', include('pages.urls')), 
+    path('accounts/', include('accounts.urls')),
+    path('blog/', include('blog.urls')),
+    path('course/', include('course.urls')),
 ]
 
 # Serve static and media files during development
