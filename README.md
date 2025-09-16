@@ -181,3 +181,49 @@ In Django templates, use:
 
 * Never commit `.env` or secrets.
 * Keep frontend assets inside `static/`.
+
+
+
+## Environment Variables
+
+This project uses environment variables for configuration, such as debug mode, allowed hosts, secret key, and email settings.
+
+### Steps to set up your `.env` file:
+
+1. **Create a new `.env` file** in the project root:
+
+```bash
+touch .env
+```
+
+2. **Copy the example contents** below into your `.env` file:
+
+```dotenv
+# Debug mode
+DEBUG="True"
+
+ALLOWED_HOSTS="localhost,127.0.0.1"
+
+# Secret key (replace with your own secret in production)
+SECRET_KEY="your-secret-key-here"
+
+# Email configuration
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST="smtp.your-email-provider.com"
+EMAIL_PORT="465"
+EMAIL_USE_TLS="False"
+EMAIL_USE_SSL="True"
+EMAIL_HOST_USER="your-email@example.com"
+EMAIL_HOST_PASSWORD="your-email-password"
+DEFAULT_FROM_EMAIL="webmaster@localhost"
+```
+
+3. **Update the values** as needed for your local environment:
+
+* `SECRET_KEY` – generate a secure key for Django
+* `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` – your email credentials
+
+> ⚠️ **Important:** Do **not** commit your `.env` file to version control.
+
+
+
