@@ -1,0 +1,386 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The BLOOMI Project </title>
+
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+        <link rel="stylesheet" href="../css/style.css">
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+       
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+    
+         <nav>
+            <img src="../images/logo.png" alt="">
+            <div class="nav-links">
+                <ul>
+                    <i id="menu-close" class="fas fa-times"></i>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a class="active" href="course.html">Courses</a></li>
+                    <li><a href="ai-tutor.html">AI Tutor</a></li>
+                    <li><a href="contact.html">Contacts</a></li>
+                </ul>
+                <img id="menu-btn" src="../images/menu.png" alt="">
+            </div>
+        </nav>
+
+         <!-- Home Section -->
+
+        <section id="about-home">
+                <h2>Enroll In Our Courses and Enhance Your Skills</h2>
+        </section>
+
+      
+
+        <!-- Course Section -->
+
+        <section id="course-inner">
+            <div class="overview">
+                <img class="course-img" src="images/Robotics.webp" alt="">
+                <div class="course-head">
+                    <div class="c-name">
+                        <h2>Robotics</h2>
+                        <div class="star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>Description of the Robotics course.</p>
+                    </div>
+                    <span>$80.00</span>
+                </div>
+                <h3>Facilitator</h3>
+                <div class="tutor">
+                    <img src="images/Godswill.jpg" alt="">
+                    <div class="tutor-det">
+                        <h5>Godswill Ndlovu</h5>
+                        <p>Mechatronics Engineer</p>
+
+                    </div>
+                </div>
+                <hr>
+                <h3>Course Overview</h3>
+                <p>This course covers the fundamentals of robotics and embedded systems, including sensors, microcontrollers, and programming for physical devices.</p>
+                <hr>
+                <h3>What You Will Learn</h3>
+                <div class="learn">
+                    <p><i class="far fa-check-circle"></i> •	Learners will be introduced to the fundamental concepts of robotics and embedded systems.</p>
+                    <p><i class="far fa-check-circle"></i> •	Provided with hands-on experience with programming and hardware used in robotics.</p>
+                    <p><i class="far fa-check-circle"></i> •	Developing problem-solving skills through practical projects involving automation.</p>
+                    <p><i class="far fa-check-circle"></i> •	Foster teamwork and collaboration through group projects and presentations.</p>
+                </div>
+            </div>
+
+            <div class="enroll">
+                <h3>What You Will Learn</h3>
+                <div class="learn">
+                    <p><i class="far fa-video"></i>52 hours video</p>
+                    <p><i class="far fa-newspaper"></i>75 articles</p>
+                    <p><i class="far fa-cloud-download"></i>Downloadable resources</p>
+                    <p><i class="far fa-infinity"></i>Lifetime access</p>
+                    <p><i class="far fa-mobile-alt"></i>Access on mobile and TV</p>
+                    <p><i class="far fa-paperclip"></i>Assignments</p>
+                    <p><i class="far fa-trophy-alt"></i>Certificate of completion</p>
+                    <div class="enroll-btn">
+                        <a class="blue" href="#" onclick="openPaymentModal('Robotics', '80.00')"> Enroll Now</a>
+                    </div>
+            </div>
+        </section>
+
+        <!-- Zimbabwe PayNow Payment Modal -->
+        <div id="paymentModal" class="payment-modal">
+            <div class="payment-modal-content">
+                <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+                <h2>Enroll in Course</h2>
+                <div class="course-summary">
+                    <h3 id="selectedCourse">Course Name</h3>
+                    <p class="course-price">Price: $<span id="coursePrice">0.00</span></p>
+                </div>
+
+                <div class="payment-options">
+                    <h3>Choose Zimbabwe Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method" onclick="selectPaymentMethod('ecocash')">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>EcoCash</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('onemoney')">
+                            <i class="fas fa-wallet"></i>
+                            <span>OneMoney</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('telecash')">
+                            <i class="fas fa-phone"></i>
+                            <span>Telecash</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('bank')">
+                            <i class="fas fa-university"></i>
+                            <span>Bank Transfer</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('paynow')">
+                            <i class="fas fa-qrcode"></i>
+                            <span>PayNow QR</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('card')">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Credit Card</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="paymentForm" class="payment-form" style="display: none;">
+                    <h3 id="paymentMethodTitle">Payment Details</h3>
+                    <div id="mobilePayment" style="display: none;">
+                        <p>Send <strong>$<span id="mobileAmount">0.00</span></strong> to:</p>
+                        <div class="payment-details">
+                            <p><strong>Mobile Number:</strong> +263 78 123 4567</p>
+                            <p><strong>Reference:</strong> BLOOMI-<span id="courseRef">COURSE</span></p>
+                            <p><strong>Merchant:</strong> BLOOMI Project</p>
+                        </div>
+                        <div class="qr-code" id="qrCodeSection" style="display: none;">
+                            <p>Or scan QR code:</p>
+                            <div class="qr-placeholder">
+                                <i class="fas fa-qrcode fa-3x"></i>
+                                <p>QR Code would be generated here</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="bankPayment" style="display: none;">
+                        <p>Transfer <strong>$<span id="bankAmount">0.00</span></strong> to:</p>
+                        <div class="payment-details">
+                            <p><strong>Bank:</strong> CBZ Bank</p>
+                            <p><strong>Account Name:</strong> BLOOMI Project</p>
+                            <p><strong>Account Number:</strong> 1234-5678-9012-3456</p>
+                            <p><strong>Branch:</strong> Harare Main</p>
+                            <p><strong>Reference:</strong> BLOOMI-<span id="bankCourseRef">COURSE</span></p>
+                        </div>
+                    </div>
+
+                    <div id="cardPayment" style="display: none;">
+                        <form id="cardPaymentForm">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiryDate">Expiry Date</label>
+                                    <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" placeholder="123" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardName">Cardholder Name</label>
+                                <input type="text" id="cardName" placeholder="John Doe" required>
+                            </div>
+                            <button type="submit" class="pay-now-btn">Pay Now - $<span id="finalPrice">0.00</span></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button onclick="closePaymentModal()" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-col">
+                <h3>Top Products</h3>
+                <li>Arduino kits</li>
+                <li>Rocketry kits</li>
+                <li>Microcontroller Boards</li>
+                <li>sensors</li>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick links</h3>
+                <li>Jobs</li>
+                <li>Brand Assets</li>
+                <li>Gallery</li>
+                <li>Terms of Service</li>
+            </div>
+
+            <div class="footer-col">
+                <h3>Features</h3>
+                <li>Arduino kits</li>
+                <li>Rocketry kits</li>
+                <li>Microcontroller Boards</li>
+                <li>sensors</li>
+            </div>
+
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <li><a href="expert-profiles.html" style="color: #7b838a; text-decoration: none;">Experts</a></li>
+                <li>Material</li>
+                <li>Training</li>
+                <li>Inccubation</li>
+            </div>
+
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>You can trust us. We only send Promo offers</p>
+                <div class="subscribe">
+                    <input type="text" placeholder="Your Email address">
+                    <a href="#" class="yellow">SUBSCRIBE</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>Copyright ©2021 All rights reserved | This template was made by AREIC Technologies </p>
+            </div>
+
+            
+        </footer>
+
+        <script>
+            $("#menu-btn").click(function(){
+                $('nav .nav-links ul').addClass("active")
+            });
+            $("#menu-close").click(function(){
+                $('nav .nav-links ul').removeClass("active")
+            });
+
+        </script>
+
+        <script>
+            // Zimbabwe PayNow Payment Modal Functionality
+            let selectedPaymentMethod = '';
+            const usdToZwlRate = 32000; // Approximate exchange rate (adjust as needed)
+
+            function openPaymentModal(courseName, price) {
+                document.getElementById('selectedCourse').textContent = courseName;
+                document.getElementById('coursePrice').textContent = price;
+                document.getElementById('mobileAmount').textContent = price;
+                document.getElementById('bankAmount').textContent = price;
+                document.getElementById('finalPrice').textContent = price;
+                document.getElementById('courseRef').textContent = courseName.toUpperCase().replace(/\s+/g, '');
+                document.getElementById('bankCourseRef').textContent = courseName.toUpperCase().replace(/\s+/g, '');
+
+                document.getElementById('paymentModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closePaymentModal() {
+                document.getElementById('paymentModal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+                document.getElementById('paymentForm').style.display = 'none';
+                selectedPaymentMethod = '';
+
+                // Reset all payment method selections
+                document.querySelectorAll('.payment-method').forEach(method => {
+                    method.classList.remove('selected');
+                });
+
+                // Hide all payment forms
+                document.getElementById('mobilePayment').style.display = 'none';
+                document.getElementById('bankPayment').style.display = 'none';
+                document.getElementById('cardPayment').style.display = 'none';
+                document.getElementById('qrCodeSection').style.display = 'none';
+            }
+
+            function selectPaymentMethod(method) {
+                selectedPaymentMethod = method;
+
+                // Reset all selections
+                document.querySelectorAll('.payment-method').forEach(method => {
+                    method.classList.remove('selected');
+                });
+
+                // Select current method
+                event.currentTarget.classList.add('selected');
+
+                // Show payment form
+                document.getElementById('paymentForm').style.display = 'block';
+
+                // Hide all payment details first
+                document.getElementById('mobilePayment').style.display = 'none';
+                document.getElementById('bankPayment').style.display = 'none';
+                document.getElementById('cardPayment').style.display = 'none';
+                document.getElementById('qrCodeSection').style.display = 'none';
+
+                // Show relevant payment details
+                if (method === 'ecocash' || method === 'onemoney' || method === 'telecash') {
+                    document.getElementById('mobilePayment').style.display = 'block';
+                    document.getElementById('paymentMethodTitle').textContent = method.charAt(0).toUpperCase() + method.slice(1) + ' Payment';
+                } else if (method === 'bank') {
+                    document.getElementById('bankPayment').style.display = 'block';
+                    document.getElementById('paymentMethodTitle').textContent = 'Bank Transfer Details';
+                } else if (method === 'paynow') {
+                    document.getElementById('mobilePayment').style.display = 'block';
+                    document.getElementById('qrCodeSection').style.display = 'block';
+                    document.getElementById('paymentMethodTitle').textContent = 'PayNow QR Payment';
+                } else if (method === 'card') {
+                    document.getElementById('cardPayment').style.display = 'block';
+                    document.getElementById('paymentMethodTitle').textContent = 'Credit Card Payment';
+                }
+            }
+
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('paymentModal');
+                if (event.target === modal) {
+                    closePaymentModal();
+                }
+            }
+
+            // Handle card payment form submission
+            document.getElementById('cardPaymentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Basic validation
+                const cardNumber = document.getElementById('cardNumber').value;
+                const expiryDate = document.getElementById('expiryDate').value;
+                const cvv = document.getElementById('cvv').value;
+                const cardName = document.getElementById('cardName').value;
+
+                if (!cardNumber || !expiryDate || !cvv || !cardName) {
+                    alert('Please fill in all payment details.');
+                    return;
+                }
+
+                // Simulate payment processing
+                alert('Processing payment... This is a demo. In a real application, this would connect to a payment processor.');
+
+                // Close modal after "successful" payment
+                setTimeout(() => {
+                    closePaymentModal();
+                    alert('Payment successful! Welcome to the course. You will receive access details via email.');
+                }, 2000);
+            });
+
+            // Handle mobile money payment confirmation
+            function confirmMobilePayment() {
+                alert('Please send the payment using your selected mobile money method. Once payment is received, you will get course access within 24 hours.');
+                closePaymentModal();
+            }
+
+            // Handle bank transfer confirmation
+            function confirmBankTransfer() {
+                alert('Please make the bank transfer using the details provided. Once payment is received, you will get course access within 24 hours.');
+                closePaymentModal();
+            }
+
+        </script>
+
+
+    </body>
+
+</html> 

@@ -1,0 +1,154 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The BLOOMI Project </title>
+
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+        <link rel="stylesheet" href="../css/style.css">
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+       
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+    
+         <nav>
+            <img src="../images/logo.png" alt="">
+            <div class="nav-links">
+                <ul>
+                    <i id="menu-close" class="fas fa-times"></i>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="course.html">Courses</a></li>
+                    <li><a href="ai-tutor.html">AI Tutor</a></li>
+                    <li><a class="active" href="contact.html">Contacts</a></li>
+                </ul>
+                <img id="menu-btn" src="../images/menu.png" alt="">
+            </div>
+        </nav>
+
+         <!-- Home Section -->
+
+        <section id="about-home">
+                <h2>Contact US</h2>
+        </section>
+
+        <section id="contact">
+            <div class="getin">
+                <h2>Get in touch</h2>
+                <p>Need assistance? Fill the form and unlock a Door to evolved education</p>
+                <div class="getin-details">
+                    <h3>Headquaters</h3>
+                    <div>
+                        <i class="far fa-home get"></i>
+                        <p>1145 chiremba Road, Zimta, Mutare</p>
+                    </div>
+                    <h3>Phone</h3>
+                    <div>
+                        <i class="fas fa-phone-alt get"></i>
+                        <p>(+263) 787 096 488 <br> (+263) 718 490 763</p>
+                    </div>
+                     <h3>Support</h3>
+                    <div>
+                        <i class="fas fa-envelope-open-text get"></i>
+                        <p>areictechnologies@gmail.com</p>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="form">
+                <h4>Let's Connect</h4>
+                <p>Fill the form below to reach out to us</p>
+                <div class="form-row">
+                    <input type="text" placeholder="Your Name">
+                    <input type="text" placeholder="Email">
+                </div>
+                <div class="form-col">
+                    <input type="text" placeholder="Subject">
+                </div>
+                <div class="form-col">
+                    <textarea name="" id="" cols="30" rows="8" placeholder="How can we help you?"></textarea>
+                </div>
+                <div class="form-col">
+                    <button>Submit</button>
+                </div>
+                
+            </div>
+        </section>
+        
+        <section id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7729227.718350569!2d23.855059314194172!3d-18.92975758813839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a4e706b17161%3A0xa1c0385fc5cbbfee!2sZimbabwe!5e0!3m2!1sen!2szw!4v1754574451331!5m2!1sen!2szw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+
+        <footer>
+            <div class="footer-col">
+                <h3>Top Products</h3>
+                <li>Arduino kits</li>
+                <li>Rocketry kits</li>
+                <li>Microcontroller Boards</li>
+                <li>sensors</li>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick links</h3>
+                <li>Jobs</li>
+                <li>Brand Assets</li>
+                <li>Gallery</li>
+                <li>Terms of Service</li>
+            </div>
+
+            <div class="footer-col">
+                <h3>Features</h3>
+                <li>Arduino kits</li>
+                <li>Rocketry kits</li>
+                <li>Microcontroller Boards</li>
+                <li>sensors</li>
+            </div>
+
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <li>Experts</li>
+                <li>Material</li>
+                <li>Training</li>
+                <li>Inccubation</li>
+            </div> 
+
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>You can trust us. We only send Promo offers</p>
+                <div class="subscribe">
+                    <input type="text" placeholder="Your Email address">
+                    <a href="#" class="yellow">SUBSCRIBE</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>Copyright ©2021 All rights reserved | This template was made by AREIC Technologies </p>
+            </div>
+
+            
+        </footer>
+
+        <script>
+            $("#menu-btn").click(function(){
+                $('nav .nav-links ul').addClass("active")
+            });
+            $("#menu-close").click(function(){
+                $('nav .nav-links ul').removeClass("active")
+            });
+
+        </script>
+
+    </body>
+
+</html> 
