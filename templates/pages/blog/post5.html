@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<section id="about-home">
+    <h2>Blog</h2>
+</section>
+{% endblock %}
+
+{% block content %}
+<section id="blog-container">
+    <div class="blogs blogpost">
+        <div class="post">
+            <img src="{% static 'bloomi/images/artificial intelligence.jpg' %}" alt="Artificial Intelligence">
+            <h3>Learn Artificial Intelligence In the most interactive way</h3>
+            <p>
+                Join our Artificial Intelligence course and build real-world projects while learning the latest technologies.
+                <br><br>
+                <strong>Beyond the Classroom: Why Hands-On AI is the Skillset Every Student Needs</strong>
+                <br>
+                AI is no longer a distant technology; it powers the apps we use every day and drives innovation in every industry. Our 10-week Introduction to Artificial Intelligence course is designed to demystify AI and make it accessible. It moves beyond buzzwords, offering a comprehensive journey that blends clear theoretical grounding with indispensable practical skills.
+                <br><br>
+                We believe in learning by doing. That’s why for every two hours of instruction, students spend five hours building mini-AI systems — training small models, testing algorithms, and seeing for themselves how machine learning actually works. It’s not enough to know about neural networks; students need to experience the data, the training process and the evaluation metrics to really understand.
+                <br><br>
+                The true test of skill comes when students evaluate and improve their models. Watching an algorithm correctly classify an image is exciting, but the real learning happens when they examine its errors, adjust parameters, and see improvements over time. This cycle of analysis builds a critical engineering mindset: measuring, troubleshooting and iterating for better results.
+                <br><br>
+                Ultimately, the course invests in students’ futures. Through final team projects that solve real-world problems, they gain teamwork and communication skills alongside technical experience. They also gain exposure to emerging careers in AI, data science and automation. Most importantly, they leave with a lasting confidence in their ability to understand and build intelligent systems.
+                <br><br>
+                This is more than an introduction to AI; it’s a launchpad into the technologies that will define the next decade. Don’t just let your student consume AI — empower them to create it.
+            </p>
+            <a href="#" class="yellow">Read Next</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

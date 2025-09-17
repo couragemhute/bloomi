@@ -2,21 +2,238 @@
 {% load static%}
 
 {% block navigation %}
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_5.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-end justify-content-center">
-          <div class="col-md-9 ftco-animate mb-5 text-center">
-          	<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> </p>
-            <h1 class="mb-0 bread">BLOOMI</h1>
+  <section id="home">
+          <h2>Welcome to The BLOOMI Project</h2>
+          <p>Your journey to learning and growth starts here.</p>
+          <div class="btn">
+              <a class="blue" href="#features">Learn More</a>
+              <a class="yellow" href="{% url 'all_courses' %}">Visit Courses</a>
           </div>
-        </div>
-      </div>
-    </section>
+  </section>
+
 
 {% endblock%}
 
 {% block content %}
+<!-- Features -->
+<section id="features">
+    <h1>Awesome Features</h1>
+    <p>Replenish man have thing gathering lights yielding shall You</p>
+    <div class="fea-base">
+        <div class="fea-box">
+            <i class="fas fa-graduation-cap"></i>
+            <h3>Quality Education</h3>
+            <p>We provide high-quality educational resources to help you succeed.</p>
+        </div>
+        <div class="fea-box">
+            <i class="fas fa-robot"></i>
+            <h3>AI Tutoring</h3>
+            <p>Get personalized assistance from AI-driven tutors.</p>
+        </div>
+        <div class="fea-box">
+            <i class="fas fa-laptop-code"></i>
+            <h3>Online Courses</h3>
+            <p>Access a wide range of online courses at your convenience.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Courses -->
+<section id="course">
+    <h1>Our Courses</h1>
+    <p>Explore a variety of courses designed to enhance your skills.</p>
+    <div class="course-box">
+        <div class="courses">
+            <img src="{% static 'bloomi/images/robotics.jpg' %}" alt="">
+            <div class="details">
+                <h6>Robotics</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div class="courses">
+            <img src="{% static 'bloomi/images/entrepreneurship.jpg' %}" alt="">
+            <div class="details">
+                <h6>Entrepreneurship skills</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div class="courses">
+            <img src="{% static 'bloomi/images/artificial intelligence.jpg' %}" alt="">
+            <div class="details">
+                <h6>Artificial Intelligence</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div class="courses">
+            <img src="{% static 'bloomi/images/rocket science.jpg' %}" alt="">
+            <div class="details">
+                <h6>Rocketry</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div class="courses">
+            <img src="{% static 'bloomi/images/c3.jpg' %}" alt="">
+            <div class="details">
+                <h6>Introduction to Python</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div class="courses">
+            <img src="{% static 'bloomi/images/Web development.jpg' %}" alt="">
+            <div class="details">
+                <h6>Web Development</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Registration -->
+<section id="registration">
+    <div class="reminder">
+        <p>Get to use our AI Tutor for free first month.</p>
+        <h1>Register to start</h1>
+        <div class="time">
+            <div class="date">120 <br> Days</div>
+            <div class="date">15 <br> Hours</div>
+            <div class="date">47 <br> Minutes</div>
+            <div class="date">35 <br> Seconds</div>
+        </div>
+    </div>
+<div class="form">
+    <h3>Create Free Account NOW</h3>
+    <form method="POST" action="{% url 'register_user' %}">
+        {% csrf_token %}
+        <input type="text" name="full_name" placeholder="NAME" required>
+        <input type="email" name="email" placeholder="EMAIL" required>
+        <input type="text" name="phone_number" placeholder="PHONE NUMBER" required>
+        <input type="password" name="password" placeholder="PASSWORD" required>
+        <input type="password" name="confirm_password" placeholder="CONFIRM PASSWORD" required>
+        <div class="btn">
+            <button type="submit" class="yellow" style="border:none;cursor:pointer;">Register</button>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                Already have an account? 
+                <a class="yellow" href="#" style="color: #f093fb; text-decoration: none;">Login</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+</section>
+
+<!-- Profiles -->
+<!-- Profiles -->
+<section id="experts">
+    <h1>Meet Our Experts</h1>
+    <p>Our team of experts is here to guide you through your learning journey.</p>
+    <div class="expert-box">
+
+        <div class="profile">
+            <img src="{% static 'bloomi/images/ceo.jpg' %}" alt="ENG Ashbey Kaseme">
+            <h6>ENG Ashbey Kaseme</h6>
+            <p>Chief Executive Officer</p>
+            <p>A holder of a Bachelor of Science in Geomatics Engineering (Honours) in Surveying from the University of Zimbabwe. Adventurous and captivated by innovative thinking in order to explore new horizons.</p>
+        </div>
+
+        <div class="profile">
+            <img src="{% static 'bloomi/images/tiri.jpg' %}" alt="Tirivashe G Mataya">
+            <h6>Tirivashe G Mataya</h6>
+            <p>Chief Technology Officer</p>
+            <p>I am passionate about technology, education, and social impact, creating solutions that blend creativity with problem-solving. My goal is to empower communities through sustainable and impactful ideas.</p>
+        </div>
+
+        <div class="profile">
+            <img src="{% static 'bloomi/images/melo.jpg' %}" alt="ENG Melody Takawira">
+            <h6>ENG Melody Takawira</h6>
+            <p>Chief Learning Architect</p>
+            <p>I leverage my background as a Mechatronic Engineer to design dynamic and responsive educational ecosystems. My expertise in control systems design directly informs my approach to creating adaptive learning pathways that optimize student engagement and outcomes.</p>
+        </div>
+
+        <div class="profile">
+            <img src="{% static 'bloomi/images/dancel.jpg' %}" alt="Dancel Mautsa">
+            <h6>Dancel Mautsa</h6>
+            <p>Lead Technical Facilitator (Software Development)</p>
+            <p>Passionate Web Dev (Frontend Developer) specializes in creating responsive and user-friendly websites. I focus on clean, optimized code and collaborating effectively with teams to deliver quality projects.</p>
+        </div>
+
+        <div class="profile">
+            <img src="{% static 'bloomi/images/Godswill.jpg' %}" alt="ENG Godswill S. Ndlovu">
+            <h6>ENG Godswill S. Ndlovu</h6>
+            <p>Lead Technical Facilitator (Engineering)</p>
+            <p>Hey there, Godswill S. Ndlovu is passionate and involved in research about robotics, automation, and IoT. Holder of a BSc degree in Mechatronics Engineering from the University of Zimbabwe.</p>
+        </div>
+
+        <div class="profile">
+            <img src="{% static 'bloomi/images/prim.jpg' %}" alt="Primrose R Mazike">
+            <h6>Primrose R Mazike</h6>
+            <p>Lead Technical Facilitator (Business)</p>
+            <p>A Mathematical and Computational Science student at the University of Zimbabwe. Aspiring businesswoman and entrepreneur.</p>
+        </div>
+
+        <div class="profile">
+            <img src="{% static 'bloomi/images/Courage.jpg' %}" alt="Courage Mhute">
+            <h6>Courage Mhute</h6>
+            <p>Lead Technical Facilitator (Artificial Intelligence)</p>
+            <p>Courage Mhute is a Senior Software Engineer with expertise in software design and development. He is passionate about learning and driving innovation through technology.</p>
+        </div>
+
+    </div>
+</section>
+
 
 
 {% endblock%}

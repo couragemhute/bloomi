@@ -1,6 +1,6 @@
 # admin.py
 from django.contrib import admin
-from .models import Category, Blog
+from .models import Category, Blog, ContactUsRecipients
 
 # ---------- Category Admin ----------
 @admin.register(Category)
@@ -17,5 +17,13 @@ class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ("title", "content")
     list_filter = ("category", "created_at")
+    readonly_fields = ("created_at", "updated_at")
+    ordering = ("-created_at",)
+
+# ---------- ContactUsRecipients Admin ----------
+@admin.register(ContactUsRecipients)
+class ContactUsRecipientsAdmin(admin.ModelAdmin):
+    list_display = ("email", "created_at", "updated_at")
+    search_fields = ("email",)
     readonly_fields = ("created_at", "updated_at")
     ordering = ("-created_at",)

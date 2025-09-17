@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<section id="about-home">
+    <h2>Blog</h2>
+</section>
+{% endblock %}
+
+{% block content %}
+<section id="blog-container">
+    <div class="blogs blogpost">
+        <div class="post">
+            <img src="{% static 'bloomi/images/Robotics.webp' %}" alt="Robotics and Embedded Systems">
+            <h3>Learn Introduction to Robotics and Embedded Systems In the most interactive way</h3>
+            <p>
+                Join our Introduction to Robotics and Embedded Systems course and build real-world projects while learning the latest technologies.
+                <br><br>
+                <strong>Beyond the Classroom: Why Building Robots Builds Future-Ready Skills</strong>
+                <br>
+                From smart devices to autonomous vehicles, the future belongs to those who can combine hardware and software. Our 8-week Introduction to Robotics & Embedded Systems course bridges that gap. It’s a hands-on program that merges essential theory with the skills needed to design, program and assemble your own devices.
+                <br><br>
+                We dedicate five hours to building and testing for every two hours of instruction. Students wire sensors, program microcontrollers and watch their prototypes come to life. It’s not enough to read about actuators or communication protocols — they’ll apply these concepts in real time, building small robots and embedded systems.
+                <br><br>
+                The most important lessons come during testing and iteration. Seeing a robot follow a line or respond to a sensor is satisfying, but the real growth happens when students diagnose issues, adjust their code or circuitry, and improve performance. This cultivates a systems-thinking mindset that is valuable across engineering disciplines.
+                <br><br>
+                Group projects mimic real-world product development, sharpening teamwork, project management and presentation skills. By the end, students have tangible experience with the building blocks of IoT, automation and mechatronics — and a clearer view of related careers.
+                <br><br>
+                This is more than a robotics course; it’s a foundation for creating the physical technology of tomorrow. Don’t just teach theory — give your student the chance to build it.
+            </p>
+            <a href="#" class="yellow">Read Next</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

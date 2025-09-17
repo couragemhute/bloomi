@@ -36,3 +36,9 @@ class Subscriber(TimeStampMixin):
 
     def __str__(self):
         return self.email
+    
+class ContactUsRecipients(TimeStampMixin):
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.email

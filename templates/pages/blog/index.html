@@ -1,22 +1,72 @@
-{% extends 'layouts/base.html'%}
-{% load static%}
+{% extends 'layouts/base.html' %}
+{% load static %}
 
 {% block navigation %}
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_5.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-end justify-content-center">
-          <div class="col-md-9 ftco-animate mb-5 text-center">
-          	<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> </p>
-            <h1 class="mb-0 bread">BLOOMI</h1>
-          </div>
-        </div>
-      </div>
-    </section>
-
-{% endblock%}
+<section id="about-home">
+    <h2>Blog</h2>
+</section>
+{% endblock %}
 
 {% block content %}
+<section id="blog-container">
+    <div class="blogs">
+        <div class="post">
+            <img src="{% static 'bloomi/images/b3.jpg' %}" alt="">
+            <h3>Learn Web Development In the most interactive way</h3>
+            <p>Join our web development course and build real-world projects while learning the latest technologies.</p>
+            <a href="{% url 'post-1' %}" class="yellow">Read More</a>
+        </div>
 
+        <div class="post">
+            <img src="{% static 'bloomi/images/r12.webp' %}" alt="">
+            <h3>Learn Robotics In the most interactive way</h3>
+            <p>Join our robotics course and build real-world projects while learning the latest technologies.</p>
+            <a href="{% url 'post-2' %}" class="yellow">Read More</a>
+        </div>
 
-{% endblock%}
+        <div class="post">
+            <img src="{% static 'bloomi/images/eS.jpeg' %}" alt="">
+            <h3>Learn Entrepreneurial Skills In the most interactive way</h3>
+            <p>Join our entrepreneurial skills course and build real-world projects while learning the latest technologies.</p>
+            <a href="{% url 'post-3' %}" class="yellow">Read More</a>
+        </div>
+
+        <div class="post">
+            <img src="{% static 'bloomi/images/ai.png' %}" alt="">
+            <h3>Learn Artificial Intelligence In the most interactive way</h3>
+            <p>Join our AI course and build real-world projects while learning the latest technologies.</p>
+            <a href="{% url 'post-4' %}" class="yellow">Read More</a>
+        </div>
+
+        <div class="post">
+            <img src="{% static 'bloomi/images/a1.jpg' %}" alt="">
+            <h3>Learn Rocketry In the most interactive way</h3>
+            <p>Join our rocketry course and build real-world projects while learning the latest technologies.</p>
+            <a href="{% url 'post-5' %}" class="yellow">Read More</a>
+        </div>
+
+        <div class="post">
+            <img src="{% static 'bloomi/images/c3.jpg' %}" alt="">
+            <h3>Learn Introduction to Python In the most interactive way</h3>
+            <p>Join our Python course and build real-world projects while learning the latest technologies.</p>
+            <a href="{% url 'post-6' %}" class="yellow">Read More</a>
+        </div>
+    </div>
+
+    <div class="cate">
+        <h2>Categories</h2>
+        <hr>
+        <a href="#">Web Development</a>
+        <hr>
+        <a href="#">Rocketry</a>
+        <hr>
+        <a href="#">Robotics</a>
+        <hr>
+        <a href="#">Artificial Intelligence</a>
+        <hr>
+        <a href="#">Entrepreneurial Skills</a>
+        <hr>
+        <a href="#">Introduction to Python</a>
+    </div>
+</section>
+{% endblock %}

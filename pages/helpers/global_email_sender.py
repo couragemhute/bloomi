@@ -9,6 +9,8 @@ from django.conf import settings
 from django.contrib import messages
 import logging
 
+from blog.models import ContactUsRecipients
+
 
 def send_email_from_global_config(email_subject, user, email_content, recipient_email):
     email_html_content = render_to_string(
@@ -46,9 +48,7 @@ def contact_form_submission(request):
 
         try:
             user = "Website Visitor"
-            recipient_emails = [
-                "courage@ultimatecreative.co.zw",
-            ]
+            recipient_emails = ContactUsRecipients.objects.values_list('email', flat=True)
 
             email_sent_all = True
             for recipient in recipient_emails:

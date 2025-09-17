@@ -4,7 +4,10 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from blog.models import Subscriber
 from .models import Course, Expert
 from .forms import CourseForm, SubscriberForm, ExpertForm
-
+# views.py
+from django.views import View
+from django.shortcuts import redirect
+from django.contrib import messages
 
 # ---------------- COURSE ----------------
 class CourseListView(ListView):
@@ -45,12 +48,24 @@ class SubscriberListView(ListView):
     template_name = "subscribers/subscriber_list.html"
     context_object_name = "subscribers"
 
+class SubscriberCreateView(View):
+    def post(self, request, *args, **kwargs):
+        email = request.POST.get("email", "").strip()
 
-class SubscriberCreateView(CreateView):
-    model = Subscriber
-    form_class = SubscriberForm
-    template_name = "subscribers/subscriber_form.html"
-    success_url = reverse_lazy("subscriber_list")
+        if not email:
+            messages.error(request, "Email cannot be empty.")
+            return redirect(request.META.get('HTTP_REFERER'))
+
+        # Check if email already exists
+        if Subscriber.objects.filter(email=email).exists():
+            messages.warning(request, "This email is already subscribed.")
+            return redirect(request.META.get('HTTP_REFERER'))
+
+        # Save subscriber
+        Subscriber.objects.create(email=email)
+        messages.success(request, "Thank you for subscribing!")
+
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 class SubscriberDeleteView(DeleteView):

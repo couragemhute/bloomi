@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<section id="about-home">
+    <h2>Blog</h2>
+</section>
+{% endblock %}
+
+{% block content %}
+<section id="blog-container">
+    <div class="blogs blogpost">
+        <div class="post">
+            <img src="{% static 'bloomi/images/eS.jpeg' %}" alt="Entrepreneurial Skills">
+            <h3>Learn Entrepreneurial Skills In the most interactive way</h3>
+            <p>
+                Join our Entrepreneurial Skills course and build real-world projects while learning the latest technologies.
+                <br><br>
+                <strong>Beyond the Classroom: Why Entrepreneurial Thinking Powers Every Career</strong>
+                <br>
+                Innovation doesn’t happen by accident. Our 6-week Introduction to Entrepreneurial Skills course gives students the mindset and toolkit to turn ideas into opportunities. It blends crisp theoretical modules with immersive exercises that make entrepreneurship real.
+                <br><br>
+                For every two hours of learning concepts such as business models, customer discovery and pitching, students spend five hours applying them — validating ideas, mapping out value propositions and building simple prototypes. They don’t just talk about entrepreneurship; they practice it.
+                <br><br>
+                Feedback and iteration sessions teach them to listen, adapt and refine their ideas — a critical habit for any entrepreneur or intrapreneur. By presenting their concepts to peers and mentors, students strengthen communication, teamwork and resilience.
+                <br><br>
+                By course end, they’ve experienced the entrepreneurial journey from ideation to pitch. Whether they go on to launch a startup or innovate within an organisation, they’ll have a competitive edge in thinking creatively and acting decisively.
+                <br><br>
+                This is more than an entrepreneurship class; it’s a catalyst for self-reliance and innovation. Don’t just prepare your student to get a job — equip them to create one.
+            </p>
+            <a href="#" class="yellow">Read Next</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

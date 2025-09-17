@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html'%}
+{% load static%}
+
+{% block navigation %}
+<section id="about-home">
+    <h2>About The BLOOMI Project</h2>
+</section>
+{% endblock%}
+
+{% block content %}
+<!-- Courses -->
+<section id="course">
+    <h1>Our Courses</h1>
+    <p>Explore a variety of courses designed to enhance your skills.</p>
+    <div class="course-box">
+
+        <div onclick="window.location.href='{% url 'course_inner_1' %}';" class="courses">
+            <img src="{% static 'bloomi/images/robotics.jpg' %}" alt="">
+            <div class="details">
+                <h6>Robotics</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div onclick="window.location.href='{% url 'course_inner_2' %}';" class="courses">
+            <img src="{% static 'bloomi/images/entrepreneurship.jpg' %}" alt="">
+            <div class="details">
+                <h6>Entrepreneurship Skills</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div onclick="window.location.href='{% url 'course_inner_3' %}';" class="courses">
+            <img src="{% static 'bloomi/images/artificial intelligence.jpg' %}" alt="">
+            <div class="details">
+                <h6>Artificial Intelligence</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div onclick="window.location.href='{% url 'course_inner_4' %}';" class="courses">
+            <img src="{% static 'bloomi/images/rocket science.jpg' %}" alt="">
+            <div class="details">
+                <h6>Rocketry</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div onclick="window.location.href='{% url 'course_inner_5' %}';" class="courses">
+            <img src="{% static 'bloomi/images/c3.jpg' %}" alt="">
+            <div class="details">
+                <h6>Introduction to Python</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+        <div onclick="window.location.href='{% url 'course_inner_6' %}';" class="courses">
+            <img src="{% static 'bloomi/images/Web development.jpg' %}" alt="">
+            <div class="details">
+                <h6>Web Development</h6>
+                <div class="star">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><span>(30)</span>
+                </div>
+            </div>
+            <div class="cost">$80.00</div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

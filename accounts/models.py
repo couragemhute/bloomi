@@ -1,12 +1,7 @@
-
 from django.db import models
-from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from blog.models import TimeStampMixin
 
-# ------------------------
-# Custom User Manager
-# ------------------------
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -29,19 +24,16 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-# ------------------------
-# Custom User Model
-# ------------------------
 class CustomUser(AbstractUser, TimeStampMixin):
     username = None  # remove username
     email = models.EmailField(unique=True)
-
-    # optional extras
+    
     full_name = models.CharField(max_length=150, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)  # ✅ new field
     profile_picture = models.ImageField(upload_to="users/", blank=True, null=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []  # removes username requirement
+    REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 

@@ -2,21 +2,179 @@
 {% load static%}
 
 {% block navigation %}
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_5.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-end justify-content-center">
-          <div class="col-md-9 ftco-animate mb-5 text-center">
-          	<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> </p>
-            <h1 class="mb-0 bread">BLOOMI</h1>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="about-home">
+        <h2>About The BLOOMI Project</h2>
+</section>
 
 {% endblock%}
 
 {% block content %}
 
+        <!-- Modern About Section with Video Animations -->
+        <section id="about-container">
+            <div class="about-content-wrapper">
+                <div class="about-video-section">
+                    <div class="video-placeholder">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-overlay">
+                            <h3>Watch Our Story</h3>
+                            <p>Discover how BLOOMI is transforming education</p>
+                        </div>
+                        <div class="video-particles">
+                            <div class="particle particle-1"></div>
+                            <div class="particle particle-2"></div>
+                            <div class="particle particle-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-text-modern">
+                    <div class="section-header">
+                        <h2 class="animated-title">Welcome to the BLOOMI Project</h2>
+                        <div class="title-underline"></div>
+                        <p class="section-subtitle">Enhance your skills with world-class online education</p>
+                    </div>
+
+                    <div class="about-description">
+                        <p>At BLOOMI, we revolutionize education through practical, hands-on learning experiences. Our innovative approach combines cutting-edge technology with real-world applications, ensuring you gain skills that matter in today's dynamic job market.</p>
+
+                        <div class="learning-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>30%</h4>
+                                    <p>Theoretical Learning</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>70%</h4>
+                                    <p>Practical Sessions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modern-features">
+                        <div class="feature-card animated-card">
+                            <div class="feature-icon">
+                    <img src="{% static 'bloomi/images/vision.png' %}" alt="Innovation">
+                            </div>
+                            <div class="feature-content">
+                                <h5>Innovative Learning</h5>
+                                <p>Experience cutting-edge education with interactive technologies and real-world problem-solving approaches.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-card animated-card">
+                            <div class="feature-icon">
+                    <img src="{% static 'bloomi/images/artificial-intelligence.png' %}" alt="AI Technology">
+                            </div>
+                            <div class="feature-content">
+                                <h5>AI-Powered Future</h5>
+                                <p>Our courses are designed by industry experts with a forward-thinking approach to emerging technologies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modern Timeline Section -->
+        <section id="timeline">
+            <div class="timeline-container">
+                <h2>Our Journey</h2>
+                <p class="timeline-subtitle">From vision to reality - transforming education step by step</p>
+
+                <div class="timeline-wrapper">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Feb 2025</h3>
+                            <h4>Foundation</h4>
+                            <p>BLOOMI Project was founded with a vision to revolutionize education through technology and innovation.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3>May 2025</h3>
+                            <h4>Launch</h4>
+                            <p>Successfully launched our first AI-powered learning platform with interactive courses and live sessions.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Jun 2025</h3>
+                            <h4>Growth</h4>
+                            <p>Expanded our community to thousands of learners worldwide with diverse course offerings and expert instructors.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3>Aug 2025</h3>
+                            <h4>Excellence</h4>
+                            <p>Achieved recognition for innovative educational approaches and cutting-edge technology integration.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3>Jan 2026</h3>
+                            <h4>Future</h4>
+                            <p>Continuing to push boundaries with advanced AI tutoring and immersive learning experiences.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modern Features -->
+         <section id="features" >
+            <h1>Awesome Features</h1>
+            <p>Replenish man have thing gathering lights yielding shall You</p>
+            <div class="fea-base">
+                <div class="fea-box">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Quality Education</h3>
+                    <p>We provide high-quality educational resources to help you succeed.</p>
+                </div>
+
+                <div class="fea-box">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Tutoring</h3>
+                    <p>Get personalized assistance from AI-driven tutors.</p>
+                </div>
+
+                <div class="fea-box">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Online Courses</h3>
+                    <p>Access a wide range of online courses at your convenience.</p>
+                </div>
+            </div>
+        </section>
 
 {% endblock%}

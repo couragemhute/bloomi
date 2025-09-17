@@ -1,14 +1,178 @@
 {% load static %}
     
-    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery-migrate-3.0.1.min.js' %}"></script>
-    <script src="{% static 'assets/js/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.easing.1.3.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.waypoints.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.animateNumber.min.js' %}"></script>
-    <script src="{% static 'assets/js/scrollax.min.js' %}"></script>
-    <script src="{% static 'assets/js/main.js' %}"></script>
+        <script>
+            $("#menu-btn").click(function(){
+                $('nav .nav-links ul').addClass("active")
+            });
+            $("#menu-close").click(function(){
+                $('nav .nav-links ul').removeClass("active")
+            });
+
+        </script>
+
+        <script>
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.addEventListener('DOMContentLoaded', function() {
+                // Observe timeline items
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                timelineItems.forEach(item => {
+                    observer.observe(item);
+                });
+
+                // Observe feature cards
+                const featureCards = document.querySelectorAll('.animated-card');
+                featureCards.forEach(card => {
+                    observer.observe(card);
+                });
+
+                // Video placeholder interaction
+                const videoPlaceholder = document.querySelector('.video-placeholder');
+                if (videoPlaceholder) {
+                    videoPlaceholder.addEventListener('click', function() {
+                        // You can replace this with actual video functionality
+                        alert('Video feature coming soon! This will showcase BLOOMI\'s journey and impact.');
+                    });
+                }
+            });
+
+            // Smooth scroll for timeline navigation
+            document.querySelectorAll('.timeline-content').forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+
+        </script>
+ <script>
+            // Zimbabwe PayNow Payment Modal Functionality
+            let selectedPaymentMethod = '';
+            const usdToZwlRate = 32000; // Approximate exchange rate (adjust as needed)
+
+            function openPaymentModal(courseName, price) {
+                document.getElementById('selectedCourse').textContent = courseName;
+                document.getElementById('coursePrice').textContent = price;
+                document.getElementById('mobileAmount').textContent = price;
+                document.getElementById('bankAmount').textContent = price;
+                document.getElementById('finalPrice').textContent = price;
+                document.getElementById('courseRef').textContent = courseName.toUpperCase().replace(/\s+/g, '');
+                document.getElementById('bankCourseRef').textContent = courseName.toUpperCase().replace(/\s+/g, '');
+
+                document.getElementById('paymentModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closePaymentModal() {
+                document.getElementById('paymentModal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+                document.getElementById('paymentForm').style.display = 'none';
+                selectedPaymentMethod = '';
+
+                // Reset all payment method selections
+                document.querySelectorAll('.payment-method').forEach(method => {
+                    method.classList.remove('selected');
+                });
+
+                // Hide all payment forms
+                document.getElementById('mobilePayment').style.display = 'none';
+                document.getElementById('bankPayment').style.display = 'none';
+                document.getElementById('cardPayment').style.display = 'none';
+                document.getElementById('qrCodeSection').style.display = 'none';
+            }
+
+            function selectPaymentMethod(method) {
+                selectedPaymentMethod = method;
+
+                // Reset all selections
+                document.querySelectorAll('.payment-method').forEach(method => {
+                    method.classList.remove('selected');
+                });
+
+                // Select current method
+                event.currentTarget.classList.add('selected');
+
+                // Show payment form
+                document.getElementById('paymentForm').style.display = 'block';
+
+                // Hide all payment details first
+                document.getElementById('mobilePayment').style.display = 'none';
+                document.getElementById('bankPayment').style.display = 'none';
+                document.getElementById('cardPayment').style.display = 'none';
+                document.getElementById('qrCodeSection').style.display = 'none';
+
+                // Show relevant payment details
+                if (method === 'ecocash' || method === 'onemoney' || method === 'telecash') {
+                    document.getElementById('mobilePayment').style.display = 'block';
+                    document.getElementById('paymentMethodTitle').textContent = method.charAt(0).toUpperCase() + method.slice(1) + ' Payment';
+                } else if (method === 'bank') {
+                    document.getElementById('bankPayment').style.display = 'block';
+                    document.getElementById('paymentMethodTitle').textContent = 'Bank Transfer Details';
+                } else if (method === 'paynow') {
+                    document.getElementById('mobilePayment').style.display = 'block';
+                    document.getElementById('qrCodeSection').style.display = 'block';
+                    document.getElementById('paymentMethodTitle').textContent = 'PayNow QR Payment';
+                } else if (method === 'card') {
+                    document.getElementById('cardPayment').style.display = 'block';
+                    document.getElementById('paymentMethodTitle').textContent = 'Credit Card Payment';
+                }
+            }
+
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('paymentModal');
+                if (event.target === modal) {
+                    closePaymentModal();
+                }
+            }
+
+            // Handle card payment form submission
+            document.getElementById('cardPaymentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Basic validation
+                const cardNumber = document.getElementById('cardNumber').value;
+                const expiryDate = document.getElementById('expiryDate').value;
+                const cvv = document.getElementById('cvv').value;
+                const cardName = document.getElementById('cardName').value;
+
+                if (!cardNumber || !expiryDate || !cvv || !cardName) {
+                    alert('Please fill in all payment details.');
+                    return;
+                }
+
+                // Simulate payment processing
+                alert('Processing payment... This is a demo. In a real application, this would connect to a payment processor.');
+
+                // Close modal after "successful" payment
+                setTimeout(() => {
+                    closePaymentModal();
+                    alert('Payment successful! Welcome to the course. You will receive access details via email.');
+                }, 2000);
+            });
+
+            // Handle mobile money payment confirmation
+            function confirmMobilePayment() {
+                alert('Please send the payment using your selected mobile money method. Once payment is received, you will get course access within 24 hours.');
+                closePaymentModal();
+            }
+
+            // Handle bank transfer confirmation
+            function confirmBankTransfer() {
+                alert('Please make the bank transfer using the details provided. Once payment is received, you will get course access within 24 hours.');
+                closePaymentModal();
+            }
+
+        </script>

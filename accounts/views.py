@@ -37,3 +37,22 @@ class UserDeleteView(DeleteView):
     success_url = reverse_lazy("user_list")
 
 
+from django.views import View
+from django.shortcuts import redirect
+from django.contrib import messages
+from .forms import UserRegistrationForm
+
+class RegisterUserView(View):
+    def post(self, request, *args, **kwargs):
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            messages.success(request, "Registration successful! You can now log in.")
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+
+        return redirect(request.META.get('HTTP_REFERER'))

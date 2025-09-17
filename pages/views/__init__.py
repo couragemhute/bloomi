@@ -1,8 +1,19 @@
-from .services import ServicesTemplateView
+
 from .about import AboutTemplateView
 from .contact import ContactTemplateView
-from .blog import BlogTemplateView
-from .products import ProductsTemplateView
-from .team import TeamTemplateView
-from .policy import PolicyTemplateView
-from .terms_and_conditions import TermsAndConditionsTemplateView
+from .blog import (
+    BlogTemplateView,
+        Post1TemplateView, Post2TemplateView, Post3TemplateView,
+    Post4TemplateView, Post5TemplateView, Post6TemplateView
+)
+from .ai_tutor import AiTutorTemplateView
+from .course import (
+    CourseTemplateView,
+    Course1TemplateView,
+    Course2TemplateView,
+    Course3TemplateView,
+    Course4TemplateView,
+    Course5TemplateView,
+    Course6TemplateView,
+)
+from .about import AboutTemplateView

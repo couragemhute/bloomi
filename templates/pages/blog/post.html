@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<section id="about-home">
+    <h2>Blog</h2>
+</section>
+{% endblock %}
+
+{% block content %}
+<section id="blog-container">
+    <div class="blogs blogpost">
+        <div class="post">
+            <img src="{% static 'bloomi/images/c2.jpg' %}" alt="Web Development">
+            <h3>Learn Web Development In the most interactive way</h3>
+            <p>
+                Join our web development course and build real-world projects while learning the latest technologies.
+                <br><br>
+                <strong>Beyond the Classroom: Why Building the Web Builds Future Opportunities</strong>
+                <br>
+                Every organisation needs an online presence, and the ability to build it is a gateway skill. Our 8-week Introduction to Web Development course turns students from passive users into active makers. It pairs solid foundations in HTML, CSS and JavaScript with extended studio time to immediately apply what they learn.
+                <br><br>
+                For every two hours of guided instruction, five hours are spent coding responsive pages, adding interactivity and deploying to the cloud. Students don’t just learn tags and syntax — they produce working websites and see them live on the internet.
+                <br><br>
+                Review sessions and usability testing help them think like professional developers, refining their code and improving user experience. Final team projects produce polished websites that solve real problems or showcase passions, reinforcing collaboration and presentation skills.
+                <br><br>
+                By course end, students understand how the pieces of the web fit together and have a portfolio piece to prove it. This is the foundation for careers in design, development and digital entrepreneurship.
+                <br><br>
+                This is more than learning to “make a website”; it’s about shaping the digital world. Don’t just let your student surf the web — help them build it.                   
+            </p>
+            <a href="#" class="yellow">Read Next</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
