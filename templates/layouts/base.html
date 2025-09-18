@@ -26,8 +26,17 @@
         <!-- Insert navbar section here with class/id="about-home" -->
     {% endblock %}
 
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
     <!-- Main Content -->
     {% block content %}
+    
         <!-- Default content -->
     {% endblock %}
 

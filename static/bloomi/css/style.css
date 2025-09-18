@@ -459,6 +459,117 @@ nav .nav-links ul li a:hover {
    transform: translateY(-3px);
    box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
 }
+
+#registration .form button.yellow {
+   text-decoration: none;
+   font-size: 0.9rem;
+   padding: 13px 35px;
+   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+   font-weight: 600;
+   border-radius: 25px;
+   color: #fff;
+   transition: 0.3s ease;
+   box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+   border: none; /* remove default button border */
+   cursor: pointer; /* pointer cursor like link */
+}
+
+#registration .form button.yellow:hover {
+   color: #fff;
+   background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+   transform: translateY(-3px);
+   box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+}
+/* Gradient Button Style */
+#registration .form .btn-gradient {
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 13px 35px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    font-weight: 600;
+    border-radius: 25px;
+    color: #fff;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+    border: none;         /* remove default border */
+    cursor: pointer;       /* pointer cursor */
+}
+
+#registration .form .btn-gradient:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+}
+
+/* Gradient button */
+.btn-gradient {
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 13px 35px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    font-weight: 600;
+    border-radius: 25px;
+    color: #fff;
+    transition: 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+}
+.btn-gradient:hover {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+}
+
+/* Modal styles */
+.login-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    padding: 50px 0;
+}
+
+/* Show modal when targeted */
+.login-modal:target {
+    display: block;
+}
+
+.login-modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.close-modal {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    text-decoration: none;
+    color: #333;
+}
+
+.login-modal input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 /* experts */
 #experts {
    padding: 8vw 8vw 8vw 8vw;

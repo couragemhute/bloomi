@@ -6,7 +6,8 @@ from .views import (
     UserDetailView,
     UserCreateView,
     UserUpdateView,
-    UserDeleteView
+    UserDeleteView,
+    login_modal
 )
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     path("<int:pk>/delete/", UserDeleteView.as_view(), name="user_delete"),
 
     path("register/", RegisterUserView.as_view(), name="register_user"),
+    path('login-modal/', login_modal, name='login_modal'),
 ]

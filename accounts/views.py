@@ -56,3 +56,25 @@ class RegisterUserView(View):
                     messages.error(request, f"{field}: {error}")
 
         return redirect(request.META.get('HTTP_REFERER'))
+
+
+# users/views.py
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.views.decorators.http import require_POST
+
+@require_POST
+def login_modal(request):
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    user = authenticate(request, email=email, password=password)
+    referer = request.META.get('HTTP_REFERER', '/')
+
+    if user is not None:
+        login(request, user)
+        messages.success(request, "Successfully logged in!")
+        return redirect(referer)
+    else:
+        messages.error(request, "Invalid email or password!")
+        return redirect(referer)
