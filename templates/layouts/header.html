@@ -1,16 +1,35 @@
 {% load static %}
 <nav>
     <img src="{% static 'bloomi/images/logo.png' %}" alt="Logo">
+
     <div class="nav-links">
-        <ul>
+        <ul id="nav-menu">
             <i id="menu-close" class="fas fa-times"></i>
+
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'blog' %}">Blog</a></li>
-            <li><a href="{% url 'all_courses' %}">Courses</a></li>  
-            <li><a href="{% url 'ai_tutor' %}">AI Tutor</a></li> 
+            <li><a href="{% url 'all_courses' %}">Courses</a></li>
+            <li><a href="{% url 'ai_tutor' %}">AI Tutor</a></li>
             <li><a href="{% url 'contact' %}">Contacts</a></li>
         </ul>
+
         <img id="menu-btn" src="{% static 'bloomi/images/menu.png' %}" alt="Menu">
     </div>
 </nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll("#nav-menu a");
+
+        navLinks.forEach(link => {
+            // Normalize URLs (handles trailing slashes)
+            const linkPath = new URL(link.href).pathname;
+
+            if (linkPath === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    });
+</script>
