@@ -1,5 +1,7 @@
 from pathlib import Path
 from decouple import config, Csv
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # --------------------------------------------------
 # BASE DIRECTORY
