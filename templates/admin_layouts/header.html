@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', loadNotifications);
                         {% if request.user.image %}
                             <img src="{{ request.user.image.url }}" alt="profile-user" class="rounded-circle me-2 thumb-sm" />
                         {% else %}
-                            <img src="{% static 'assets/images/users/default.png' %}" alt="profile-user" class="rounded-circle me-2 thumb-sm" />
+                            <img src="{% static 'assets/images/user.jpeg' %}" alt="profile-user" class="rounded-circle me-2 thumb-sm" />
                         {% endif %}
 
                         <div>
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', loadNotifications);
                             {% else %}
                                 <small class="d-none d-md-block font-11">Superuser</small>
                             {% endif %}
-                            <span class="d-none d-md-block fw-semibold font-12">{{ request.user.username }} <i class="mdi mdi-chevron-down"></i></span>
+                            <span class="d-none d-md-block fw-semibold font-12">{{ request.user.email }} <i class="mdi mdi-chevron-down"></i></span>
                         </div>
                     </div>
                 </a>

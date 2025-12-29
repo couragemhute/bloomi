@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block content %}
-{% if employee %}
+{% if request.user %}
 
 <div class="row">
     <div class="col-12">
@@ -35,18 +35,17 @@
                         <div class="col-lg-6 align-self-center mb-3 mb-lg-0">
                             <div class="met-profile-main">
                                 <div class="met-profile-main-pic">
-                                    <img src="{% if employee.user.image %}{{ employee.user.image.url }}{% else %}{% static 'img/default-profile.png' %}{% endif %}" alt="" height="110" class="rounded-circle">
+                                    <img src="{% if request.user.image %}{{ request.user.image.url }}{% else %}{% static 'assets/images/user.jpeg' %}{% endif %}" alt="" height="110" class="rounded-circle">
                                     <span class="met-profile_main-pic-change">
                                         <i class="fas fa-camera"></i>
                                     </span>
                                 </div>
                                 <div class="met-profile_user-detail">
                                     <h5 class="met-user-name">
-                                        {{ employee.first_name|default:"N/A" }} {{ employee.last_name|default:"" }}
+                                        {{ request.user.first_name|default:"N/A" }} {{ request.user.last_name|default:"" }}
                                     </h5>
                                     <p class="mb-0 met-user-name-post">
-                                        {% if employee.employee_type %}{{ employee.employee_type.name|default:"N/A" }}{% else %}N/A{% endif %},
-                                        {% if employee.school %}{{ employee.school.name|default:"N/A" }}{% else %}N/A{% endif %}
+                                        {{ request.user.role|default:"N/A" }}
                                     </p>
                                 </div>
                             </div>
@@ -54,23 +53,8 @@
 
                         <div class="col-lg-6 ms-auto align-self-center">
                             <ul class="list-unstyled personal-detail mb-0">
-                                <li><i class="las la-id-card mr-2 text-secondary font-22 align-middle"></i>
-                                    <b> National ID </b>: {{ employee.national_id|default:"N/A" }}
-                                </li>
-                                <li class="mt-2"><i class="las la-phone mr-2 text-secondary font-22 align-middle"></i>
-                                    <b> Phone </b>: {{ employee.contact_number|default:"N/A" }}
-                                </li>
                                 <li class="mt-2"><i class="las la-envelope text-secondary font-22 align-middle mr-2"></i>
-                                    <b> Email </b>: {% if employee.email %}{{ employee.email }}{% elif employee.user.email %}{{ employee.user.email }}{% else %}N/A{% endif %}
-                                </li>
-                                <li class="mt-2"><i class="las la-venus-mars text-secondary font-22 align-middle mr-2"></i>
-                                    <b> Gender </b>: {{ employee.gender|default:"N/A" }}
-                                </li>
-                                <li class="mt-2"><i class="las la-calendar text-secondary font-22 align-middle mr-2"></i>
-                                    <b> Date of Birth </b>: {{ employee.date_of_birth|default:"N/A" }}
-                                </li>
-                                <li class="mt-2"><i class="las la-map-marker text-secondary font-22 align-middle mr-2"></i>
-                                    <b> Address </b>: {{ employee.address|default:"N/A" }}
+                                    <b> Email </b>: {% if request.user.email %}{{ request.user.email }}{% elif request.user.user.email %}{{ request.user.user.email }}{% else %}N/A{% endif %}
                                 </li>
                             </ul>
                         </div>
@@ -81,61 +65,11 @@
     </div>
 </div>
 
-<!-- Qualifications Section -->
-<div class="row">
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Academic Qualifications</h4>
-            </div>
-            <div class="card-body">
-                {% if employee.academic_qualifications.exists %}
-                    {% for academic in employee.academic_qualifications.all %}
-                        <p>
-                            <b>{{ academic.qualification|default:"N/A" }}</b> -
-                            {{ academic.institution|default:"N/A" }}
-                            ({{ academic.year_completed|default:"N/A" }})
-                        </p>
-                        {% if academic.document %}
-                            <a href="{{ academic.document.url }}" target="_blank">View Certificate</a>
-                        {% else %}
-                            <span>No certificate available.</span>
-                        {% endif %}
-                        <hr>
-                    {% endfor %}
-                {% else %}
-                    <p>No academic qualifications found.</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+ <div class="card-header text-center">
+    <h4 class="card-title">Change Your Password</h4>
+</div>
 
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Professional Qualifications</h4>
-            </div>
-            <div class="card-body">
-                {% if employee.professional_qualifications.exists %}
-                    {% for prof in employee.professional_qualifications.all %}
-                        <p>
-                            <b>{{ prof.qualification|default:"N/A" }}</b> -
-                            {{ prof.institution|default:"N/A" }}
-                            ({{ prof.year_completed|default:"N/A" }})
-                        </p>
-                        {% if prof.document %}
-                            <a href="{{ prof.document.url }}" target="_blank">View Certificate</a>
-                        {% else %}
-                            <span>No certificate available.</span>
-                        {% endif %}
-                        <hr>
-                    {% endfor %}
-                {% else %}
-                    <p>No professional qualifications found.</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+            <br>
 <form method="post" novalidate>
     {% csrf_token %}
 
