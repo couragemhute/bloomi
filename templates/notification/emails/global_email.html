@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="x-apple-disable-message-reformatting">
-    <title>Bloomi Notification</title>
+    <title>Email from MistNex Dynamics</title>
     
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,600" rel="stylesheet" type="text/css">
     <style>
@@ -17,93 +17,128 @@
             width: 100% !important;
             font-family: 'Roboto', sans-serif !important;
             font-size: 14px;
-            margin-bottom: 10px;
             line-height: 24px;
-            color: #8094ae;
-            font-weight: 400;
+            color: #5e6e82;
+            background-color: #f5f6fa;
         }
+
         * {
             -ms-text-size-adjust: 100%;
             -webkit-text-size-adjust: 100%;
-            margin: 0;
-            padding: 0;
         }
+
         table, td {
             mso-table-lspace: 0pt !important;
             mso-table-rspace: 0pt !important;
         }
+
         table {
             border-spacing: 0 !important;
             border-collapse: collapse !important;
-            table-layout: fixed !important;
             margin: 0 auto !important;
+            table-layout: fixed !important;
         }
-        table table table {
-            table-layout: auto;
-        }
+
         a {
             text-decoration: none;
         }
+
         img {
+            max-width: 100%;
+            height: auto;
             -ms-interpolation-mode: bicubic;
         }
+
+        .email-container {
+            max-width: 620px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.05);
+        }
+
+        .email-header {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .email-body {
+            padding: 0 30px 30px;
+            text-align: center;
+        }
+
+        .email-footer {
+            font-size: 13px;
+            color: #9ea8bb;
+            padding: 20px 30px 40px;
+            text-align: center;
+        }
+
+        .email-bottom {
+            text-align: center;
+            font-size: 13px;
+            color: #adb5bd;
+            padding: 25px 20px 10px;
+        }
+
+        .email-body h2 {
+            font-size: 20px;
+            color: #007bff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .email-body p {
+            margin-bottom: 20px;
+        }
+
     </style>
 </head>
 
-<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f5f6fa;">
-	<center style="width: 100%; background-color: #f5f6fa;">
-        <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f5f6fa">
-            <tr>
-               <td style="padding: 40px 0;">
-                    <table style="width:100%;max-width:620px;margin:0 auto;">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; padding-bottom:25px">
-                                    <a href="#" class="logo-link">                                        
-                                        {% comment %} <img class="logo-dark logo-img logo-img-lg" src="{% static 'images/logo_bloomi.png' %}" alt="Bloomi" height="150" width="130"> {% endcomment %}
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+<body>
+<center>
+    <table width="100%" bgcolor="#f5f6fa">
+        <tr>
+            <td style="padding: 40px 0;">
+                <table class="email-container">
+                    <!-- Header / Logo -->
+                    <tr>
+                        <td class="email-header">
+                            <a href="#" class="logo-link">
+                                <!-- Optional logo -->
+                                <!-- <img src="{% static 'images/mistnex-logo.png' %}" alt="MistNex Logo" height="60"> -->
+                            </a>
+                        </td>
+                    </tr>
 
-                    <table style="width:100%;max-width:620px;margin:0 auto;background-color:#ffffff;">
-                        <tbody>
-                            <tr>
-                                <td style="text-align:center;padding: 30px 30px 15px 30px;">
-                                    <h2 style="font-size: 18px; color: #6576ff; font-weight: 600; margin: 0;">Hello {{ recipient_email }}!</h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; padding: 0 30px 20px;">
-                                    <p style="margin-bottom: 25px;">
-                                        {{ your_email_content }}
-                                    </p>
-                                </td>
-                            </tr>                  
-                            <tr>
-                                <td style="text-align:center;padding: 20px 30px 40px">
-                                    <p style="margin: 0; font-size: 13px; line-height: 22px; color:#9ea8bb;">
-                                        You are receiving this email because you subscribed to receive notifications from Bloomi.  
-                                        If you no longer wish to receive these updates, you can unsubscribe at any time.
-                                    </p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- Content -->
+                    <tr>
+                        <td class="email-body">
+                            <h2>Hello {{ recipient_email }}!</h2>
+                            <p>{{ your_email_content }}</p>
+                        </td>
+                    </tr>
 
-                    <table style="width:100%;max-width:620px;margin:0 auto;">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; padding:25px 20px 0;">
-                                    <p style="font-size: 13px;">&copy; 2025 Bloomi. All Rights Reserved.</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- Footer message -->
+                    <tr>
+                        <td class="email-footer">
+                            <p>This message was generated automatically by a system under <strong>MistNex Dynamics</strong>. Please do not reply to this email.</p>
+                            <p>If you need assistance, contact us at <a href="mailto:info@mistnex.co.zw">info@mistnex.co.zw</a>.</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Footer -->
+                <table style="max-width:620px; margin: 0 auto;">
+                    <tr>
+                        <td class="email-bottom">
+                            &copy; 2025 MistNex Dynamics. All Rights Reserved.
+                        </td>
+                    </tr>
+                </table>
             </td>
-            </tr>
-        </table>
-    </center>
+        </tr>
+    </table>
+</center>
 </body>
 </html>

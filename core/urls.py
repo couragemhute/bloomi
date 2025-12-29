@@ -25,6 +25,11 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('blog/', include('blog.urls')),
     path('course/', include('course.urls')),
+    path('dashboard/', include('dashboard.urls')),
+    path('role/', include('role.urls')),
+    path('notification/', include('notification.urls')),
+
+
 ]
 
 # Serve static and media files during development

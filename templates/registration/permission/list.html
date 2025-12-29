@@ -1,0 +1,53 @@
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block navigation %}
+<!-- Page Navigation -->
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <nav aria-label="breadcrumb">
+            <h4 class="page-title">System Permissions</h4>
+        </nav>
+        <div>
+            <button type="button" class="btn btn-outline-secondary ms-2" onclick="history.back();">
+                &larr; Back
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="datatable_1">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for obj in permissions %}
+                            <tr>
+                                <td>{{ obj.name }}</td>
+                                <td>{{ obj.codename }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3">No permissions found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

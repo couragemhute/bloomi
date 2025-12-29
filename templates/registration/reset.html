@@ -1,0 +1,71 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+
+{% include 'admin_layouts/styles.html' %}
+
+<body class="h-100">
+    
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="form-input-content">
+                        <div class="card login-form mb-0">
+                            <div class="card-body pt-5">
+                                <div class="text-center"> <!-- Center the logo -->
+                                    <a href="#"> <img class="logo-dark logo-img logo-img-lg" src="{% static 'assets/images/eagle.png' %}" alt="logo-dark" height="80" width="100"></a>
+                                </div>
+                                <form class="mt-5 mb-5 login-input" method="post" >
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="id_username">Email:</label>
+                                        <input type="email" class="form-control" id="id_email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_new_password">New Password:</label>
+                                        <input type="password" class="form-control" id="id_new_password" name="new_password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_confirm_password">Confirm Password:</label>
+                                        <input type="password" class="form-control" id="id_confirm_password" name="confirm_password" required>
+                                    </div>
+                                    <button class="btn login-form__btn submit w-100">Reset Password</button>
+                                </form>
+                                <p class="mt-5 login-form__footer">Already have account? <a href="{% url 'account_login' %}" class="text-primary">Sign In</a> now</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    {% include 'admin_layouts/scripts.html' %}
+</body>
+</html>
+
+
+
+
+

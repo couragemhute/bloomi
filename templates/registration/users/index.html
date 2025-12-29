@@ -1,0 +1,96 @@
+
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<!-- Page Navigation -->
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <nav aria-label="breadcrumb">
+            <h4 class="page-title">users</h4>
+        </nav>
+        <div>
+            <a href="{% url 'user-create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Add user
+            </a>
+            <button type="button" class="btn btn-outline-secondary ms-2" onclick="history.back();">
+                &larr; Back
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="datatable_1">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Email</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Role</th>
+                                    <th> Is Active</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>{{ user.role }}</td>
+                                    <td>{{ user.is_active }}</td>
+                                    <td class="text-end">
+                                        <a href="{% url 'user-details' user.id %}" class="text-info" data-bs-toggle="tooltip" title="View Details">
+                                            <i class="las la-eye text-info" style="font-size: 1.7rem;" data-bs-toggle="tooltip" title="View Details"></i>
+                                        </a>
+                                        <a href="{% url 'user-update' user.id %}" class="text-secondary ms-2" data-bs-toggle="tooltip" title="Edit user">
+                                            <i class="las la-pen text-secondary" style="font-size: 1.7rem;" data-bs-toggle="tooltip" title="Edit user"></i>
+                                        </a>
+                                        <!-- Delete Button triggers modal -->
+                                        <a href="#" class="text-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteuserModal{{ user.id }}" title="Delete user">
+                                            <i class="las la-trash-alt text-danger" style="font-size: 1.7rem;"></i>
+                                        </a>
+
+                                        <!-- Delete Confirmation Modal -->
+                                        <div class="modal fade" id="deleteuserModal{{ user.id }}" tabindex="-1" aria-labelledby="deleteuserModalLabel{{ user.id }}" aria-hidden="true">
+                                          <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteuserModalLabel{{ user.id }}">Confirm User Deactivation</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
+                                                Are you sure you want to deactivate <strong>{{ user.username }}</strong>?
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <form method="post" action="{% url 'user-delete' user.id %}" style="display:inline;">
+                                                  {% csrf_token %}
+                                                  <button type="submit" class="btn btn-danger">Deactivate</button>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3">No Users found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

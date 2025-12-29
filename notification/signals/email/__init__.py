@@ -1,0 +1,1 @@
+from .email import notify_user_on_new_notification

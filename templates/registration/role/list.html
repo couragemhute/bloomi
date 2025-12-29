@@ -1,0 +1,92 @@
+
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<!-- Page Navigation -->
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <nav aria-label="breadcrumb">
+            <h4 class="page-title">Roles</h4>
+        </nav>
+        <div>
+            <a href="{% url 'role-create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Add Role
+            </a>
+            <button type="button" class="btn btn-outline-secondary ms-2" onclick="history.back();">
+                &larr; Back
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="datatable_1">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Role Name</th>
+                                    <th>Permissions</th>
+                                    <th> Is Admin</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for role in roles %}
+                                <tr>
+                                    <td>{{ role.name }}</td>
+                                    <td>{{ role.permissions.all.count|default:"0" }} assigned</td>
+                                    <td>{{ role.is_admin|yesno:"Yes,No" }}</td>
+                                    <td class="text-end">
+                                        <a href="{% url 'role-details' role.id %}" class="text-info" data-bs-toggle="tooltip" title="View Details">
+                                            <i class="las la-eye text-info" style="font-size: 1.7rem;" data-bs-toggle="tooltip" title="View Details"></i>
+                                        </a>
+                                        <a href="{% url 'role-update' role.id %}" class="text-secondary ms-2" data-bs-toggle="tooltip" title="Edit role">
+                                            <i class="las la-pen text-secondary" style="font-size: 1.7rem;" data-bs-toggle="tooltip" title="Edit role"></i>
+                                        </a>
+                                        <!-- Delete Button triggers modal -->
+                                        <a href="#" class="text-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteroleModal{{ role.id }}" title="Delete role">
+                                            <i class="las la-trash-alt text-danger" style="font-size: 1.7rem;"></i>
+                                        </a>
+
+                                        <!-- Delete Confirmation Modal -->
+                                        <div class="modal fade" id="deleteroleModal{{ role.id }}" tabindex="-1" aria-labelledby="deleteroleModalLabel{{ role.id }}" aria-hidden="true">
+                                          <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteroleModalLabel{{ role.id }}">Confirm Role Deactivation</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
+                                                Are you sure you want to delete <strong>{{ role.name }}</strong>?
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <form method="post" action="{% url 'role-delete' role.id %}" style="display:inline;">
+                                                  {% csrf_token %}
+                                                  <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3">No Roles found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <nav aria-label="breadcrumb">
+            <h4 class="page-title mb-0 fw-bold text-primary">
+                <i class="bi bi-building me-2"></i> user Details
+            </h4>
+        </nav>
+        <div>
+            <a href="{% url 'user-update' user.id %}" class="btn btn-secondary shadow-sm">
+                <i class="las la-pen-square"></i> Edit
+            </a>
+
+            <button type="button" class="btn btn-outline-secondary ms-2" onclick="history.back();">
+                &larr; Back
+            </button>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-gradient bg-light text-white d-flex align-items-center justify-content-center rounded-top-4">
+                <i class="bi bi-mortarboard-fill me-2 fs-3"></i>
+                <h5 class="mb-0 fw-semibold fs-4 text-center">User ({{ user.email }})</h5>
+            </div>
+            <div class="card-body p-0">
+                <dl class="row m-0">
+    
+                    <div class="d-flex align-items-center px-4" style="background-color: #e9ecef;">
+                        <dt class="col-5 col-md-4 py-4 mb-0 text-success d-flex align-items-center fw-semibold fs-6">
+                            <i class="bi bi-geo-alt-fill me-2"></i> Email Address
+                        </dt>
+                        <dd class="col-7 col-md-8 py-4 mb-0 fs-6">{{ user.email }}</dd>
+                    </div>
+                    <div class="d-flex align-items-center px-4" style="background-color: #e9ecef;">
+                        <dt class="col-5 col-md-4 py-4 mb-0 text-success d-flex align-items-center fw-semibold fs-6">
+                            <i class="bi bi-geo-alt-fill me-2"></i> Is Active
+                        </dt>
+                        <dd class="col-7 col-md-8 py-4 mb-0 fs-6">{{ user.is_active|yesno:"Yes,No" }}</dd>
+                    </div>
+                    <div class="d-flex align-items-center px-4" style="background-color: #f8f9fa;">
+                        <dt class="col-5 col-md-4 py-4 mb-0 text-primary d-flex align-items-center fw-semibold fs-6">
+                            <i class="bi bi-person-fill me-2"></i> Role
+                        </dt>
+                        <dd class="col-7 col-md-8 py-4 mb-0 fs-6">{{ user.role }}</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

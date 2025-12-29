@@ -1,0 +1,72 @@
+
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+
+{% include 'admin_layouts/styles.html' %}
+
+<body class="h-100">
+    
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="form-input-content">
+                        <div class="card login-form mb-0">
+                            <div class="card-body pt-5">
+                                <div class="text-center"> <!-- Center the logo -->
+                                    <a href="#"> <img class="logo-dark logo-img logo-img-lg" src="{% static 'assets/images/eagle.png' %}" alt="logo-dark" height="80" width="100"></a>
+                                </div>
+                                {% if messages %}
+
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {% for message in messages %}
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    {% endfor %}
+                                </div>
+
+                                {% endif %}
+                                <form class="user" method="post" action="{% url 'account_signup' %}">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">Signup</button>
+                                    <hr>
+                                </form>
+                                <p class="mt-5 login-form__footer">Dont have account? <a href="{% url 'account_login' %}" class="text-primary">Sign In</a> now</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    {% include 'admin_layouts/scripts.html' %}
+</body>
+</html>
+
+
+
+
+

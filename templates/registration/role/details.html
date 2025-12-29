@@ -1,0 +1,127 @@
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <nav aria-label="breadcrumb">
+            <h4 class="page-title mb-0 fw-bold text-primary">
+                <i class="bi bi-building me-2"></i> Role Details
+            </h4>
+        </nav>
+        <div>
+            <a href="{% url 'role-update' role.id %}" class="btn btn-secondary shadow-sm">
+                <i class="las la-pen-square"></i> Edit
+            </a>
+
+            <button type="button" class="btn btn-outline-secondary ms-2" onclick="history.back();">
+                &larr; Back
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-gradient bg-light text-white d-flex align-items-center justify-content-center rounded-top-4">
+                <i class="bi bi-mortarboard-fill me-2 fs-3"></i>
+                <h5 class="mb-0 fw-semibold fs-4 text-center">Role ({{ role.name }})</h5>
+            </div>
+            <div class="card-body p-0">
+                <dl class="row m-0">
+                    <div class="d-flex align-items-center border-bottom px-4" style="background-color: #f8f9fa;">
+                        <dt class="col-5 col-md-4 py-4 mb-0 text-primary d-flex align-items-center fw-semibold fs-6">
+                            <i class="bi bi-hash me-2"></i>Name
+                        </dt>
+                        <dd class="col-7 col-md-8 py-4 mb-0 fs-6">{{ role.name }}</dd>
+                    </div>
+                    <div class="d-flex align-items-center px-4" style="background-color: #e9ecef;">
+                        <dt class="col-5 col-md-4 py-4 mb-0 text-success d-flex align-items-center fw-semibold fs-6">
+                            <i class="bi bi-geo-alt-fill me-2"></i>Is Admin
+                        </dt>
+                        <dd class="col-7 col-md-8 py-4 mb-0 fs-6">{{ role.is_admin|yesno:"Yes,No" }}</dd>
+                    </div>
+                </dl>
+
+                <!-- Include DataTables CSS -->
+                <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+                <div style="overflow-x: auto;" class="p-4">
+                    <table id="permissionsTable" class="display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>System Permissions</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for obj in role.permissions.all %}
+                            <tr>
+                                <td>
+                                    <em class="icon ni ni-priority"></em><em class="icon ni ni-priority"></em>
+                                </td>
+                                <td>{{ obj.name }}</td>
+                                <td>
+                                    <a href="#" class="las la-trash-alt text-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteItem{{ obj.pk }}">
+                                        <em class="icon ni ni-cross-fill-c"></em>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% for obj in role.permissions.all %}
+                <!-- Modal -->
+                <div class="modal fade" tabindex="-1" id="modalDeleteItem{{ obj.pk }}" aria-hidden="true" aria-labelledby="modalDeleteLabel{{ obj.pk }}">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body modal-body-lg text-center">
+                                <div class="nk-modal">
+                                    <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-cross bg-danger"></em>
+                                    <h4 class="nk-modal-title" id="modalDeleteLabel{{ obj.pk }}">Delete {{ obj.name }}</h4>
+                                    <div class="nk-modal-text">
+                                        <p class="lead">Are You Sure You Want To Delete This Permission?</p>
+                                    </div>
+                                </div>
+                                <div class="nk-modal-action mt-5">
+                                    <form method="POST" action="{% url 'remove-role-permission' obj.pk role.pk %}">
+                                        {% csrf_token %}
+                                        <button type="button" class="btn btn-lg btn-mw btn-light" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-lg btn-mw btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div><!-- .modal-body -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- Include jQuery and DataTables JS -->
+                <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+                <!-- Initialize DataTables -->
+                <script>
+                $(document).ready(function() {
+                    $('#permissionsTable').DataTable({
+                        "pageLength": 15,
+                        "lengthChange": false,
+                        "scrollY": "400px",
+                        "scrollCollapse": true,
+                        "paging": true,
+                        "searching": true,
+                        "info": false
+                    });
+                });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

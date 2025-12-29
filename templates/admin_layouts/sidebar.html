@@ -1,0 +1,271 @@
+{% load static %}
+<!-- leftbar-tab-menu -->
+<div class="leftbar-tab-menu">
+    <!-- Logo -->
+
+<div class="topbar-left p-3 text-center">
+    <a>
+        <img 
+            src="{% static 'bloomi/images/logo.png' %}" 
+            alt="Bloomi Logo" 
+            class="img-fluid" 
+        >
+    </a>
+</div>
+
+
+    <!-- Menu Body -->
+    <div class="menu-body p-4 navbar-vertical" data-simplebar style="height: calc(100vh - 60px);">
+
+        <div class="menu-body navbar-vertical tab-content" data-simplebar>
+            <div id="MetricaApps" class="main-icon-menu-pane tab-pane active show" role="tabpanel" aria-labelledby="apps-tab">
+                <div class="title-box">
+                    <h6 class="menu-title">Apps</h6>
+                </div>
+
+                <div class="collapse navbar-collapse show" id="sidebarCollapse">
+                    <ul class="navbar-nav accordion" id="sidebarAccordion">
+
+                        <!-- Dashboard -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard' %}">
+                                <i class="ti ti-dashboard"></i> Dashboard
+                            </a>
+                        </li>
+                        <style>
+                        /* smooth toggle with max-height */
+                        .kitchen-menu,
+                        .kitchen-submenu {
+                            overflow: hidden;
+                            transition: max-height 0.3s ease;
+                            max-height: 0;
+                        }
+                        .kitchen-menu[aria-expanded="true"],
+                        .kitchen-submenu[aria-expanded="true"] {
+                            max-height: 1000px; /* large enough for content */
+                        }
+                        .toggle-icon {
+                            transition: transform 0.3s ease;
+                        }
+                        .nav-link[aria-expanded="true"] .toggle-icon {
+                            transform: rotate(180deg);
+                        }
+                        </style>
+
+                        <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            // Helpers
+                            function toggleMenu(toggleEl, menuEl, storageKey) {
+                            const isExpanded = toggleEl.getAttribute('aria-expanded') === 'true';
+                            if (isExpanded) {
+                                toggleEl.setAttribute('aria-expanded', 'false');
+                                menuEl.setAttribute('aria-expanded', 'false');
+                                menuEl.hidden = true;
+                                localStorage.setItem(storageKey, 'false');
+                            } else {
+                                toggleEl.setAttribute('aria-expanded', 'true');
+                                menuEl.setAttribute('aria-expanded', 'true');
+                                menuEl.hidden = false;
+                                localStorage.setItem(storageKey, 'true');
+                            }
+                            }
+
+                            // Main Kitchen toggle
+                            const kitchenToggle = document.getElementById('kitchenToggle');
+                            const kitchenMenu = document.getElementById('kitchenMenu');
+
+                            kitchenToggle.addEventListener('click', e => {
+                            e.preventDefault();
+                            toggleMenu(kitchenToggle, kitchenMenu, 'kitchenMenuOpen');
+                            });
+
+                            // Submenu toggles
+                            const submenuToggles = document.querySelectorAll('.kitchen-sub-toggle');
+
+                            submenuToggles.forEach(toggle => {
+                            const menuId = toggle.getAttribute('aria-controls');
+                            const menu = document.getElementById(menuId);
+                            const storageKey = menuId + 'Open';
+
+                            toggle.addEventListener('click', e => {
+                                e.preventDefault();
+                                toggleMenu(toggle, menu, storageKey);
+                            });
+                            });
+
+                            // Restore state from localStorage
+                            function restoreState(toggleId, menuId, storageKey) {
+                            const toggleEl = document.getElementById(toggleId);
+                            const menuEl = document.getElementById(menuId);
+                            const isOpen = localStorage.getItem(storageKey) === 'true';
+                            if (isOpen) {
+                                toggleEl.setAttribute('aria-expanded', 'true');
+                                menuEl.setAttribute('aria-expanded', 'true');
+                                menuEl.hidden = false;
+                            } else {
+                                toggleEl.setAttribute('aria-expanded', 'false');
+                                menuEl.setAttribute('aria-expanded', 'false');
+                                menuEl.hidden = true;
+                            }
+                            }
+
+                            restoreState('kitchenToggle', 'kitchenMenu', 'kitchenMenuOpen');
+                            restoreState('reportsToggle', 'kitchenReports', 'kitchenReportsOpen');
+                            restoreState('supplierToggle', 'kitchenSupplier', 'kitchenSupplierOpen');
+                        });
+                        </script>
+
+
+                        <!-- User Management -->
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#userMenu" role="button" aria-expanded="false" aria-controls="userMenu">
+                                <i class="ti ti-users"></i> User Management
+                            </a>
+                            <div class="collapse" id="userMenu" data-bs-parent="#sidebarAccordion">
+                                <ul class="nav flex-column ms-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'user-index' %}">
+                                            <i class="ti ti-user"></i> System Users
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'role-list' %}">
+                                            <i class="ti ti-user-plus"></i> Roles
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'permission-list' %}">
+                                            <i class="ti ti-lock"></i> Permissions
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.leftbar-tab-menu .nav-link {
+    font-size: 20px !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.leftbar-tab-menu .nav-link i {
+    margin-right: 6px;
+    font-size: 15px;
+}
+</style>
+
+<script>
+function collapseStateManager() {
+    const collapses = document.querySelectorAll('.collapse');
+    const activeCollapse = localStorage.getItem('lastExpandedId');
+
+    if (activeCollapse) {
+        collapses.forEach(collapse => {
+            if (collapse.id === activeCollapse) {
+                collapse.classList.add('show');
+            } else {
+                collapse.classList.remove('show');
+            }
+        });
+    }
+
+    collapses.forEach(collapse => {
+        collapse.addEventListener('show.bs.collapse', function () {
+            collapses.forEach(c => {
+                if (c !== collapse) new bootstrap.Collapse(c, { toggle: false }).hide();
+            });
+            localStorage.setItem('lastExpandedId', collapse.id);
+        });
+    });
+}
+document.addEventListener('DOMContentLoaded', collapseStateManager);
+</script>
+
+<style>
+  .leftbar-tab-menu {
+      width: 260px;
+      min-width: 260px;
+      position: fixed;
+      top: 60px; /* Adjust for your header height */
+      bottom: 0;
+      left: 0;
+      background: #fff;
+      z-index: 1030;
+      overflow-y: auto;
+      overflow-x: hidden;
+      transition: all 0.3s ease-in-out;
+  }
+
+  .leftbar-tab-menu .nav-link {
+      font-size: 12px !important; /* ← adjust this size */
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+
+  .leftbar-tab-menu .nav-link i {
+      margin-right: 6px;
+      font-size: 18px; /* Icon size if needed */
+  }
+
+  @media (max-width: 768px) {
+      .leftbar-tab-menu {
+          position: absolute;
+          width: 100%;
+          min-width: unset;
+          height: auto;
+      }
+
+      #body {
+          margin-left: 0 !important;
+      }
+  }
+</style>
+
+<style>
+.leftbar-tab-menu {
+    width: 260px;
+    position: fixed;
+    top: 0; /* Full height from top */
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    overflow-y: auto;
+    z-index: 1030;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.leftbar-tab-menu .nav-link {
+    font-size: 14px;
+    color: #333;
+    white-space: normal;
+}
+
+.leftbar-tab-menu .nav-link i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.menu-body {
+    padding-top: 10px;
+}
+
+.menu-body .collapse .nav-link {
+    font-size: 13px;
+}
+
+/* Smooth toggle icons */
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+.nav-link[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+}
+</style>

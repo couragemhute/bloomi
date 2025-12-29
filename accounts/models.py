@@ -27,10 +27,11 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser, TimeStampMixin):
     username = None  # remove username
     email = models.EmailField(unique=True)
-    
+    role = models.ForeignKey('role.Role', on_delete=models.SET_NULL, null=True, blank=True)
     full_name = models.CharField(max_length=150, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)  # ✅ new field
     profile_picture = models.ImageField(upload_to="users/", blank=True, null=True)
+    image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

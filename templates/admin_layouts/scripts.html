@@ -1,0 +1,189 @@
+{% load static %}
+
+<script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+<script src="{% static 'assets/libs/feather-icons/feather.min.js' %}"></script>
+<script src="{% static 'assets/libs/simple-datatables/umd/simple-datatables.js' %}"></script>
+<script src="{% static 'assets/js/pages/datatable.init.js' %}"></script>
+
+<!-- App js -->
+<script src="{% static 'assets/js/app.js' %}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tables = document.querySelectorAll(".custom-datatable");
+
+  tables.forEach((table) => {
+    const rows = Array.from(table.querySelectorAll("tbody tr"));
+    let currentPage = 1;
+    let rowsPerPage = 10;
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("datatable-wrapper");
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+
+    const controls = document.createElement("div");
+    controls.className = "datatable-controls";
+    controls.innerHTML = `
+      <div>
+        Show 
+        <select id="rowsPerPageSelect">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select> entries
+      </div>
+      <input type="text" id="searchInput" placeholder="Search table..." />
+    `;
+    wrapper.insertBefore(controls, table);
+
+    const pagination = document.createElement("div");
+    pagination.style.marginTop = "10px";
+    wrapper.appendChild(pagination);
+
+    const searchInput = controls.querySelector("#searchInput");
+    const rowsPerPageSelect = controls.querySelector("#rowsPerPageSelect");
+
+    let filteredRows = [...rows];
+
+    function renderTable() {
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      const paginatedRows = filteredRows.slice(start, end);
+
+      table.querySelector("tbody").innerHTML = "";
+      paginatedRows.forEach((row) => {
+        table.querySelector("tbody").appendChild(row);
+      });
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
+      pagination.innerHTML = "";
+
+      if (pageCount <= 1) return;
+
+      for (let i = 1; i <= pageCount; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.disabled = i === currentPage;
+        btn.addEventListener("click", () => {
+          currentPage = i;
+          renderTable();
+        });
+        pagination.appendChild(btn);
+      }
+    }
+
+    searchInput.addEventListener("input", () => {
+      const term = searchInput.value.toLowerCase();
+      filteredRows = rows.filter((row) =>
+        row.innerText.toLowerCase().includes(term)
+      );
+      currentPage = 1;
+      renderTable();
+    });
+
+    rowsPerPageSelect.addEventListener("change", () => {
+      rowsPerPage = parseInt(rowsPerPageSelect.value);
+      currentPage = 1;
+      renderTable();
+    });
+
+    renderTable();
+  });
+});
+</script>
+
+
+<style>
+.datatable-wrapper {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.datatable-controls {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.datatable-controls select,
+.datatable-controls input[type="text"] {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  min-width: 100px;
+  transition: border-color 0.2s;
+}
+
+.datatable-controls select:focus,
+.datatable-controls input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+.datatable-wrapper button {
+  padding: 4px 10px;
+  margin-right: 5px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.datatable-wrapper button:disabled {
+  background-color: #6c757d;
+  cursor: default;
+}
+</style>
+
+
+<!-- jQuery and Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
+
+<style>
+  /* Override Select2 container styles */
+  .select2-container--default .select2-selection--single {
+    border: 1px solid #edeaeaff !important;  /* Gray border */
+    height: 38px !important;               /* Increased height */
+    line-height: 37px !important;          /* Vertically center text */
+    border-radius: 4px;
+  }
+
+  /* Adjust the dropdown arrow position */
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 40px !important;
+  }
+
+  /* Adjust the rendered selected text */
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 40px !important;
+  }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('select').not('#class-section').each(function () {
+      if (!$(this).hasClass('select2-hidden-accessible') && !$(this).is('[data-no-select2]')) {
+        $(this).select2({
+          width: '100%',
+          placeholder: $(this).attr('placeholder') || 'Select an option',
+          allowClear: true
+        });
+      }
+    });
+  });
+</script>
