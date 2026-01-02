@@ -147,12 +147,80 @@
     <div class="reminder">
         <p>Get to use our AI Tutor for free first month.</p>
         <h1>Register to start</h1>
-        <div class="time">
-            <div class="date">120 <br> Days</div>
-            <div class="date">15 <br> Hours</div>
-            <div class="date">47 <br> Minutes</div>
-            <div class="date">35 <br> Seconds</div>
-        </div>
+       <div class="time">
+    <div class="date"><span id="days">120</span><br>Days</div>
+    <div class="date"><span id="hours">15</span><br>Hours</div>
+    <div class="date"><span id="minutes">47</span><br>Minutes</div>
+    <div class="date"><span id="seconds">35</span><br>Seconds</div>
+</div>
+<script>
+    let totalSeconds =
+        (120 * 24 * 60 * 60) +
+        (15 * 60 * 60) +
+        (47 * 60) +
+        35;
+
+    const elements = {
+        days: document.getElementById("days"),
+        hours: document.getElementById("hours"),
+        minutes: document.getElementById("minutes"),
+        seconds: document.getElementById("seconds")
+    };
+
+    // Force white color via JavaScript
+    Object.values(elements).forEach(el => {
+        el.style.color = "#fff";
+        el.style.display = "inline-block";
+        el.style.fontWeight = "bold";
+    });
+
+    function animateNumber(el, newValue) {
+        const oldValue = parseInt(el.textContent, 10);
+        if (oldValue === newValue) return;
+
+        let start = null;
+        const duration = 300;
+        const startY = -20;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+
+            el.style.transform = `translateY(${startY * (1 - progress)}px)`;
+            el.style.opacity = progress;
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = newValue;
+                el.style.transform = "translateY(0)";
+                el.style.opacity = "1";
+                el.style.color = "#fff"; // enforce white again
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    function updateTimer() {
+        if (totalSeconds <= 0) return;
+
+        totalSeconds--;
+
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        animateNumber(elements.days, days);
+        animateNumber(elements.hours, hours);
+        animateNumber(elements.minutes, minutes);
+        animateNumber(elements.seconds, seconds);
+    }
+
+    setInterval(updateTimer, 1000);
+</script>
+
     </div>
 
     <div class="form">
@@ -208,78 +276,255 @@
 <section id="experts">
     <h1>Meet Our Experts</h1>
     <p>Our team of experts is here to guide you through your learning journey.</p>
-    <div class="expert-box">
+    <div class="expert-carousel">
+        <div class="carousel-track">
+            <div class="profile">
+                <img src="{% static 'bloomi/images/ceo.jpg' %}" alt="ENG Ashbey Kaseme">
+                <h6>ENG Ashbey Kaseme</h6>
+                <p>Chief Executive Officer</p>
+                <p>A holder of a Bachelor of Science in Geomatics Engineering (Honours) in Surveying from the University of Zimbabwe. Adventurous and captivated by innovative thinking in order to explore new horizons.</p>
+            </div>
 
-        <div class="profile">
-            <img src="{% static 'bloomi/images/ceo.jpg' %}" alt="ENG Ashbey Kaseme">
-            <h6>ENG Ashbey Kaseme</h6>
-            <p>Chief Executive Officer</p>
-            <p>A holder of a Bachelor of Science in Geomatics Engineering (Honours) in Surveying from the University of Zimbabwe. Adventurous and captivated by innovative thinking in order to explore new horizons.</p>
-        </div>
+            <div class="profile">
+                <img src="{% static 'bloomi/images/tiri.jpg' %}" alt="Tirivashe G Mataya">
+                <h6>Tirivashe G Mataya</h6>
+                <p>Chief Technology Officer</p>
+                <p>I am passionate about technology, education, and social impact, creating solutions that blend creativity with problem-solving. My goal is to empower communities through sustainable and impactful ideas.</p>
+            </div>
 
-        <div class="profile">
-            <img src="{% static 'bloomi/images/tiri.jpg' %}" alt="Tirivashe G Mataya">
-            <h6>Tirivashe G Mataya</h6>
-            <p>Chief Technology Officer</p>
-            <p>I am passionate about technology, education, and social impact, creating solutions that blend creativity with problem-solving. My goal is to empower communities through sustainable and impactful ideas.</p>
-        </div>
+            <div class="profile">
+                <img src="{% static 'bloomi/images/melo.jpg' %}" alt="ENG Melody Takawira">
+                <h6>ENG Melody Takawira</h6>
+                <p>Chief Learning Architect</p>
+                <p>I leverage my background as a Mechatronic Engineer to design dynamic and responsive educational ecosystems. My expertise in control systems design directly informs my approach to creating adaptive learning pathways that optimize student engagement and outcomes.</p>
+            </div>
 
-        <div class="profile">
-            <img src="{% static 'bloomi/images/melo.jpg' %}" alt="ENG Melody Takawira">
-            <h6>ENG Melody Takawira</h6>
-            <p>Chief Learning Architect</p>
-            <p>I leverage my background as a Mechatronic Engineer to design dynamic and responsive educational ecosystems. My expertise in control systems design directly informs my approach to creating adaptive learning pathways that optimize student engagement and outcomes.</p>
-        </div>
+            <div class="profile">
+                <img src="{% static 'bloomi/images/dancel.jpg' %}" alt="Dancel Mautsa">
+                <h6>Dancel Mautsa</h6>
+                <p>Lead Technical Facilitator (Software Development)</p>
+                <p>Passionate Web Dev (Frontend Developer) specializes in creating responsive and user-friendly websites. I focus on clean, optimized code and collaborating effectively with teams to deliver quality projects.</p>
+            </div>
 
-        <div class="profile">
-            <img src="{% static 'bloomi/images/dancel.jpg' %}" alt="Dancel Mautsa">
-            <h6>Dancel Mautsa</h6>
-            <p>Lead Technical Facilitator (Software Development)</p>
-            <p>Passionate Web Dev (Frontend Developer) specializes in creating responsive and user-friendly websites. I focus on clean, optimized code and collaborating effectively with teams to deliver quality projects.</p>
-        </div>
+            <div class="profile">
+                <img src="{% static 'bloomi/images/Godswill.jpg' %}" alt="ENG Godswill S. Ndlovu">
+                <h6>ENG Godswill S. Ndlovu</h6>
+                <p>Lead Technical Facilitator (Engineering)</p>
+                <p>Hey there, Godswill S. Ndlovu is passionate and involved in research about robotics, automation, and IoT. Holder of a BSc degree in Mechatronics Engineering from the University of Zimbabwe.</p>
+            </div>
 
-        <div class="profile">
-            <img src="{% static 'bloomi/images/Godswill.jpg' %}" alt="ENG Godswill S. Ndlovu">
-            <h6>ENG Godswill S. Ndlovu</h6>
-            <p>Lead Technical Facilitator (Engineering)</p>
-            <p>Hey there, Godswill S. Ndlovu is passionate and involved in research about robotics, automation, and IoT. Holder of a BSc degree in Mechatronics Engineering from the University of Zimbabwe.</p>
-        </div>
+            <div class="profile">
+                <img src="{% static 'bloomi/images/prim.jpg' %}" alt="Primrose R Mazike">
+                <h6>Primrose R Mazike</h6>
+                <p>Lead Technical Facilitator (Business)</p>
+                <p>A Mathematical and Computational Science student at the University of Zimbabwe. Aspiring businesswoman and entrepreneur.</p>
+            </div>
 
-        <div class="profile">
-            <img src="{% static 'bloomi/images/prim.jpg' %}" alt="Primrose R Mazike">
-            <h6>Primrose R Mazike</h6>
-            <p>Lead Technical Facilitator (Business)</p>
-            <p>A Mathematical and Computational Science student at the University of Zimbabwe. Aspiring businesswoman and entrepreneur.</p>
-        </div>
+            <div class="profile">
+                <img src="{% static 'bloomi/images/Courage.jpg' %}" alt="Courage Mhute">
+                <h6>Courage Mhute</h6>
+                <p>Lead Technical Facilitator (Artificial Intelligence)</p>
+                <p>Courage Mhute is a Lead AI Engineer and Senior Software Engineer specializing in artificial intelligence systems, intelligent automation, and scalable software architectures. He leads the design and implementation of AI-driven solutions, translating complex data and algorithms into impactful, real-world applications.</p>
+            </div>
 
-        <div class="profile">
-            <img src="{% static 'bloomi/images/Courage.jpg' %}" alt="Courage Mhute">
-            <h6>Courage Mhute</h6>
-            <p>Lead Technical Facilitator (Artificial Intelligence)</p>
-    <p>
-        Courage Mhute is a Lead AI Engineer and Senior Software Engineer specializing in
-        artificial intelligence systems, intelligent automation, and scalable software
-        architectures. He leads the design and implementation of AI-driven solutions,
-        translating complex data and algorithms into impactful, real-world applications.
-    </p>
-        </div>
-        <div class="profile">
-            <img src="{% static 'bloomi/images/gracious.jpeg' %}" alt="Gracious Chigwarira">
-            <h6>Gracious Chigwarira</h6>
-            <p>Lead Technical Facilitator (Financial Literacy)</p>
-            <p>Holder of a Bachelor's Degree in Actuarial Science from the University of Zimbabwe. Pursuing a certification in AI and Big Data Analytics, with a passion for finance, investment, and risk management as an aspiring Chartered Financial Analyst.</p>
-        </div>
-        <div class="profile">
-            <img src="{% static 'bloomi/images/yvonne.jpeg' %}" alt="Yvonne Marashe">
-            <h6>Yvonne Marashe</h6>
-            <p>Lead Legal Facilitator (BSc Law Honours Degree in Law (LLB))</p>
-            <p>A dedicated lawyer, I provide expert legal guidance and support to individuals and organizations, helping them navigate complex legal issues and achieve their goals. I'm committed to delivering high-quality service and advocating for my clients' rights.
+            <div class="profile">
+                <img src="{% static 'bloomi/images/gracious.jpeg' %}" alt="Gracious Chigwarira">
+                <h6>Gracious Chigwarira</h6>
+                <p>Lead Technical Facilitator (Financial Literacy)</p>
+                <p>Holder of a Bachelor's Degree in Actuarial Science from the University of Zimbabwe. Pursuing a certification in AI and Big Data Analytics, with a passion for finance, investment, and risk management as an aspiring Chartered Financial Analyst.</p>
+            </div>
 
-Outside of the courtroom, I'm an avid reader and book lover, enjoying everything from fiction to non-fiction and staying up-to-date on current events. I'm also passionate about helping others, whether it's offering advice, lending a listening ear, or volunteering my time to make a positive impact in my community.</p>
+            <div class="profile">
+                <img src="{% static 'bloomi/images/yvonne.jpeg' %}" alt="Yvonne Marashe">
+                <h6>Yvonne Marashe</h6>
+                <p>Lead Legal Facilitator (BSc Law Honours Degree in Law (LLB))</p>
+                <p>A dedicated lawyer, I provide expert legal guidance and support to individuals and organizations, helping them navigate complex legal issues and achieve their goals. I'm committed to delivering high-quality service and advocating for my clients' rights. Outside of the courtroom, I'm an avid reader and book lover, enjoying everything from fiction to non-fiction and staying up-to-date on current events. I'm also passionate about helping others, whether it's offering advice, lending a listening ear, or volunteering my time to make a positive impact in my community.</p>
+            </div>
+        </div>
+        
+        <!-- Navigation arrows -->
+        <button class="carousel-prev" aria-label="Previous expert">‹</button>
+        <button class="carousel-next" aria-label="Next expert">›</button>
+        
+        <!-- Indicators (optional) -->
+        <div class="carousel-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+            <span class="indicator" data-slide="4"></span>
+            <span class="indicator" data-slide="5"></span>
+            <span class="indicator" data-slide="6"></span>
+            <span class="indicator" data-slide="7"></span>
+            <span class="indicator" data-slide="8"></span>
         </div>
     </div>
 </section>
+<style>
+    .expert-carousel {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
 
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px;
+    width: max-content;
+}
+
+.profile {
+    min-width: 300px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid #f0f8ff;
+}
+
+.profile h6 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+    color: #2c3e50;
+}
+
+.profile p {
+    margin: 8px 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.indicator.active {
+    background: #007bff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile {
+        min-width: 280px;
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
+
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const track = document.querySelector('.carousel-track');
+    const profiles = document.querySelectorAll('.profile');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    const indicators = document.querySelectorAll('.indicator');
+    
+    let currentIndex = 0;
+    const profileWidth = profiles[0].offsetWidth + 20; // width + gap
+    const maxIndex = profiles.length - Math.floor(track.parentElement.offsetWidth / profileWidth);
+    
+    function updateCarousel() {
+        const translateX = -currentIndex * profileWidth;
+        track.style.transform = `translateX(${translateX}px)`;
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+    }
+    
+    prevBtn.addEventListener('click', () => {
+        currentIndex = Math.max(currentIndex - 1, 0);
+        updateCarousel();
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        currentIndex = Math.min(currentIndex + 1, maxIndex);
+        updateCarousel();
+    });
+    
+    // Indicator clicks
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentIndex = index;
+            updateCarousel();
+        });
+    });
+    
+    // Auto-play (optional)
+    setInterval(() => {
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+        } else {
+            currentIndex = 0;
+        }
+        updateCarousel();
+    }, 5000);
+});
+
+</script>
 
 
 {% endblock%}
