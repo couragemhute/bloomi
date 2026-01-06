@@ -4,6 +4,8 @@ from blog.forms import StyledModelForm
 from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from role.models import Role
+
 
 class CustomUserForm(StyledModelForm):
     class Meta:
@@ -63,3 +65,23 @@ class CustomUserUpdateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs["class"] = "form-control"
+
+class CustomSignupForm(SignupForm):
+    full_name = forms.CharField(
+        max_length=150,
+        label="Full Name",
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    role = forms.ModelChoiceField(
+        queryset=Role.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-control"})
+    )
+
+    def save(self, request):
+        user = super().save(request)
+        user.full_name = self.cleaned_data.get("full_name")
+        user.role = self.cleaned_data.get("role")
+        user.save()
+        return user

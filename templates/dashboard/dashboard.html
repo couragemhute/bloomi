@@ -1,2 +1,6 @@
 
-{% include 'dashboard/by_user/admin.html' %}
+{% if request.user.role.name == "Administrator" or request.user.role.name == "Super Admin" %}
+    {% include 'dashboard/by_user/admin.html' %}
+{% elif request.user.role.name == "Student" %}
+    {% include 'dashboard/by_user/student.html' %}
+{% endif %}

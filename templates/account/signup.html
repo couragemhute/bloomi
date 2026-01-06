@@ -1,72 +1,106 @@
-
 {% load static %}
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
-<html class="h-100" lang="en">
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <title>Signup - The Bloomi Project</title>
 
-{% include 'admin_layouts/styles.html' %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The Bloomi Project" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<body class="h-100">
-    
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-    <div class="login-form-bg h-100">
-        <div class="container h-100">
-            <div class="row justify-content-center h-100">
-                <div class="col-xl-6">
-                    <div class="form-input-content">
-                        <div class="card login-form mb-0">
-                            <div class="card-body pt-5">
-                                <div class="text-center"> <!-- Center the logo -->
-                                    <a href="#"> <img class="logo-dark logo-img logo-img-lg" src="{% static 'assets/images/eagle.png' %}" alt="logo-dark" height="80" width="100"></a>
-                                </div>
-                                {% if messages %}
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'bloomi/images/logo.png' %}">
 
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {% for message in messages %}
-                                    {{ message }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    {% endfor %}
-                                </div>
+    <!-- App CSS -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" />
+</head>
 
-                                {% endif %}
-                                <form class="user" method="post" action="{% url 'account_signup' %}">
-                                    {% csrf_token %}
-                                    {{ form|crispy }}
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">Signup</button>
-                                    <hr>
-                                </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="{% url 'account_login' %}" class="text-primary">Sign In</a> now</p>
-                            </div>
-                        </div>
+<body
+    id="body"
+    class="auth-page"
+    style="
+        background-image: url('{% static 'assets/images/p-1.png' %}');
+        background-size: cover;
+        background-position: center;
+    "
+>
+
+<!-- Auth Page -->
+<div class="container-md">
+    <div class="row vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-lg-4 col-md-6 col-sm-10">
+
+            <div class="card shadow">
+                <!-- Header -->
+                <div class="card-body p-0 auth-header-box" style="background-color: rgb(135, 198, 203);">
+                    <div class="text-center p-3">
+                        <img
+                            src="{% static 'bloomi/images/logo.png' %}"
+                            height="70"
+                            alt="logo"
+                            class="auth-logo mb-2"
+                        >
+
+                        <h4 class="fw-semibold text-dark mb-1">
+                            Create Account
+                        </h4>
+                        <p class="text-muted mb-0">
+                            Sign up to get started
+                        </p>
                     </div>
                 </div>
+
+                <!-- Body -->
+                <div class="card-body pt-0">
+
+                    <!-- Messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-3">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Form -->
+                    <form class="my-4" method="post" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+
+                        <div class="d-grid mt-3">
+                            <button type="submit" class="btn btn-info">
+                                Sign Up <i class="fas fa-user-plus ms-1"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="text-center text-muted">
+                        <p class="mb-0">
+                            Already have an account?
+                            <a href="{% url 'account_login' %}" class="text-primary ms-1">
+                                Log In
+                            </a>
+                        </p>
+                    </div>
+
+                </div>
             </div>
+
         </div>
     </div>
-    
+</div>
 
-    
+<!-- Scripts -->
+<script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+<script src="{% static 'assets/libs/feather-icons/feather.min.js' %}"></script>
+<script src="{% static 'assets/js/app.js' %}"></script>
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    {% include 'admin_layouts/scripts.html' %}
 </body>
 </html>
-
-
-
-
-
