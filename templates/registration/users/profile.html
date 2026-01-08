@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="met-profile_user-detail">
                                     <h5 class="met-user-name">
-                                        {{ request.user.first_name|default:"N/A" }} {{ request.user.last_name|default:"" }}
+                                        {{ request.user.full_name|default:"N/A" }}
                                     </h5>
                                     <p class="mb-0 met-user-name-post">
                                         {{ request.user.role|default:"N/A" }}
