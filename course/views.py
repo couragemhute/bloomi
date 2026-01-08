@@ -1,45 +1,52 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
 from blog.models import Subscriber
 from .models import Course, Expert
 from .forms import CourseForm, SubscriberForm, ExpertForm
-# views.py
 from django.views import View
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 # ---------------- COURSE ----------------
 class CourseListView(ListView):
     model = Course
-    template_name = "courses/course_list.html"
+    template_name = "courses/index.html"
     context_object_name = "courses"
 
 
 class CourseDetailView(DetailView):
     model = Course
-    template_name = "courses/course_detail.html"
+    template_name = "courses/detail.html"
     context_object_name = "course"
 
 
 class CourseCreateView(CreateView):
     model = Course
     form_class = CourseForm
-    template_name = "courses/course_form.html"
+    template_name = "courses/create.html"
     success_url = reverse_lazy("course_list")
 
 
 class CourseUpdateView(UpdateView):
     model = Course
     form_class = CourseForm
-    template_name = "courses/course_form.html"
+    template_name = "courses/update.html"
     success_url = reverse_lazy("course_list")
 
 
 class CourseDeleteView(DeleteView):
-    model = Course
-    template_name = "courses/course_confirm_delete.html"
-    success_url = reverse_lazy("course_list")
+    def post(self, request, *args, **kwargs):
+        course = get_object_or_404(Course, pk=kwargs.get('pk'))
+
+        # Toggle active status instead of deleting
+        course.is_active = not course.is_active
+        course.save(update_fields=["is_active"])
+
+        status = "activated" if course.is_active else "deactivated"
+        messages.success(request, f"{course.title} {status} successfully")
+
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
 
 # ---------------- SUBSCRIBER ----------------
@@ -77,31 +84,31 @@ class SubscriberDeleteView(DeleteView):
 # ---------------- EXPERT ----------------
 class ExpertListView(ListView):
     model = Expert
-    template_name = "experts/expert_list.html"
+    template_name = "experts/index.html"
     context_object_name = "experts"
 
 
 class ExpertDetailView(DetailView):
     model = Expert
-    template_name = "experts/expert_detail.html"
+    template_name = "experts/detail.html"
     context_object_name = "expert"
 
 
 class ExpertCreateView(CreateView):
     model = Expert
     form_class = ExpertForm
-    template_name = "experts/expert_form.html"
-    success_url = reverse_lazy("expert_list")
+    template_name = "experts/create.html"
+    success_url = reverse_lazy("list")
 
 
 class ExpertUpdateView(UpdateView):
     model = Expert
     form_class = ExpertForm
-    template_name = "experts/expert_form.html"
-    success_url = reverse_lazy("expert_list")
+    template_name = "experts/update.html"
+    success_url = reverse_lazy("list")
 
 
 class ExpertDeleteView(DeleteView):
     model = Expert
-    template_name = "experts/expert_confirm_delete.html"
-    success_url = reverse_lazy("expert_list")
+    template_name = "experts/confirm_delete.html"
+    success_url = reverse_lazy("list")

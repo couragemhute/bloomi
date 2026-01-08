@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
+from django.conf import settings
+from django.utils.timezone import now
 
 
 class TimeStampMixin(models.Model):
@@ -20,11 +22,13 @@ class Course(TimeStampMixin):
     ]
 
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
-    description = models.TextField()
+    slug = models.SlugField(blank=True)
     image = models.ImageField(upload_to="courses/")
     price = models.DecimalField(max_digits=8, decimal_places=2)
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES, default="beginner")
+    description = models.TextField()
+    is_active = models.BooleanField(default=True)
+
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -33,13 +37,37 @@ class Course(TimeStampMixin):
 
     def __str__(self):
         return self.title
-
+    
+    def current_expert(self):
+        today = now().date()
+        return self.expert_assignments.filter(
+            start_date__lte=today, 
+            end_date__isnull=True
+        ).first()
 
 class Expert(TimeStampMixin):
-    name = models.CharField(max_length=150)
-    role = models.CharField(max_length=150)
-    bio = models.TextField(blank=True)
-    photo = models.ImageField(upload_to="experts/")
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        related_name="expert_assignments", null=True, blank=True
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="course_assignments", null=True, blank=True
+    )
+    
+    start_date = models.DateField( null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-start_date"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["course", "user", "start_date"],
+                name="unique_course_user_start"
+            )
+        ]
 
     def __str__(self):
-        return self.name
+        return f"{self.user} → {self.course} ({self.start_date})"

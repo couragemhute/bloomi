@@ -2,7 +2,6 @@ from django.urls import reverse_lazy
 from .models import CustomUser, Profession, Qualification
 from email.message import EmailMessage
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, TemplateView
@@ -22,10 +21,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.views import View
-from django.shortcuts import redirect
 from django.contrib import messages
 from .forms import UserRegistrationForm
-from django.shortcuts import get_object_or_404, redirect
 from .models import CustomUser, FacilitatorProfile
 from .forms import FacilitatorProfileForm
 
@@ -83,15 +80,16 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     
 class UserDeleteView(LoginRequiredMixin, View):
     def post(self, request, **kwargs):
-        user = get_object_or_404(CustomUser, pk=kwargs.get('pk'))
+        course = get_object_or_404(Course, pk=kwargs.get("pk"))
 
         # Toggle active status
-        user.is_active = not user.is_active
-        user.save(update_fields=["is_active"])
+        course.is_active = not getattr(course, "is_active", True)  # default True if field missing
+        course.save(update_fields=["is_active"])
 
-        status = "activated" if user.is_active else "deactivated"
-        messages.success(request, f"{user} {status} successfully")
+        status = "activated" if course.is_active else "deactivated"
+        messages.success(request, f"Course '{course.title}' {status} successfully.")
 
+        # Redirect back to previous page
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
 def register_user(request):

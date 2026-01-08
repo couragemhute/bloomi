@@ -8,7 +8,7 @@ from .models import Course, Expert
 class CourseForm(StyledModelForm):
     class Meta:
         model = Course
-        fields = ["title", "description", "image", "price", "level"]
+        exclude = ["slug", "is_active"]
 
 
 class SubscriberForm(StyledModelForm):
@@ -20,4 +20,4 @@ class SubscriberForm(StyledModelForm):
 class ExpertForm(StyledModelForm):
     class Meta:
         model = Expert
-        fields = ["name", "role", "bio", "photo"]
+        fields = ["course", "user", "start_date"]

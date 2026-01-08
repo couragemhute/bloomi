@@ -25,7 +25,7 @@ class SubscriberAdmin(admin.ModelAdmin):
 # ---------- Expert Admin ----------
 @admin.register(Expert)
 class ExpertAdmin(admin.ModelAdmin):
-    list_display = ("name", "role", "created_at")
-    search_fields = ("name", "role")
+    list_display = ("course", "user", "created_at")
+    search_fields = ("course", "user")
     readonly_fields = ("created_at", "updated_at")
     ordering = ("-created_at",)

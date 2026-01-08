@@ -119,6 +119,25 @@
                         <!-- User Management -->
                         {% if request.user.role.name == "Administrator" or request.user.role.name == "Super Admin" %}
                             <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="collapse" href="#CourseMenu" role="button" aria-expanded="false" aria-controls="CourseMenu">
+                                    <i class="ti ti-users"></i> Course Management
+                                </a>
+                                <div class="collapse" id="CourseMenu" data-bs-parent="#sidebarAccordion">
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'course_list' %}">
+                                                <i class="ti ti-user"></i> Courses
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'expert_list' %}">
+                                                <i class="ti ti-user-plus"></i>Course Experts 
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="collapse" href="#userMenu" role="button" aria-expanded="false" aria-controls="userMenu">
                                     <i class="ti ti-users"></i> User Management
                                 </a>

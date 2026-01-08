@@ -1,0 +1,127 @@
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<!-- Page Navigation -->
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <nav aria-label="breadcrumb">
+            <h4 class="page-title">Courses</h4>
+        </nav>
+        <div>
+            <a href="{% url 'course_add' %}" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Add Course
+            </a>
+            <button type="button" class="btn btn-outline-secondary ms-2" onclick="history.back();">
+                &larr; Back
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="datatable_1">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Title</th>
+                                <th>Level</th>
+                                <th>Price</th>
+                                <th>Is Active</th>
+                                <th>Current Expert</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in courses %}
+                            <tr>
+                                <td>{{ course.title }}</td>
+                                <td>
+                                    <span class="badge bg-secondary">
+                                        {{ course.get_level_display }}
+                                    </span>
+                                </td>
+                                <td>${{ course.price }}</td>
+                                <td>
+                                    {% if course.is_active %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Inactive</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% with assignment=course.current_expert %}
+                                        {% if assignment %}
+                                            {{ assignment.user.get_full_name|default:assignment.user.username }}
+                                        {% else %}
+                                            <span class="text-muted">Not assigned</span>
+                                        {% endif %}
+                                    {% endwith %}
+                                </td>
+                                <td class="text-end">
+                                    <!-- View -->
+                                    <a href="{% url 'course_detail' course.id %}" class="text-info" title="View">
+                                        <i class="las la-eye text-info" style="font-size: 1.7rem;"></i>
+                                    </a>
+
+                                    <!-- Edit -->
+                                    <a href="{% url 'course_edit' course.id %}" class="text-secondary ms-2" title="Edit">
+                                        <i class="las la-pen text-secondary" style="font-size: 1.7rem;"></i>
+                                    </a>
+
+                             <!-- Toggle Activation -->
+<a href="#" class="{% if course.is_active %}text-danger{% else %}text-success{% endif %} ms-2"
+   data-bs-toggle="modal" data-bs-target="#toggleCourseModal{{ course.id }}"
+   title="{% if course.is_active %}Deactivate{% else %}Activate{% endif %} course">
+    <i class="las {% if course.is_active %}la-trash-alt{% else %}la-check-circle{% endif %}" 
+       style="font-size: 1.7rem;"></i>
+</a>
+
+<!-- Toggle Activation Modal -->
+<div class="modal fade" id="toggleCourseModal{{ course.id }}" tabindex="-1" aria-labelledby="toggleCourseModalLabel{{ course.id }}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="toggleCourseModalLabel{{ course.id }}">
+            {% if course.is_active %}Confirm Deactivation{% else %}Confirm Activation{% endif %}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to
+        {% if course.is_active %}deactivate{% else %}activate{% endif %}
+        <strong>{{ course.title }}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form method="post" action="{% url 'course_delete' course.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn {% if course.is_active %}btn-danger{% else %}btn-success{% endif %}">
+                {% if course.is_active %}Deactivate{% else %}Activate{% endif %}
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center">No courses found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

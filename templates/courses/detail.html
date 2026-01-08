@@ -1,0 +1,156 @@
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <h4 class="page-title mb-0 fw-bold text-primary">
+            <i class="bi bi-journal-bookmark-fill me-2"></i> Course Details
+        </h4>
+        <div>
+            <a href="{% url 'course_edit' course.id %}" class="btn btn-primary btn-sm">
+                <i class="bi bi-pencil-square"></i> Edit
+            </a>
+            <button type="button" class="btn btn-outline-secondary btn-sm ms-2" onclick="history.back();">
+                &larr; Back
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<!-- Course Overview -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center">
+                        <img src="{{ course.image.url }}" class="img-fluid rounded-3" alt="{{ course.title }}">
+                    </div>
+                    <div class="col-md-9">
+                        <h3 class="fw-bold mb-1">{{ course.title }}</h3>
+                        <p class="text-muted mb-2">{{ course.description }}</p>
+
+                        <span class="badge bg-secondary me-2">
+                            {{ course.get_level_display }}
+                        </span>
+                        <span class="badge bg-success">
+                            ${{ course.price }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Details -->
+<div class="row">
+
+    <!-- Course Info -->
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center rounded-top-4">
+                <span class="fw-semibold fs-5">
+                    <i class="bi bi-info-circle me-2"></i> Course Info
+                </span>
+            </div>
+            <div class="card-body p-0">
+                <dl class="row m-0">
+                    <div class="d-flex px-4 py-3 bg-light">
+                        <dt class="col-5 fw-semibold">Slug</dt>
+                        <dd class="col-7 mb-0">{{ course.slug }}</dd>
+                    </div>
+                    <div class="d-flex px-4 py-3">
+                        <dt class="col-5 fw-semibold">Created</dt>
+                        <dd class="col-7 mb-0">{{ course.created_at|date:"M d, Y" }}</dd>
+                    </div>
+                    <div class="d-flex px-4 py-3 bg-light">
+                        <dt class="col-5 fw-semibold">Last Updated</dt>
+                        <dd class="col-7 mb-0">{{ course.updated_at|date:"M d, Y" }}</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Expert -->
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center rounded-top-4">
+                <span class="fw-semibold fs-5">
+                    <i class="bi bi-person-badge-fill me-2"></i> Current Expert
+                </span>
+            </div>
+            <div class="card-body">
+                {% with assignment=course.current_expert %}
+                    {% if assignment %}
+                        <h5 class="fw-bold mb-1">
+                            {{ assignment.user.get_full_name|default:assignment.user.username }}
+                        </h5>
+                        <p class="mb-1 text-muted">
+                            Started on {{ assignment.start_date }}
+                        </p>
+                    {% else %}
+                        <p class="text-muted mb-0">No expert currently assigned.</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Expert History -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-light rounded-top-4">
+                <span class="fw-semibold fs-5">
+                    <i class="bi bi-clock-history me-2"></i> Expert History
+                </span>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Expert</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for assignment in course.expert_assignments.all %}
+                        <tr>
+                            <td>
+                                {{ assignment.user.get_full_name|default:assignment.user.username }}
+                            </td>
+                            <td>{{ assignment.start_date }}</td>
+                            <td>{{ assignment.end_date|default:"—" }}</td>
+                            <td>
+                                {% if not assignment.end_date %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Past</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">
+                                No expert history available.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
