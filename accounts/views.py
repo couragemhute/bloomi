@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from .models import CustomUser
+from .models import CustomUser, Profession, Qualification
 from email.message import EmailMessage
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -25,6 +25,10 @@ from django.views import View
 from django.shortcuts import redirect
 from django.contrib import messages
 from .forms import UserRegistrationForm
+from django.shortcuts import get_object_or_404, redirect
+from .models import CustomUser, FacilitatorProfile
+from .forms import FacilitatorProfileForm
+
 
 class RegisterUserView(View):
     def post(self, request, *args, **kwargs):
@@ -64,10 +68,18 @@ class UserListView(LoginRequiredMixin,ListView):
     template_name = 'registration/users/index.html'
     context_object_name = 'users'
 
-class UserDetailView(LoginRequiredMixin,DetailView):
+class UserDetailView(LoginRequiredMixin, DetailView):
     model = CustomUser
     template_name = 'registration/users/details.html'
-    context_object_name = 'users'   
+    context_object_name = 'user'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['professions'] = Profession.objects.all()
+        context['qualifications'] = Qualification.objects.all()
+        context['user'] = self.request.user
+        return context
+ 
     
 class UserDeleteView(LoginRequiredMixin, View):
     def post(self, request, **kwargs):
@@ -184,3 +196,64 @@ class CustomPasswordResetView(PasswordResetView):
 
         email_message.content_subtype = 'html'
         email_message.send()
+
+
+# --- Facilitator Profile Update (existing) ---
+class FacilitatorProfileUpdateView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        user = get_object_or_404(CustomUser, pk=kwargs.get('pk'))
+        profile, created = FacilitatorProfile.objects.get_or_create(user=user)
+        form = FacilitatorProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Facilitator profile for {user.full_name} updated successfully.")
+        else:
+            messages.error(request, f"Error updating profile: {form.errors}")
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+# --- Add Profession ---
+@require_POST
+def profession_add(request):
+    name = request.POST.get('name')
+    user = request.user
+
+    if not name:
+        messages.error(request, "Profession name cannot be empty.")
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+    # Check if the user already has a profession
+    profession, created = Profession.objects.get_or_create(user=user)
+    profession.name = name
+    profession.save()
+
+    if created:
+        messages.success(request, "Profession added successfully.")
+    else:
+        messages.success(request, "Profession updated successfully.")
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+# --- Add Qualification ---
+@require_POST
+def qualification_add(request):
+    name = request.POST.get('name')
+    institution = request.POST.get('institution', '')
+    year_obtained = request.POST.get('year_obtained')
+    certificate = request.FILES.get('certificate')
+    user = request.user
+
+    if name:
+        Qualification.objects.create(
+            user=user,
+            name=name,
+            institution=institution,
+            year_obtained=year_obtained if year_obtained else None,
+            certificate=certificate
+        )
+        messages.success(request, "Qualification added successfully.")
+    else:
+        messages.error(request, "Qualification name cannot be empty.")
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+

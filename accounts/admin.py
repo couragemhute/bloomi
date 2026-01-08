@@ -1,7 +1,7 @@
 # admin.py
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import Qualification, Profession, FacilitatorProfile, CustomUser
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
@@ -25,3 +25,32 @@ class CustomUserAdmin(UserAdmin):
             "fields": ("email", "password1", "password2", "is_staff", "is_active"),
         }),
     )
+
+# --- Qualification Admin ---
+@admin.register(Qualification)
+class QualificationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'institution', 'year_obtained')
+    search_fields = ('name', 'institution')
+    list_filter = ('year_obtained',)
+
+# --- Profession Admin ---
+@admin.register(Profession)
+class ProfessionAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+
+# --- FacilitatorProfile Admin ---
+@admin.register(FacilitatorProfile)
+class FacilitatorProfileAdmin(admin.ModelAdmin):
+    list_display = ('user_email', 'user_full_name')
+    search_fields = ('user__email', 'user__full_name')
+
+    def user_email(self, obj):
+        return obj.user.email
+    user_email.short_description = "Email"
+
+    def user_full_name(self, obj):
+        return obj.user.full_name
+    user_full_name.short_description = "Full Name"
+

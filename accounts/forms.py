@@ -5,7 +5,7 @@ from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from role.models import Role
-
+from .models import FacilitatorProfile, Qualification, Profession
 
 class CustomUserForm(StyledModelForm):
     class Meta:
@@ -85,3 +85,12 @@ class CustomSignupForm(SignupForm):
         user.role = self.cleaned_data.get("role")
         user.save()
         return user
+
+
+class FacilitatorProfileForm(forms.ModelForm):
+    class Meta:
+        model = FacilitatorProfile
+        fields = ['bio', 'linkedin_url', 'facebook_url', 'twitter_url']
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 3}),
+        }

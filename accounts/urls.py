@@ -22,4 +22,12 @@ urlpatterns = [
 
     path("register/", RegisterUserView.as_view(), name="register_user"),
     path('login-modal/', login_modal, name='login_modal'),
+
+    path(
+        'facilitator-profile/update/<int:pk>/',
+        FacilitatorProfileUpdateView.as_view(),
+        name='facilitator-profile-update'
+    ),
+    path('profession/add/', profession_add, name='profession-add'),
+    path('qualification/add/', qualification_add, name='qualification-add'),
 ]
