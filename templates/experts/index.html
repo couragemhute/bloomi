@@ -1,0 +1,101 @@
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+{% block navigation %}
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <nav aria-label="breadcrumb">
+            <h4 class="page-title">Experts</h4>
+        </nav>
+        <div>
+            <a href="{% url 'expert_add' %}" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Add Expert
+            </a>
+            <button type="button" class="btn btn-outline-secondary ms-2" onclick="history.back();">
+                &larr; Back
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="datatable_1">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>User</th>
+                                <th>Course</th>
+                                <th>Start Date</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for expert in experts %}
+                            <tr>
+                                <td>{{ expert.user.get_full_name|default:expert.user.username }}</td>
+                                <td>{{ expert.course.title }}</td>
+                                <td>{{ expert.start_date|date:"M d, Y" }}</td>
+                                <td class="text-end">
+                                    <!-- View -->
+                                    <a href="{% url 'expert_detail' expert.id %}" class="text-info" title="View">
+                                        <i class="las la-eye text-info" style="font-size: 1.7rem;"></i>
+                                    </a>
+
+                                    <!-- Edit -->
+                                    <a href="{% url 'expert_edit' expert.id %}" class="text-secondary ms-2" title="Edit">
+                                        <i class="las la-pen text-secondary" style="font-size: 1.7rem;"></i>
+                                    </a>
+
+                                  <!-- Delete / Remove Modal Trigger -->
+<a href="#" class="text-danger ms-2" 
+   data-bs-toggle="modal" 
+   data-bs-target="#deleteExpertModal{{ expert.id }}" 
+   title="Delete">
+    <i class="las la-trash text-danger" style="font-size: 1.7rem;"></i>
+</a>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteExpertModal{{ expert.id }}" tabindex="-1" 
+     aria-labelledby="deleteExpertModalLabel{{ expert.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteExpertModalLabel{{ expert.id }}">
+                    Confirm Deletion
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong>{{ expert.user.full_name}}</strong> from <strong>{{ expert.course.title|default:"—" }}</strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" action="{% url 'expert_delete' expert.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">No experts found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

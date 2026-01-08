@@ -21,3 +21,8 @@ class ExpertForm(StyledModelForm):
     class Meta:
         model = Expert
         fields = ["course", "user", "start_date"]
+        widgets = {
+            "start_date": forms.DateInput(
+                attrs={"type": "date", "class": "form-control"}
+            ),
+        }

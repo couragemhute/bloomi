@@ -98,17 +98,20 @@ class ExpertCreateView(CreateView):
     model = Expert
     form_class = ExpertForm
     template_name = "experts/create.html"
-    success_url = reverse_lazy("list")
+    success_url = reverse_lazy("expert_list")
 
 
 class ExpertUpdateView(UpdateView):
     model = Expert
     form_class = ExpertForm
     template_name = "experts/update.html"
-    success_url = reverse_lazy("list")
+    success_url = reverse_lazy("expert_list")
 
 
-class ExpertDeleteView(DeleteView):
-    model = Expert
-    template_name = "experts/confirm_delete.html"
-    success_url = reverse_lazy("list")
+class ExpertDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        expert = get_object_or_404(Expert, pk=kwargs.get('pk'))
+        expert.delete()
+        messages.success(request, f"Expert {expert.user} removed successfully.")
+
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
