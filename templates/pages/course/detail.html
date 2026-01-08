@@ -13,16 +13,20 @@
 <section id="course-inner">
     <div class="overview">
         <img src="{{ course.image.url }}" class="course-img" alt="{{ course.title }}">
+            <h2>{{course.title}} </h2>
+       <div class="rating-stars d-flex align-items-center gap-2 rating_style">
+    <div class="stars">
+        {% for _ in ""|rjust:course.get_average_rating %}
+            <span class="fa fa-star"></span>
+        {% endfor %}
+    </div>
+    <p class="mb-0">({{ course.get_total_rating }} people rated)</p>
+</div>
+
+
         <div class="course-head">
             <div class="c-name">
-                <h2>{{course.title}}</h2>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
+            
                 <p>{{course.description}}</p>
             </div>
             <span>${{course.price}}</span>
@@ -86,6 +90,71 @@
                 <a class="blue" href="#" onclick="openPaymentModal('Robotics', '80.00')">Enroll Now</a>
             </div>
         </div>
+        <!-- Course Ratings Card -->
+<div class="course-ratings-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="course-rating-title text-center"><i class="bi bi-chat-dots-fill me-2"></i> Course Reviews</h4>
+        <button class="cancel-btn btn-primary" onclick="openRatingModal('{{ course.id }}')">
+            Rate this Course
+        </button>
+    </div>
+
+    <div class="card-body course-ratings-body">
+        {% for rating in course.course_ratings.all %}
+        <div class="rating-entry">
+            <div class="rating-header">
+                <div class="rating-stars">
+                    {% for _ in ""|rjust:rating.stars %}
+                        <span class="fa fa-star"></span>
+                    {% endfor %}
+                    <span class="rating-user">{{ rating.user.full_name}}</span>
+                </div>
+                <small class="rating-time">{{ rating.created_at|timesince }} ago</small>
+            </div>
+            <p class="rating-comment">Comment: {{ rating.comment }}</p>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">No reviews yet.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Custom Rating Modal -->
+<div id="courseRatingModal" class="rating-modal" style="display: none;">
+    <div class="rating-modal-content">
+        <h3 class="modal-title">Rate This Course</h3>
+
+        <form method="post" action="{% url 'course-rating-create' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="course" id="modalCourseId" value="">
+
+            <!-- Star Rating -->
+            <div class="form-group">
+                <label>Your Rating</label>
+                <div class="star-selection">
+                    {% for value, label in course_rating_form.stars.field.choices %}
+                        <input type="radio" name="stars" value="{{ value }}"> {{ label }} ⭐
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Review Comment -->
+            <div class="form-group">
+
+     <div class="mb-3">
+                                                <h5 class="text-body-highlight mb-3">Your Review</h5>
+                                                {{course_rating_form.comment}}
+                                              </div>            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="cancel-btn btn-danger" onclick="closeRatingModal()">Cancel</button>
+                <button type="submit" class="cancel-btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
     </div>
 </section>
 

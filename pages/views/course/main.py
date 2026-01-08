@@ -2,6 +2,7 @@
 from django.views.generic import TemplateView
 from course.models import Course
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from course.forms import CourseRatingForm
 # Blog View
 class CourseTemplateView(TemplateView):
     template_name = 'pages/course/index.html'
@@ -15,6 +16,12 @@ class CourseDetailTemplateView(DetailView):
     model = Course
     template_name = "pages/course/detail.html"
     context_object_name = "course"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        course = self.get_object()
+        context['course_rating_form'] = CourseRatingForm()    
+        return context
 
 # Each course detail page as a simple TemplateView
 class Course1TemplateView(TemplateView):

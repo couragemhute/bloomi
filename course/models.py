@@ -46,6 +46,24 @@ class Course(TimeStampMixin):
             end_date__isnull=True
         ).first()
 
+    def get_course_ratings(self):
+        return self.course_ratings.all()
+
+    def get_total_rating(self):
+        total = 0
+        total = self.get_course_ratings().count()
+        return total
+        
+    def get_average_rating(self):
+        total = 0
+        ratings = self.get_course_ratings()
+        for rating in ratings:
+            total += rating.stars
+        if ratings:
+            return total / ratings.count()
+        return 0
+    
+
 class Expert(TimeStampMixin):
     course = models.ForeignKey(
         Course,
@@ -83,3 +101,17 @@ class WhatStudentWillLearn(TimeStampMixin):
 
     def __str__(self):
         return f"{self.course.title} → {self.content[:50]}..." 
+
+
+class CourseRating(TimeStampMixin):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_ratings')
+    user = models.ForeignKey("accounts.CustomUser", on_delete=models.CASCADE)
+    stars = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('course', 'user') 
+
+    def __str__(self):
+        return f"{self.user.full_name} - {self.course.title} ({self.stars} Stars)"

@@ -35,3 +35,97 @@
         });
     });
 </script>
+
+<style>
+/* ===== rating_style ===== */
+.rating_style {
+    font-size: 14px;
+}
+
+.rating_style .stars {
+    display: flex;
+    gap: 4px;
+}
+
+.rating_style .stars .fa-star {
+    color: #ffc107 !important; /* Bootstrap warning yellow */
+    font-size: 16px;
+}
+</style>
+
+<!-- Rating Modal JS -->
+<script>
+function openRatingModal(courseId) {
+    document.getElementById('courseRatingModal').style.display = 'block';
+    document.getElementById('modalCourseId').value = courseId;
+}
+
+function closeRatingModal() {
+    document.getElementById('courseRatingModal').style.display = 'none';
+    // Reset form
+    const form = document.querySelector('#courseRatingModal form');
+    if(form) form.reset();
+}
+</script>
+
+<!-- Rating Modal CSS -->
+<style id="rating_style">
+.course-ratings-card {
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: #fff;
+}
+.course-ratings-card .course-rating-title {
+    font-weight: bold;
+}
+.course-ratings-body .rating-entry {
+    border-bottom: 1px solid #eee;
+    padding: 0.5rem 0;
+}
+.course-ratings-body .rating-stars .fa-star {
+    color: #ffc107;
+}
+.rating-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    z-index: 1050;
+}
+.rating-modal-content {
+    background: #fff;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 10% auto;
+    border-radius: 0.5rem;
+    position: relative;
+}
+.rating-modal .modal-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.rating-modal .form-group {
+    margin-bottom: 1rem;
+}
+.rating-modal .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+.rating-modal .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.rating-modal .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.star-selection input[type="radio"] {
+    margin-right: 0.3rem;
+}
+</style>
