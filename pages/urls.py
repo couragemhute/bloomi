@@ -3,7 +3,7 @@ from django.urls import path
 from pages.helpers.global_email_sender import contact_form_submission
 from .views import (
     AboutTemplateView, BlogTemplateView, ContactTemplateView,
-     AiTutorTemplateView, CourseTemplateView, AboutTemplateView,
+     AiTutorTemplateView, CourseTemplateView,CourseDetailTemplateView, AboutTemplateView,
     Course1TemplateView,
     Course2TemplateView,
     Course3TemplateView,
@@ -20,7 +20,11 @@ urlpatterns = [
     path('blog/', BlogTemplateView.as_view(), name='blog'),
     path('contact/', ContactTemplateView.as_view(), name='contact'),
     path('ai_tutor/', AiTutorTemplateView.as_view(), name='ai_tutor'),
+
     path('course/', CourseTemplateView.as_view(), name='all_courses'),
+    path('course-details/<int:pk>/', CourseDetailTemplateView.as_view(), name='catalogue_course_detail'),
+
+
     path('about/', AboutTemplateView.as_view(), name='about'),
 
     

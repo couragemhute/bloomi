@@ -9,6 +9,7 @@ from .blog import (
 from .ai_tutor import AiTutorTemplateView
 from .course import (
     CourseTemplateView,
+    CourseDetailTemplateView,
     Course1TemplateView,
     Course2TemplateView,
     Course3TemplateView,
