@@ -69,14 +69,15 @@ class UserDetailView(LoginRequiredMixin,DetailView):
     template_name = 'registration/users/details.html'
     context_object_name = 'users'   
     
-class UserDeleteView(LoginRequiredMixin,View):
-    def get(self, request, **kwargs):
-        obj = get_object_or_404( CustomUser, pk=kwargs.get('pk'))
+class UserDeleteView(LoginRequiredMixin, View):
+    def post(self, request, **kwargs):
+        obj = get_object_or_404(CustomUser, pk=kwargs.get('pk'))
         obj.is_active = False
         obj.save()
-        messages.success(request,f'{obj} deactivated successfully')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-            
+
+        messages.success(request, f'{obj} deactivated successfully')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
 def register_user(request):
         if request.method == "GET":
             return render(

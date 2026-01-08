@@ -71,10 +71,13 @@
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                <form method="post" action="{% url 'user-delete' user.id %}" style="display:inline;">
-                                                  {% csrf_token %}
-                                                  <button type="submit" class="btn btn-danger">Deactivate</button>
-                                                </form>
+                                               <form method="post" action="{% url 'user-delete' user.pk %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+        Deactivate
+    </button>
+</form>
+
                                               </div>
                                             </div>
                                           </div>

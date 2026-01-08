@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <title>Account Inactive - The Bloomi Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="The Bloomi Project" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'bloomi/images/logo.png' %}">
+
+    <!-- App css -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="body" class="auth-page"
+      style="background-image: url('{% static 'assets/images/p-1.png' %}');
+             background-size: cover;
+             background-position: center center;">
+
+    <div class="container-md">
+        <div class="row vh-100 d-flex justify-content-center">
+            <div class="col-12 align-self-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 mx-auto">
+                            <div class="card">
+
+                                <!-- Header -->
+                                <div class="card-body p-0 auth-header-box"
+                                     style="background-color: rgb(135, 198, 203);">
+                                    <div class="text-center p-3">
+                                        <a class="logo logo-admin">
+                                            <img src="{% static 'bloomi/images/logo.png' %}"
+                                                 height="70"
+                                                 alt="logo"
+                                                 class="auth-logo">
+                                        </a>
+                                        <h4 class="mt-3 mb-1 fw-semibold text-dark font-18">
+                                            Account Inactive
+                                        </h4>
+                                        <p class="text-muted mb-0">
+                                            Access Restricted
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Body -->
+                                <div class="card-body pt-4 text-center">
+                                    <div class="alert alert-danger">
+                                        <i class="fas fa-user-lock me-1"></i>
+                                        Your account has been deactivated.
+                                    </div>
+
+                                    <p class="text-muted mt-3">
+                                        You no longer have access to the system.<br>
+                                        If you believe this is a mistake, please contact the administrator.
+                                    </p>
+
+                                    <div class="d-grid mt-4">
+                                        <a href="{% url 'account_login' %}" class="btn btn-info">
+                                            Back to Login
+                                            <i class="fas fa-arrow-left ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- end card-body -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- vendor js -->
+    <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'assets/libs/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.js' %}"></script>
+</body>
+</html>
