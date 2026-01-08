@@ -18,14 +18,52 @@
 
 {% block content %}
 <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="met-profile">
+                    <div class="row">
+                        <div class="col-lg-6 align-self-center mb-3 mb-lg-0">
+                            <div class="met-profile-main">
+                                <div class="met-profile-main-pic">
+                                    <img src="{% if request.user.image %}{{ request.user.image.url }}{% else %}{% static 'assets/images/user.jpeg' %}{% endif %}" alt="" height="110" class="rounded-circle">
+                                    <span class="met-profile_main-pic-change">
+                                        <i class="fas fa-camera"></i>
+                                    </span>
+                                </div>
+                                <div class="met-profile_user-detail">
+                                    <h5 class="met-user-name">
+                                        {{ request.user.first_name|default:"N/A" }} {{ request.user.last_name|default:"" }}
+                                    </h5>
+                                    <p class="mb-0 met-user-name-post">
+                                        {{ request.user.role|default:"N/A" }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 ms-auto align-self-center">
+                            <ul class="list-unstyled personal-detail mb-0">
+                                <li class="mt-2"><i class="las la-envelope text-secondary font-22 align-middle mr-2"></i>
+                                    <b> Email </b>: {% if request.user.email %}{{ request.user.email }}{% elif request.user.user.email %}{{ request.user.user.email }}{% else %}N/A{% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!--end row-->
+                </div>
+            </div><!--end card-body-->
+        </div>
+    </div>
+</div>
+<div class="row">
 
     <!-- User Details Card -->
     <div class="col-12 col-md-6 mb-4">
         <div class="card shadow-lg border-0 rounded-4">
-            <div class="card-header bg-dark bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
+            <div class="card-header bg-light bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
                 <div><i class="bi bi-mortarboard-fill me-2 fs-3"></i> <span class="fw-semibold fs-4">Security Details</span></div>
                 <div>
-                    <a href="{% url 'user-update' user.id %}" class="btn btn-sm btn-light">
+                    <a href="{% url 'user-update' user.id %}" class="btn btn-sm btn-primary">
     <i class="bi bi-pencil-square me-1"></i> Update
 </a>
 
@@ -57,10 +95,10 @@
     <!-- Facilitator Profile Card -->
     <div class="col-12 col-md-6 mb-4">
         <div class="card shadow-lg border-0 rounded-4">
-            <div class="card-header bg-dark bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
+            <div class="card-header bg-light bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
                 <div><i class="bi bi-mortarboard-fill me-2 fs-3"></i> <span class="fw-semibold fs-4">Facilitator Profile</span></div>
                 <div>
-                    <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#updateFacilitatorModal">
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#updateFacilitatorModal">
                         <i class="bi bi-pencil-square me-1"></i> Update
                     </button>
                 </div>
@@ -88,10 +126,10 @@
     <!-- Profession Card -->
     <div class="col-12 col-md-6 mb-4">
         <div class="card shadow-lg border-0 rounded-4">
-                        <div class="card-header bg-dark bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
+                        <div class="card-header bg-light bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
                 <div><i class="bi bi-briefcase-fill me-2 fs-3"></i> <span class="fw-semibold fs-4">Profession</span></div>
                 <div>
-                    <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#addProfessionModal">
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProfessionModal">
                         <i class="bi bi-plus-circle"></i> Add Profession
                     </button>
                 </div>
@@ -109,10 +147,10 @@
     <!-- Qualifications Card -->
     <div class="col-12 col-md-6 mb-4">
         <div class="card shadow-lg border-0 rounded-4">
-            <div class="card-header bg-dark bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
+            <div class="card-header bg-light bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
                 <div><i class="bi bi-journal-medical me-2 fs-3"></i> <span class="fw-semibold fs-4">Qualifications</span></div>
                 <div>
-                    <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#addQualificationModal">
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addQualificationModal">
                         <i class="bi bi-plus-circle"></i> Add Qualification
                     </button>
                 </div>

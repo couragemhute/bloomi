@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', loadNotifications);
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="{% url 'user_profile' %}"><i class="ti ti-user font-16 me-1 align-text-bottom"></i> Profile</a>
-                    {% comment %} <a class="dropdown-item" href="#"><i class="ti ti-settings font-16 me-1 align-text-bottom"></i> Settings</a> {% endcomment %}
+                    <a class="dropdown-item" href="{% url 'user-details' user.pk %}"><i class="ti ti-user font-16 me-1 align-text-bottom"></i> Profile</a>
+                    <a class="dropdown-item" href="{% url 'user_profile' %}"><i class="ti ti-settings font-16 me-1 align-text-bottom"></i> Security</a>
                     <div class="dropdown-divider mb-0"></div>
                     <!-- Logout Modal Trigger -->
                     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
