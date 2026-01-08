@@ -59,7 +59,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ["email", "first_name", "last_name", "role", "image"]
+        fields = ["email", "full_name", "role", "image"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -71,12 +71,16 @@ class UserDetailView(LoginRequiredMixin,DetailView):
     
 class UserDeleteView(LoginRequiredMixin, View):
     def post(self, request, **kwargs):
-        obj = get_object_or_404(CustomUser, pk=kwargs.get('pk'))
-        obj.is_active = False
-        obj.save()
+        user = get_object_or_404(CustomUser, pk=kwargs.get('pk'))
 
-        messages.success(request, f'{obj} deactivated successfully')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        # Toggle active status
+        user.is_active = not user.is_active
+        user.save(update_fields=["is_active"])
+
+        status = "activated" if user.is_active else "deactivated"
+        messages.success(request, f"{user} {status} successfully")
+
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
 def register_user(request):
         if request.method == "GET":
