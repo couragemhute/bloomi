@@ -45,6 +45,18 @@
             </div>
         </div>
     </div>
+        <div class="col-12">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <h3 class="fw-bold mb-1">Course Overview</h3>
+                        <p class="text-muted mb-2">{{ course.overview }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Details -->
@@ -89,7 +101,7 @@
                 {% with assignment=course.current_expert %}
                     {% if assignment %}
                         <h5 class="fw-bold mb-1">
-                            {{ assignment.user.get_full_name|default:assignment.user.username }}
+                            {{ assignment.user.full_name }}
                         </h5>
                         <p class="mb-1 text-muted">
                             Started on {{ assignment.start_date }}
@@ -127,7 +139,7 @@
                         {% for assignment in course.expert_assignments.all %}
                         <tr>
                             <td>
-                                {{ assignment.user.get_full_name|default:assignment.user.username }}
+                                {{ assignment.user.full_name }}
                             </td>
                             <td>{{ assignment.start_date }}</td>
                             <td>{{ assignment.end_date|default:"—" }}</td>
@@ -151,6 +163,58 @@
             </div>
         </div>
     </div>
+    <!-- What Students Will Learn -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-light bg-gradient text-white d-flex align-items-center justify-content-between rounded-top-4">
+                <div><i class="bi bi-mortarboard-fill me-2 fs-3"></i> <span class="fw-semibold fs-4">What Students Will Learn</span></div>
+                <div>
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addLearningModal">
+                        <i class="bi bi-pencil-square me-1"></i> Add learning Outcome
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for item in course.learning_outcomes.all %}
+                        <li class="list-group-item">
+                            {{ item.content }}
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item text-muted">No learning outcomes added yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Learning Outcome Modal -->
+<div class="modal fade" id="addLearningModal" tabindex="-1" aria-labelledby="addLearningModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form method="post" action="{% url 'whatstudentwillearn_add' course.id %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="addLearningModalLabel">Add Learning Outcome</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="learningContent" class="form-label">Learning Outcome</label>
+            <input type="text" class="form-control" id="learningContent" name="content" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 </div>
 
 {% endblock %}

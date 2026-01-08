@@ -20,4 +20,7 @@ urlpatterns = [
     path("experts/<int:pk>/", views.ExpertDetailView.as_view(), name="expert_detail"),
     path("experts/<int:pk>/edit/", views.ExpertUpdateView.as_view(), name="expert_edit"),
     path("experts/<int:pk>/delete/", views.ExpertDeleteView.as_view(), name="expert_delete"),
+
+    path("courses/<int:course_id>/learn/", views.AddLearningOutcomeView.as_view(), name="whatstudentwillearn_add"),
+
 ]

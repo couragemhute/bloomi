@@ -27,6 +27,7 @@ class Course(TimeStampMixin):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES, default="beginner")
     description = models.TextField()
+    overview = models.TextField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
 
@@ -71,3 +72,14 @@ class Expert(TimeStampMixin):
 
     def __str__(self):
         return f"{self.user} → {self.course} ({self.start_date})"
+
+class WhatStudentWillLearn(TimeStampMixin):
+    course = models.ForeignKey(
+        "Course",  
+        on_delete=models.CASCADE,
+        related_name="learning_outcomes"  # allows course.learning_outcomes.all()
+    )
+    content = models.TextField(help_text="Describe what the student will learn in this course")
+
+    def __str__(self):
+        return f"{self.course.title} → {self.content[:50]}..." 

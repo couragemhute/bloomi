@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 from blog.models import Subscriber
-from .models import Course, Expert
+from .models import Course, Expert, WhatStudentWillLearn
 
 # ---------- Course Admin ----------
 @admin.register(Course)
@@ -27,5 +27,12 @@ class SubscriberAdmin(admin.ModelAdmin):
 class ExpertAdmin(admin.ModelAdmin):
     list_display = ("course", "user", "created_at")
     search_fields = ("course", "user")
+    readonly_fields = ("created_at", "updated_at")
+    ordering = ("-created_at",)
+
+# Inline admin for WhatStudentWillLearn
+@admin.register(WhatStudentWillLearn)
+class ExpertAdmin(admin.ModelAdmin):
+    list_display = ("content", "created_at")
     readonly_fields = ("created_at", "updated_at")
     ordering = ("-created_at",)

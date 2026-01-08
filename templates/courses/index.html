@@ -57,7 +57,7 @@
                                 <td>
                                     {% with assignment=course.current_expert %}
                                         {% if assignment %}
-                                            {{ assignment.user.get_full_name|default:assignment.user.username }}
+                                            {{ assignment.user.full_name }}
                                         {% else %}
                                             <span class="text-muted">Not assigned</span>
                                         {% endif %}

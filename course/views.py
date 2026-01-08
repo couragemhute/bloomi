@@ -7,7 +7,7 @@ from django.views import View
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-
+from .models import  WhatStudentWillLearn
 # ---------------- COURSE ----------------
 class CourseListView(ListView):
     model = Course
@@ -115,3 +115,12 @@ class ExpertDeleteView(View):
         messages.success(request, f"Expert {expert.user} removed successfully.")
 
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
+
+
+class AddLearningOutcomeView(View):
+    def post(self, request, course_id):
+        course = get_object_or_404(Course, pk=course_id)
+        content = request.POST.get("content")
+        if content:
+            WhatStudentWillLearn.objects.create(course=course, content=content)
+        return redirect(request.META.get("HTTP_REFERER", "/"))
