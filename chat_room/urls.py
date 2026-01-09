@@ -1,3 +1,10 @@
-from django.test import TestCase
+from django.urls import path
+from chat_room.views import *
 
-# Create your tests here.
+urlpatterns = [
+    path(
+        "chat/",
+        ChatTemplateView.as_view(),
+        name="chat"
+    ),
+]

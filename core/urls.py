@@ -29,7 +29,7 @@ urlpatterns = [
     path('role/', include('role.urls')),
     path('notification/', include('notification.urls')),
     path('enrollment/', include('enrollment.urls')),
-
+    path('chat_room/', include('chat_room.urls')),
 ]
 
 # Serve static and media files during development
