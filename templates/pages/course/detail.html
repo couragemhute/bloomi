@@ -86,9 +86,61 @@
             <p><i class="far fa-mobile-alt"></i> Access on mobile and TV</p>
             <p><i class="far fa-paperclip"></i> Assignments</p>
             <p><i class="far fa-trophy-alt"></i> Certificate of completion</p>
-            <div class="enroll-btn">
+            {% comment %} <div class="enroll-btn">
                 <a class="blue" href="#" onclick="openPaymentModal('Robotics', '80.00')">Enroll Now</a>
+            </div> {% endcomment %}
+            <!-- Enroll Button -->
+<button class="cancel-btn btn-primary" onclick="openEnrollModal('{{ course.id }}')">
+    Enroll Now
+</button>
+
+
+<!-- Custom Enroll Modal -->
+<div id="enrollModal" class="rating-modal" style="display: none;">
+    <div class="rating-modal-content">
+
+        <h4 class="modal-title mb-3">Confirm Enrollment</h4>
+
+        <p>
+            Are you sure you want to enroll in
+            <strong>{{ course.title }}</strong>?
+        </p>
+
+        <form method="post" action="{% url 'course_enroll_modal' course.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="course" id="modalEnrollCourseId" value="">
+
+            <div class="modal-actions d-flex justify-content-end gap-2">
+                <button type="button"
+                        class="cancel-btn btn-secondary"
+                        onclick="closeEnrollModal()">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="cancel-btn btn-primary">
+                    Enroll
+                </button>
             </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- JS to control modal -->
+<script>
+function openEnrollModal(courseId) {
+    document.getElementById("modalEnrollCourseId").value = courseId;
+    document.getElementById("enrollModal").style.display = "block";
+}
+
+function closeEnrollModal() {
+    document.getElementById("enrollModal").style.display = "none";
+}
+</script>
+
+
+            
         </div>
         <!-- Course Ratings Card -->
 <div class="course-ratings-card">

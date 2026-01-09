@@ -15,7 +15,7 @@ class CourseEnrollment(TimeStampMixin):
         related_name="course_enrollments"
     )
     is_active = models.BooleanField(default=True)
-    enrolled_at = models.DateTimeField(auto_now_add=True)
+    has_completed = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ("course", "student")

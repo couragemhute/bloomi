@@ -28,7 +28,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('role/', include('role.urls')),
     path('notification/', include('notification.urls')),
-
+    path('enrollment/', include('enrollment.urls')),
 
 ]
 
