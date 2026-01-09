@@ -18,11 +18,14 @@
                 <img src="{{ course.image.url }}" class="course-img" alt="{{ course.title }}">
                 <div class="details">
                     <h6>{{course.title}}</h6>
-                    <div class="star">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i><span>(30)</span>
-                    </div>
+                        <div class="rating-stars d-flex align-items-center gap-2 rating_style">
+    <div class="stars">
+        {% for _ in ""|rjust:course.get_average_rating %}
+            <span class="fa fa-star"></span>
+        {% endfor %}
+    </div>
+    <p class="mb-0">({{ course.get_total_rating }} people rated)</p>
+</div>
                 </div>
                 <div class="cost">${{course.price}}</div>
             </div>
