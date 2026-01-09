@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'role.apps.RoleConfig',
     'dashboard.apps.DashboardConfig',
     'notification.apps.NotificationConfig',
+    'enrollment.apps.EnrollmentConfig',
+    'chat_room.apps.ChatRoomConfig',
 ]
 
 SITE_ID = 1
