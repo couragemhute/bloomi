@@ -1,0 +1,35 @@
+
+
+
+{% extends 'admin_layouts/base.html' %}
+{% load static %}
+
+
+{% block navigation %}
+
+
+
+{% endblock %}
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            {% block chat_sidebar %}
+            <!-- Left Chat Sidebar (General / Groups / Personal) -->
+            <div class="col-12 col-lg-4 chat-box-left">
+                {% block chat_tabs %}{% endblock %}
+            </div>
+            {% endblock %}
+
+            {% block chat_main %}
+            <!-- Right Chat Panel / Messages -->
+            <div class="col-12 col-lg-8 chat-box-right">
+                {% block chat_messages %}{% endblock %}
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+
+
+
+ {% endblock %}
