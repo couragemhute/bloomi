@@ -37,7 +37,7 @@
                         <tbody>
                             {% for expert in experts %}
                             <tr>
-                                <td>{{ expert.user.get_full_name|default:expert.user.username }}</td>
+                                <td>{{ expert.user.full_name }}</td>
                                 <td>{{ expert.course.title }}</td>
                                 <td>{{ expert.start_date|date:"M d, Y" }}</td>
                                 <td class="text-end">

@@ -25,7 +25,7 @@ from django.contrib import messages
 from .forms import UserRegistrationForm
 from .models import CustomUser, FacilitatorProfile
 from .forms import FacilitatorProfileForm
-
+from course.models import Course
 
 class RegisterUserView(View):
     def post(self, request, *args, **kwargs):
@@ -80,14 +80,14 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     
 class UserDeleteView(LoginRequiredMixin, View):
     def post(self, request, **kwargs):
-        course = get_object_or_404(Course, pk=kwargs.get("pk"))
+        user = get_object_or_404(CustomUser, pk=kwargs.get("pk"))
 
         # Toggle active status
-        course.is_active = not getattr(course, "is_active", True)  # default True if field missing
-        course.save(update_fields=["is_active"])
+        user.is_active = not getattr(user, "is_active", True)  # default True if field missing
+        user.save(update_fields=["is_active"])
 
-        status = "activated" if course.is_active else "deactivated"
-        messages.success(request, f"Course '{course.title}' {status} successfully.")
+        status = "activated" if user.is_active else "deactivated"
+        messages.success(request, f"User '{user.email}' {status} successfully.")
 
         # Redirect back to previous page
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))

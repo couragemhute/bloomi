@@ -9,9 +9,6 @@
     <li class="nav-item" role="presentation">
         <a class="nav-link" id="group_tab" data-bs-toggle="tab" href="#group_chat" role="tab">Groups</a>
     </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="personal_tab" data-bs-toggle="tab" href="#personal_chat" role="tab">Personal</a>
-    </li>
 </ul>
 
 <div class="chat-search mb-3">
@@ -79,30 +76,8 @@
         <p class="text-center text-muted">No group chats yet.</p>
         {% endfor %}
     </div>
-
-    <!-- Personal Chat -->
-    <div class="tab-pane fade" id="personal_chat">
-        {% for participant in personal_rooms %}
-            {% with room=participant.room %}
-            {% for p in room.participants.all %}
-                {% if p.user != request.user %}
-                <a href="#" class="media new-message" data-room-id="{{ room.id }}">
-                    <div class="media-left">
-                        <img src="{% static 'images/users/default-user.jpg' %}" alt="{{ p.user.get_full_name }}" class="rounded-circle thumb-md">
-                        <span class="round-10 bg-secondary"></span>
-                    </div>
-                    <div class="media-body">
-                        <h6>{{ p.user.get_full_name }}</h6>
-                        <p>Click to chat privately</p>
-                    </div>
-                </a>
-                {% endif %}
-            {% endfor %}
-            {% endwith %}
-        {% empty %}
-        <p class="text-center text-muted">No personal chats yet.</p>
-        {% endfor %}
-    </div>
+    {% block chat_messages %}
+    {% endblock %}
 </div>
 
 <div class="chat-footer mt-3">
