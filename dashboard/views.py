@@ -18,6 +18,11 @@ from role.mixins.role_permission_required import RolePermissionRequiredMixin
 #     def get_required_permissions(self):
 #         return ["view_customuser"]
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
+from .helpers import get_facilitator_dashboard_data
+
+
 class DashboardListView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
 
@@ -25,9 +30,15 @@ class DashboardListView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
 
-        users = CustomUser.objects.all()
- 
+        # Global dashboard data
+        context["user"] = user
+
+        # FACILITATOR DATA
+        if user.role and user.role.name == "Facillitator":
+            context["facilitator"] = get_facilitator_dashboard_data(user)
+
         return context
+
     
     # def get_required_permissions(self):
     #     return ["view_customuser"]

@@ -3,4 +3,6 @@
     {% include 'dashboard/by_user/admin.html' %}
 {% elif request.user.role.name == "Student" %}
     {% include 'dashboard/by_user/student.html' %}
+{% elif request.user.role.name == "Facillitator" %}
+    {% include 'dashboard/by_user/facillitator.html' %}
 {% endif %}
