@@ -2,6 +2,7 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.models import CustomUser
+from dashboard.helpers.admin import get_admin_dashboard_data
 from role.mixins.role_permission_required import RolePermissionRequiredMixin
 
 # class DashboardListView(LoginRequiredMixin,RolePermissionRequiredMixin,TemplateView):
@@ -36,6 +37,9 @@ class DashboardListView(LoginRequiredMixin, TemplateView):
         # FACILITATOR DATA
         if user.role and user.role.name == "Facillitator":
             context["facilitator"] = get_facilitator_dashboard_data(user)
+
+        if user.role and user.role.name == "Administrator" or user.role.name == "Super Admin":
+            context["admin"] = get_admin_dashboard_data(user)
 
         return context
 
