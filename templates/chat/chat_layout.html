@@ -1,35 +1,47 @@
-
-
-
 {% extends 'admin_layouts/base.html' %}
 {% load static %}
 
+{% block navigation %}{% endblock %}
 
-{% block navigation %}
-
-
-
-{% endblock %}
 {% block content %}
+<div style="height: calc(100vh - 70px); width: 100%;">
 
-    <div class="container-fluid">
-        <div class="row">
-            {% block chat_sidebar %}
-            <!-- Left Chat Sidebar (General / Groups / Personal) -->
-            <div class="col-12 col-lg-4 chat-box-left">
+    <!-- FORCE SAME ROW -->
+    <div style="
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+    ">
+
+        <!-- LEFT SIDEBAR -->
+        <div style="
+            width: 320px;
+            min-width: 320px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #ddd;
+            overflow: hidden;
+        ">
+            <div style="flex: 1; overflow-y: auto;">
                 {% block chat_tabs %}{% endblock %}
             </div>
-            {% endblock %}
+        </div>
 
-            {% block chat_main %}
-            <!-- Right Chat Panel / Messages -->
-            <div class="col-12 col-lg-8 chat-box-right">
+        <!-- RIGHT CHAT MESSAGES -->
+        <div style="
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        ">
+            <div style="flex: 1; overflow-y: auto;">
                 {% block chat_messages %}{% endblock %}
             </div>
-            {% endblock %}
         </div>
+
     </div>
-
-
-
- {% endblock %}
+</div>
+{% endblock %}

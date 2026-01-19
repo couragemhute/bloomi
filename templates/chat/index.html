@@ -21,14 +21,12 @@
         </div>
     </div>
 </div>
-{% endblock %}
 
-{% block chat_main %}
 <div class="tab-content chat-list" id="chatTabContent">
     <!-- General Chat -->
     <div class="tab-pane fade show active" id="general_chat">
         {% for room in general_rooms %}
-        <a href="#" class="media new-message" data-room-id="{{ room.id }}">
+        <a href="#" class="media new-message chat-room-link" data-room-id="{{ room.id }}" data-room-name="{% if room.course %}{{ room.course.title }}{% else %}General Chat{% endif %}">
             <div class="media-left">
                 <span class="round-10 bg-success"></span>
             </div>
@@ -52,7 +50,7 @@
     <div class="tab-pane fade" id="group_chat">
         {% for participant in group_rooms %}
             {% with room=participant.room %}
-            <a href="#" class="media new-message" data-room-id="{{ room.id }}">
+            <a href="#" class="media new-message chat-room-link" data-room-id="{{ room.id }}" data-room-name="{% if room.course %}{{ room.course.title }}{% else %}Group Chat{% endif %}">
                 <div class="media-left">
                     <div class="avatar-box thumb-md align-self-center me-2">
                         <span class="thumb-md d-flex align-items-center justify-content-center bg-soft-primary rounded-circle">
@@ -76,15 +74,226 @@
         <p class="text-center text-muted">No group chats yet.</p>
         {% endfor %}
     </div>
-    {% block chat_messages %}
-    {% endblock %}
 </div>
+{% endblock %}
 
-<div class="chat-footer mt-3">
-    <div class="row">
-        <div class="col-12">
-            <input type="text" class="form-control" placeholder="Type a message..." id="chat-input">
+{% block chat_messages %}
+<div class="chat-content">
+    <div class="chat-header">
+        <h5 id="active-room-name">Select a chat room</h5>
+    </div>
+    
+    <div class="chat-body" id="chat-messages">
+        <div class="text-center text-muted p-4">
+            <p>Select a chat to view messages</p>
         </div>
     </div>
+    
+    <div class="chat-footer">
+        <form id="message-form">
+            <input type="hidden" id="active-room-id" value="">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Select a chat room to start messaging..." id="chat-input" disabled>
+                <button type="submit" class="btn btn-de-primary" id="send-btn" disabled>
+                    <i class="la la-send"></i> Send
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const chatRoomLinks = document.querySelectorAll('.chat-room-link');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const activeRoomId = document.getElementById('active-room-id');
+    const activeRoomName = document.getElementById('active-room-name');
+    const messageForm = document.getElementById('message-form');
+
+    let currentRoomId = null;
+
+    // Handle chat room click
+    chatRoomLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all links
+            chatRoomLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link
+            this.classList.add('active');
+            
+            // Get room details
+            const roomId = this.dataset.roomId;
+            const roomName = this.dataset.roomName;
+            
+            // Update current room
+            currentRoomId = roomId;
+            activeRoomId.value = roomId;
+            activeRoomName.textContent = roomName;
+            
+            // Enable input and send button
+            chatInput.disabled = false;
+            chatInput.placeholder = 'Type a message...';
+            sendBtn.disabled = false;
+            
+            // Load messages for this room
+            loadMessages(roomId);
+        });
+    });
+
+    // Handle message send
+    messageForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const message = chatInput.value.trim();
+        const roomId = activeRoomId.value;
+        
+        if (message && roomId) {
+            sendMessage(roomId, message);
+            chatInput.value = '';
+        }
+    });
+
+    // Function to load messages for a room
+    function loadMessages(roomId) {
+        // Show loading state
+        chatMessages.innerHTML = '<p class="text-center text-muted">Loading messages...</p>';
+        
+        // Fetch messages from server
+        fetch(`/chat_room/room/${roomId}/messages/`)
+            .then(response => response.json())
+            .then(data => {
+                displayMessages(data.messages);
+            })
+            .catch(error => {
+                console.error('Error loading messages:', error);
+                chatMessages.innerHTML = '<p class="text-center text-danger">Error loading messages. Please try again.</p>';
+            });
+    }
+
+    // Function to display messages
+    function displayMessages(messages) {
+    if (messages.length === 0) {
+        chatMessages.innerHTML = `
+            <div class="text-center text-muted p-4">
+                No messages yet. Start the conversation!
+            </div>
+        `;
+        return;
+    }
+
+    chatMessages.innerHTML = '';
+
+    messages.forEach(msg => {
+        const wrapper = document.createElement('div');
+
+        // SENT BY ME
+        if (msg.is_sent) {
+            wrapper.innerHTML = `
+                <div class="media" style="justify-content:flex-end; margin-bottom:15px;">
+                    <div class="media-body reverse" style="max-width:70%; text-align:right;">
+                        <div class="chat-msg" style="
+                            background:#d4f8d4;
+                            padding:10px 14px;
+                            border-radius:12px;
+                            display:inline-block;
+                        ">
+                            <p style="margin:0;">${escapeHtml(msg.message)}</p>
+                        </div>
+                        <small class="text-muted">${formatTime(msg.created_at)}</small>
+                    </div>
+                    <div class="media-img ms-2">
+                        <img src="${msg.sender_image}" class="rounded-circle thumb-sm" style="width:36px;height:36px;">
+                    </div>
+                </div>
+            `;
+        }
+        // SENT BY OTHERS
+        else {
+            wrapper.innerHTML = `
+                <div class="media" style="margin-bottom:15px;">
+                    <div class="media-img me-2">
+                        <img src="${msg.sender_image}" class="rounded-circle thumb-sm" style="width:36px;height:36px;">
+                    </div>
+                    <div class="media-body" style="max-width:70%;">
+                        <strong style="font-size:13px;">${escapeHtml(msg.sender_name)}</strong>
+                        <div class="chat-msg" style="
+                            background:#ffffff;
+                            padding:10px 14px;
+                            border-radius:12px;
+                            box-shadow:0 1px 2px rgba(0,0,0,0.1);
+                            margin-top:4px;
+                        ">
+                            <p style="margin:0;">${escapeHtml(msg.message)}</p>
+                        </div>
+                        <small class="text-muted">${formatTime(msg.created_at)}</small>
+                    </div>
+                </div>
+            `;
+        }
+
+        chatMessages.appendChild(wrapper);
+    });
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+    // Function to send message
+    function sendMessage(roomId, message) {
+        fetch(`/chat_room/room/${roomId}/send/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ message: message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Reload messages to show the new one
+                loadMessages(roomId);
+            } else {
+                alert('Error sending message. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error sending message:', error);
+            alert('Error sending message. Please try again.');
+        });
+    }
+
+    // Helper function to escape HTML
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Helper function to format time
+    function formatTime(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Helper function to get CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script>
 {% endblock %}
