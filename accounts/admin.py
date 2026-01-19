@@ -6,23 +6,62 @@ from .models import Qualification, Profession, FacilitatorProfile, CustomUser
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ("email", "full_name", "phone_number", "is_staff", "is_active", "created_at", "updated_at")
-    list_filter = ("is_staff", "is_superuser", "is_active")
+
+    list_display = (
+        "email",
+        "role",
+        "full_name",
+        "phone_number",
+        "is_staff",
+        "is_active",
+        "created_at",
+        "updated_at",
+    )
+
+    list_filter = ("role", "is_staff", "is_superuser", "is_active")
     search_fields = ("email", "full_name")
     readonly_fields = ("created_at", "updated_at")
     ordering = ("email",)
-    
+
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        ("Personal Info", {"fields": ("full_name", "profile_picture", "phone_number")}),
-        ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
-        ("Important Dates", {"fields": ("last_login", "created_at", "updated_at")}),
+        ("Personal Info", {
+            "fields": (
+                "full_name",
+                "profile_picture",
+                "phone_number",
+            )
+        }),
+        ("Access Control", {
+            "fields": (
+                "role",                # ✅ ADD THIS
+                "is_active",
+                "is_staff",
+                "is_superuser",
+                "groups",
+                "user_permissions",
+            )
+        }),
+        ("Important Dates", {
+            "fields": (
+                "last_login",
+                "created_at",
+                "updated_at",
+            )
+        }),
     )
 
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
-            "fields": ("email", "password1", "password2", "is_staff", "is_active"),
+            "fields": (
+                "email",
+                "password1",
+                "password2",
+                "role",          # ✅ ADD THIS
+                "is_staff",
+                "is_active",
+            ),
         }),
     )
 

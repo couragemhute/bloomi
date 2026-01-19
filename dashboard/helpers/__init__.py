@@ -1,2 +1,3 @@
 from .facilitator import get_facilitator_dashboard_data
 from .admin import get_admin_dashboard_data
+from .student import get_student_dashboard_data
